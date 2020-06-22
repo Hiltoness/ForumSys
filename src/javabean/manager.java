@@ -5,6 +5,7 @@ public class manager {
 	private String notitle;
 	private String notice;  
 	private String notime;
+	private String status;
 	public String getMid() {
 		return mid;
 	}
@@ -28,6 +29,12 @@ public class manager {
 	}
 	public void setNotime(String notime) {
 		this.notime = notime;
+	}
+	public String getStatus() {
+		return status;
+	}
+	public void setStatus(String status) {
+		this.status = status;
 	}
 
 }

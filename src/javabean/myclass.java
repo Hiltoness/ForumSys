@@ -305,8 +305,13 @@ public class myclass {
 					}		
 				}
 			}
-			
-			
+			pstm=conn.prepareStatement("select status from manger");
+			rs=pstm.executeQuery();
+			while(rs.next()) {
+				if(rs.getString(1)=="unread"){
+					reportnum=reportnum+1;	
+					}	
+			}
 			
 		
 		}catch(SQLException ex){
