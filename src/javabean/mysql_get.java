@@ -1,7 +1,6 @@
 package javabean;
 
 import java.sql.Connection;
-import java.sql.DriverManager;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
@@ -103,8 +102,9 @@ public ArrayList<user> user_getData(String attwhere,String attvalue) {
 				bean.setUtime(rs.getString(3));
 				bean.setSex(rs.getString(4));
 				bean.setPassword(rs.getString(5));
-				bean.setPoint(rs.getString(6));
-				bean.setLevel(rs.getString(7));
+				bean.setPoint(rs.getInt(6));
+				bean.setLevel(rs.getInt(7));
+				bean.setCollege(rs.getString(8));
 				userlist.add(bean);
 			}
 		

@@ -8,8 +8,7 @@ import java.util.ArrayList;
 
 public class personal_center {
 	  private PreparedStatement pstm;     
-	
-	  private Connection conn;
+	 private Connection conn;
 	  private ResultSet rs;
 	  private ArrayList<usercomment> commentlist=new ArrayList<usercomment> ();
 	  private ArrayList<userpraise> praiselist=new ArrayList<userpraise> ();

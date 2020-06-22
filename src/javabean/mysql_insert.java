@@ -1,7 +1,6 @@
 package javabean;
 
 import java.sql.Connection;
-import java.sql.DriverManager;
 import java.sql.PreparedStatement;
 import java.sql.SQLException;
 
@@ -57,18 +56,19 @@ public void uco_InserData(String uid,String aid,String cotime) {
 		}
 }
 
-public void user_InserData(String uid,String uname,String utime,String sex,String password,String point,String level) {
+public void user_InserData(String uid,String uname,String utime,String sex,String password,int point,int level,String college) {
 	 try {
 		 mysql_DB db=new mysql_DB();
 			conn=db.connectDB();
-			pstm=conn.prepareStatement("insert into user values(?,?,?,?,?,?,?)");
+			pstm=conn.prepareStatement("insert into user values(?,?,?,?,?,?,?,?)");
 			pstm.setString(1, uid);
 			pstm.setString(2, uname);
 			pstm.setString(3,utime);
 			pstm.setString(4,sex);
 			pstm.setString(5,password);
-			pstm.setString(6,point);
-			pstm.setString(7,level);
+			pstm.setInt(6,point);
+			pstm.setInt(7,level);
+			pstm.setString(8,college);
 			pstm.executeUpdate();
 		
 		}catch(SQLException ex){

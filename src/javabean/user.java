@@ -6,8 +6,9 @@ public class user {
 	private String utime;
 	private String sex;
 	private String password;
-	private String point;
-	private String level;
+	private  int point;
+	private int  level;
+	private String college;
 	public String getUid() {
 		return uid;
 	}
@@ -38,16 +39,22 @@ public class user {
 	public void setPassword(String password) {
 		this.password = password;
 	}
-	public String getPoint() {
+	public int getPoint() {
 		return point;
 	}
-	public void setPoint(String point) {
+	public void setPoint(int point) {
 		this.point = point;
 	}
-	public String getLevel() {
+	public int getLevel() {
 		return level;
 	}
-	public void setLevel(String level) {
+	public void setLevel(int level) {
 		this.level = level;
+	}
+	public String getCollege() {
+		return college;
+	}
+	public void setCollege(String college ) {
+		this.college = college;
 	}
 }

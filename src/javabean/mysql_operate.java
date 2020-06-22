@@ -1,11 +1,8 @@
 package javabean;
 //数据库修改删除
 import java.sql.Connection;
-import java.sql.DriverManager;
 import java.sql.PreparedStatement;
-import java.sql.ResultSet;
 import java.sql.SQLException;
-import java.util.ArrayList;
 
 public class mysql_operate {
 	
@@ -25,7 +22,8 @@ public class mysql_operate {
 				}
 		}
 
-	  public void update_DB(String table,String setvalue,String setatt,String wherevalue,String whereatt) {
+	  //更新的那个数是字符串类型
+	  public void update_DBString(String table,String setvalue,String setatt,String wherevalue,String whereatt) {
 			 try {
 				 mysql_DB db=new mysql_DB();
 					conn=db.connectDB();
@@ -33,8 +31,21 @@ public class mysql_operate {
 					pstm.setString(1, setvalue);
 					pstm.setString(2, wherevalue);
 					pstm.executeUpdate();
-					
-				
+							
+				}catch(SQLException ex){
+				ex.printStackTrace();
+				}
+		}
+	  //更新的那个数是整数类型
+	  public void update_DBInt(String table,int setvalue,String setatt,String wherevalue,String whereatt) {
+			 try {
+				 mysql_DB db=new mysql_DB();
+					conn=db.connectDB();
+					pstm=conn.prepareStatement("update "+table+" set "+setatt+" =? where "+whereatt+" =?");					
+					pstm.setInt(1, setvalue);
+					pstm.setString(2, wherevalue);
+					pstm.executeUpdate();
+							
 				}catch(SQLException ex){
 				ex.printStackTrace();
 				}

@@ -1,7 +1,6 @@
 package javabean;
 
 import java.sql.Connection;
-import java.sql.DriverManager;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
@@ -10,9 +9,9 @@ import java.util.ArrayList;
 //我的类(首页的右边) 要知道用户id才能得到值
 public class myclass {
 	private String name;  //用户名
-	private String level;     //等级
+	private int level;     //等级
 	private int postnum;      //我的帖子数目
-	private String point;     //我的积分
+	private int point;     //我的积分
 	private int uconum;       //我的收藏数目
 	private int commentnum;     //评论未读数目
 	private int praisenum;     //点赞未读数目
@@ -40,7 +39,7 @@ public class myclass {
 		return name;
 	}
 
-	public String getLevel(String uid) {
+	public int getLevel(String uid) {
 		try {
 			mysql_DB db=new mysql_DB();
 			conn=db.connectDB();
@@ -48,7 +47,7 @@ public class myclass {
 			pstm.setString(1, uid);
 			rs=pstm.executeQuery();
 			while(rs.next()) {
-				level=rs.getString(1);
+				level=rs.getInt(1);
 			}			
 		
 		}catch(SQLException ex){
@@ -75,7 +74,7 @@ public class myclass {
 		return postnum;
 	}
 
-	public String getPoint(String uid) {
+	public int getPoint(String uid) {
 		try {
 			mysql_DB db=new mysql_DB();
 			conn=db.connectDB();
@@ -83,7 +82,7 @@ public class myclass {
 			pstm.setString(1, uid);
 			rs=pstm.executeQuery();
 			while(rs.next()) {
-				point=rs.getString(1);
+				point=rs.getInt(1);
 			}			
 		
 		}catch(SQLException ex){
