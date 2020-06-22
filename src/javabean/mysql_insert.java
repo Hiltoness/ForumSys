@@ -10,15 +10,16 @@ public class mysql_insert {
 	
 	  private Connection conn;
 	  
-public void manager_InserData(String mid,String notitle,String notice,String notime) {
+public void manager_InserData(String mid,String notitle,String notice,String notime,String status) {
 	 try {
 		 mysql_DB db=new mysql_DB();
 			conn=db.connectDB();
-			pstm=conn.prepareStatement("insert into manager values(?,?,?,?)");
+			pstm=conn.prepareStatement("insert into manager values(?,?,?,?,?)");
 			pstm.setString(1, mid);
 			pstm.setString(2, notitle);
 			pstm.setString(3,notice );
 			pstm.setString(4,notime );
+			pstm.setString(5,status);
 			pstm.executeUpdate();
 		
 		}catch(SQLException ex){

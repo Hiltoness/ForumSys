@@ -37,6 +37,7 @@ public ArrayList<manager> manager_getData(String attwhere,String attvalue) {
 				bean.setNotitle(rs.getString(2));
 				bean.setNotice(rs.getString(3));
 				bean.setNotime(rs.getString(4));
+				bean.setStatus(rs.getString(5));
 				managerlist.add(bean);
 			}
 		
