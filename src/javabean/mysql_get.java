@@ -21,17 +21,14 @@ public class mysql_get {
 	private ArrayList<userreport_r> userreport_rlist=new ArrayList<userreport_r> ();
 	
 	  private PreparedStatement pstm;     
-	  private String diverclass="com.mysql.jdbc.Driver";
-	  private String username="jdbc:mysql://localhost/visual";
-	  private String password="root";
-	  private String url="root";
+	  
 	  private Connection conn;
 	  private ResultSet rs;
 	  
 public ArrayList<manager> manager_getData(String attwhere,String attvalue) {
 	 try {
-			Class.forName(diverclass);
-			conn=DriverManager.getConnection(url,username,password);
+		 mysql_DB db=new mysql_DB();
+			conn=db.connectDB();
 			pstm=conn.prepareStatement("select * from message where "+attwhere+" =?");
 			pstm.setString(1, attvalue);
 			rs=pstm.executeQuery();
@@ -43,8 +40,7 @@ public ArrayList<manager> manager_getData(String attwhere,String attvalue) {
 				bean.setNotime(rs.getString(4));
 				managerlist.add(bean);
 			}
-		}catch(ClassNotFoundException e1){
-			e1.printStackTrace();
+		
 		}catch(SQLException ex){
 		ex.printStackTrace();
 		}
@@ -53,8 +49,8 @@ public ArrayList<manager> manager_getData(String attwhere,String attvalue) {
 
 public ArrayList<post> post_getData(String attwhere,String attvalue) {
 	 try {
-			Class.forName(diverclass);
-			conn=DriverManager.getConnection(url,username,password);
+		 mysql_DB db=new mysql_DB();
+			conn=db.connectDB();
 			pstm=conn.prepareStatement("select * from post where "+attwhere+" =?");
 			pstm.setString(1, attvalue);
 			rs=pstm.executeQuery();
@@ -65,8 +61,7 @@ public ArrayList<post> post_getData(String attwhere,String attvalue) {
 				bean.setContent(rs.getString(3));
 				postlist.add(bean);
 			}
-		}catch(ClassNotFoundException e1){
-			e1.printStackTrace();
+	
 		}catch(SQLException ex){
 		ex.printStackTrace();
 		}
@@ -75,8 +70,8 @@ public ArrayList<post> post_getData(String attwhere,String attvalue) {
 
 public ArrayList<uco> uco_getData(String attwhere,String attvalue) {
 	 try {
-			Class.forName(diverclass);
-			conn=DriverManager.getConnection(url,username,password);
+		 mysql_DB db=new mysql_DB();
+			conn=db.connectDB();
 			pstm=conn.prepareStatement("select * from uco where "+attwhere+" =?");
 			pstm.setString(1, attvalue);
 			rs=pstm.executeQuery();
@@ -87,8 +82,7 @@ public ArrayList<uco> uco_getData(String attwhere,String attvalue) {
 				bean.setCotime(rs.getString(3));
 				ucolist.add(bean);
 			}
-		}catch(ClassNotFoundException e1){
-			e1.printStackTrace();
+	
 		}catch(SQLException ex){
 		ex.printStackTrace();
 		}
@@ -97,8 +91,8 @@ public ArrayList<uco> uco_getData(String attwhere,String attvalue) {
 
 public ArrayList<user> user_getData(String attwhere,String attvalue) {
 	 try {
-			Class.forName(diverclass);
-			conn=DriverManager.getConnection(url,username,password);
+		 mysql_DB db=new mysql_DB();
+			conn=db.connectDB();
 			pstm=conn.prepareStatement("select * from user where "+attwhere+" =?");
 			pstm.setString(1, attvalue);
 			rs=pstm.executeQuery();
@@ -113,8 +107,7 @@ public ArrayList<user> user_getData(String attwhere,String attvalue) {
 				bean.setLevel(rs.getString(7));
 				userlist.add(bean);
 			}
-		}catch(ClassNotFoundException e1){
-			e1.printStackTrace();
+		
 		}catch(SQLException ex){
 		ex.printStackTrace();
 		}
@@ -123,8 +116,8 @@ public ArrayList<user> user_getData(String attwhere,String attvalue) {
 
 public ArrayList<usercomment> usercomment_getData(String attwhere1,String attvalue1,String attwhere2,String attvalue2) {
 	 try {
-			Class.forName(diverclass);
-			conn=DriverManager.getConnection(url,username,password);
+		 mysql_DB db=new mysql_DB();
+			conn=db.connectDB();
 			pstm=conn.prepareStatement("select * from usercomment where "+attwhere1+" =? and "+attwhere2+" =?");
 			pstm.setString(1, attvalue1);
 			pstm.setString(2, attvalue2);
@@ -140,8 +133,7 @@ public ArrayList<usercomment> usercomment_getData(String attwhere1,String attval
 				bean.setStatus(rs.getString(7));
 				usercommentlist.add(bean);
 			}
-		}catch(ClassNotFoundException e1){
-			e1.printStackTrace();
+		
 		}catch(SQLException ex){
 		ex.printStackTrace();
 		}
@@ -150,8 +142,8 @@ public ArrayList<usercomment> usercomment_getData(String attwhere1,String attval
 
 public ArrayList<userpost> userpost_getData(String attwhere,String attvalue) {
 	 try {
-			Class.forName(diverclass);
-			conn=DriverManager.getConnection(url,username,password);
+		 mysql_DB db=new mysql_DB();
+			conn=db.connectDB();
 			pstm=conn.prepareStatement("select * from userpost where "+attwhere+" =?");
 			pstm.setString(1, attvalue);
 			rs=pstm.executeQuery();
@@ -162,8 +154,7 @@ public ArrayList<userpost> userpost_getData(String attwhere,String attvalue) {
 				bean.setAtime(rs.getString(3));
 				userpostlist.add(bean);
 			}
-		}catch(ClassNotFoundException e1){
-			e1.printStackTrace();
+		
 		}catch(SQLException ex){
 		ex.printStackTrace();
 		}
@@ -172,8 +163,8 @@ public ArrayList<userpost> userpost_getData(String attwhere,String attvalue) {
 
 public ArrayList<userpraise> userpraise_getData(String attwhere1,String attvalue1,String attwhere2,String attvalue2) {
 	 try {
-			Class.forName(diverclass);
-			conn=DriverManager.getConnection(url,username,password);
+		 mysql_DB db=new mysql_DB();
+			conn=db.connectDB();
 			pstm=conn.prepareStatement("select * from userpraise where "+attwhere1+" =? and "+attwhere2+" =?");
 			pstm.setString(1, attvalue1);
 			pstm.setString(2, attvalue2);
@@ -188,8 +179,7 @@ public ArrayList<userpraise> userpraise_getData(String attwhere1,String attvalue
 				bean.setStatus(rs.getString(6));
 				userpraiselist.add(bean);
 			}
-		}catch(ClassNotFoundException e1){
-			e1.printStackTrace();
+		
 		}catch(SQLException ex){
 		ex.printStackTrace();
 		}
@@ -198,8 +188,8 @@ public ArrayList<userpraise> userpraise_getData(String attwhere1,String attvalue
 
 public ArrayList<userreply> userreply_getData(String attwhere,String attvalue) {
 	 try {
-			Class.forName(diverclass);
-			conn=DriverManager.getConnection(url,username,password);
+		 mysql_DB db=new mysql_DB();
+			conn=db.connectDB();
 			pstm=conn.prepareStatement("select * from userreply where "+attwhere+" =?");
 			pstm.setString(1, attvalue);
 			rs=pstm.executeQuery();
@@ -213,8 +203,7 @@ public ArrayList<userreply> userreply_getData(String attwhere,String attvalue) {
 				bean.setStatus(rs.getString(6));
 				userreplylist.add(bean);
 			}
-		}catch(ClassNotFoundException e1){
-			e1.printStackTrace();
+	
 		}catch(SQLException ex){
 		ex.printStackTrace();
 		}
@@ -222,8 +211,8 @@ public ArrayList<userreply> userreply_getData(String attwhere,String attvalue) {
 }
 public ArrayList<userreport_a> userreport_a_getData(String attwhere,String attvalue) {
 	 try {
-			Class.forName(diverclass);
-			conn=DriverManager.getConnection(url,username,password);
+		 mysql_DB db=new mysql_DB();
+			conn=db.connectDB();
 			pstm=conn.prepareStatement("select * from userreport_a where "+attwhere+" =?");
 			pstm.setString(1, attvalue);
 			rs=pstm.executeQuery();
@@ -236,8 +225,7 @@ public ArrayList<userreport_a> userreport_a_getData(String attwhere,String attva
 				bean.setStatus(rs.getString(5));
 				userreport_alist.add(bean);
 			}
-		}catch(ClassNotFoundException e1){
-			e1.printStackTrace();
+		
 		}catch(SQLException ex){
 		ex.printStackTrace();
 		}
@@ -246,8 +234,8 @@ public ArrayList<userreport_a> userreport_a_getData(String attwhere,String attva
 
 public ArrayList<userreport_c> userreport_c_getData(String attwhere,String attvalue) {
 	 try {
-			Class.forName(diverclass);
-			conn=DriverManager.getConnection(url,username,password);
+		 mysql_DB db=new mysql_DB();
+			conn=db.connectDB();
 			pstm=conn.prepareStatement("select * from userreport_c where "+attwhere+" =?");
 			pstm.setString(1, attvalue);
 			rs=pstm.executeQuery();
@@ -262,8 +250,7 @@ public ArrayList<userreport_c> userreport_c_getData(String attwhere,String attva
 				bean.setStatus(rs.getString(7));
 				userreport_clist.add(bean);
 			}
-		}catch(ClassNotFoundException e1){
-			e1.printStackTrace();
+		
 		}catch(SQLException ex){
 		ex.printStackTrace();
 		}
@@ -272,8 +259,8 @@ public ArrayList<userreport_c> userreport_c_getData(String attwhere,String attva
 
 public ArrayList<userreport_r> userreport_r_getData(String attwhere,String attvalue) {
 	 try {
-			Class.forName(diverclass);
-			conn=DriverManager.getConnection(url,username,password);
+		 mysql_DB db=new mysql_DB();
+			conn=db.connectDB();
 			pstm=conn.prepareStatement("select * from userreport_r where "+attwhere+" =?");
 			pstm.setString(1, attvalue);
 			rs=pstm.executeQuery();
@@ -287,8 +274,7 @@ public ArrayList<userreport_r> userreport_r_getData(String attwhere,String attva
 				bean.setStatus(rs.getString(6));
 				userreport_rlist.add(bean);
 			}
-		}catch(ClassNotFoundException e1){
-			e1.printStackTrace();
+		
 		}catch(SQLException ex){
 		ex.printStackTrace();
 		}

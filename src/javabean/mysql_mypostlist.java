@@ -1,7 +1,6 @@
 package javabean;
 //查看我的帖子
 import java.sql.Connection;
-import java.sql.DriverManager;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
@@ -9,18 +8,15 @@ import java.util.ArrayList;
 
 public class mysql_mypostlist {
 	private PreparedStatement pstm;     
-	  private String diverclass="com.mysql.jdbc.Driver";
-	  private String username="jdbc:mysql://localhost/visual";
-	  private String password="root";
-	  private String url="root";
+	  
 	  private Connection conn;
 	  private ResultSet rs;
 	  private ArrayList<postlist> list=new ArrayList<postlist> ();
 	  private ArrayList<userpost> list0=new ArrayList<userpost> ();
 	  public ArrayList<postlist>  postlist_getData(String attvalue) {
 			 try {
-					Class.forName(diverclass);
-					conn=DriverManager.getConnection(url,username,password);
+				 mysql_DB db=new mysql_DB();
+					conn=db.connectDB();
 					pstm=conn.prepareStatement("select * from userpost where uid=?");
 					pstm.setString(1, attvalue);
 					rs=pstm.executeQuery();
@@ -55,8 +51,7 @@ public class mysql_mypostlist {
 						list.add(bean);
 					}
 					
-				}catch(ClassNotFoundException e1){
-					e1.printStackTrace();
+			
 				}catch(SQLException ex){
 				ex.printStackTrace();
 				}

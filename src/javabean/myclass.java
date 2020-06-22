@@ -20,25 +20,20 @@ public class myclass {
 	private int reportnum;     //系统通知未读数目
 	private String[]   managertitle;    //论坛公告标题
 	
-	  private PreparedStatement pstm;     
-	  private String diverclass="com.mysql.jdbc.Driver";
-	  private String username="jdbc:mysql://localhost/visual";
-	  private String password="root";
-	  private String url="root";
+	  private PreparedStatement pstm;     	
 	  private Connection conn;
 	  private ResultSet rs;
 	public String getName(String uid) {
 		try {
-			Class.forName(diverclass);
-			conn=DriverManager.getConnection(url,username,password);
+			mysql_DB db=new mysql_DB();
+			conn=db.connectDB();
 			pstm=conn.prepareStatement("select uname from user where uid =?");
 			pstm.setString(1, uid);
 			rs=pstm.executeQuery();
 			while(rs.next()) {
-				username=rs.getString(1);
+				name=rs.getString(1);
 			}			
-		}catch(ClassNotFoundException e1){
-			e1.printStackTrace();
+		
 		}catch(SQLException ex){
 		ex.printStackTrace();
 		}		
@@ -47,16 +42,15 @@ public class myclass {
 
 	public String getLevel(String uid) {
 		try {
-			Class.forName(diverclass);
-			conn=DriverManager.getConnection(url,username,password);
+			mysql_DB db=new mysql_DB();
+			conn=db.connectDB();
 			pstm=conn.prepareStatement("select level from user where uid =?");
 			pstm.setString(1, uid);
 			rs=pstm.executeQuery();
 			while(rs.next()) {
 				level=rs.getString(1);
 			}			
-		}catch(ClassNotFoundException e1){
-			e1.printStackTrace();
+		
 		}catch(SQLException ex){
 		ex.printStackTrace();
 		}		
@@ -66,16 +60,15 @@ public class myclass {
 	public int getPostnum(String uid) {
 		postnum=0;
 		try {
-			Class.forName(diverclass);
-			conn=DriverManager.getConnection(url,username,password);
+			mysql_DB db=new mysql_DB();
+			conn=db.connectDB();
 			pstm=conn.prepareStatement("select * from userpost where uid =?");
 			pstm.setString(1, uid);
 			rs=pstm.executeQuery();
 			while(rs.next()) {
 				postnum=postnum+1;
 			}			
-		}catch(ClassNotFoundException e1){
-			e1.printStackTrace();
+	
 		}catch(SQLException ex){
 		ex.printStackTrace();
 		}		
@@ -84,16 +77,15 @@ public class myclass {
 
 	public String getPoint(String uid) {
 		try {
-			Class.forName(diverclass);
-			conn=DriverManager.getConnection(url,username,password);
+			mysql_DB db=new mysql_DB();
+			conn=db.connectDB();
 			pstm=conn.prepareStatement("select point from user where uid =?");
 			pstm.setString(1, uid);
 			rs=pstm.executeQuery();
 			while(rs.next()) {
 				point=rs.getString(1);
 			}			
-		}catch(ClassNotFoundException e1){
-			e1.printStackTrace();
+		
 		}catch(SQLException ex){
 		ex.printStackTrace();
 		}		
@@ -103,16 +95,15 @@ public class myclass {
 	public int getUconum(String uid) {
 		try {
 			uconum=0;
-			Class.forName(diverclass);
-			conn=DriverManager.getConnection(url,username,password);
+			mysql_DB db=new mysql_DB();
+			conn=db.connectDB();
 			pstm=conn.prepareStatement("select * from uco where uid =?");
 			pstm.setString(1, uid);
 			rs=pstm.executeQuery();
 			while(rs.next()) {
 				uconum=uconum+1;
 			}			
-		}catch(ClassNotFoundException e1){
-			e1.printStackTrace();
+		
 		}catch(SQLException ex){
 		ex.printStackTrace();
 		}		
@@ -121,8 +112,8 @@ public class myclass {
 
 	public int getCommentnum(String uid) {
 		try {
-			Class.forName(diverclass);
-			conn=DriverManager.getConnection(url,username,password);
+			mysql_DB db=new mysql_DB();
+			conn=db.connectDB();
 			pstm=conn.prepareStatement("select * from userreply where uid=?");
 			pstm.setString(1, uid);
 			rs=pstm.executeQuery();
@@ -152,8 +143,7 @@ public class myclass {
 				}
 			}
 		
-		}catch(ClassNotFoundException e1){
-			e1.printStackTrace();
+	
 		}catch(SQLException ex){
 		ex.printStackTrace();
 		}
@@ -162,8 +152,8 @@ public class myclass {
 
 	public int getPraisenum(String uid) {
 		try {
-			Class.forName(diverclass);
-			conn=DriverManager.getConnection(url,username,password);
+			mysql_DB db=new mysql_DB();
+			conn=db.connectDB();
 			pstm=conn.prepareStatement("select * from userreply where uid=?");
 			pstm.setString(1, uid);
 			rs=pstm.executeQuery();
@@ -192,8 +182,7 @@ public class myclass {
 					
 				}
 			}
-		}catch(ClassNotFoundException e1){
-			e1.printStackTrace();
+		
 		}catch(SQLException ex){
 		ex.printStackTrace();
 		}
@@ -202,8 +191,8 @@ public class myclass {
 
 	public int getReplynum(String uid) {
 		try {
-			Class.forName(diverclass);
-			conn=DriverManager.getConnection(url,username,password);
+			mysql_DB db=new mysql_DB();
+			conn=db.connectDB();
 			pstm=conn.prepareStatement("select * from userpost where uid=?");
 			pstm.setString(1, uid);
 			rs=pstm.executeQuery();
@@ -228,8 +217,7 @@ public class myclass {
 					
 				}
 			}
-		}catch(ClassNotFoundException e1){
-			e1.printStackTrace();
+		
 		}catch(SQLException ex){
 		ex.printStackTrace();
 		}
@@ -238,8 +226,8 @@ public class myclass {
 
 	public int getReportnum(String uid) {
 		try {
-			Class.forName(diverclass);
-			conn=DriverManager.getConnection(url,username,password);
+			mysql_DB db=new mysql_DB();
+			conn=db.connectDB();
 			pstm=conn.prepareStatement("select * from userpost where uid=?");
 			pstm.setString(1, uid);
 			rs=pstm.executeQuery();
@@ -321,8 +309,7 @@ public class myclass {
 			
 			
 			
-		}catch(ClassNotFoundException e1){
-			e1.printStackTrace();
+		
 		}catch(SQLException ex){
 		ex.printStackTrace();
 		}
@@ -331,8 +318,8 @@ public class myclass {
 
 	public String[] getManagertitle() {
 		try {
-			Class.forName(diverclass);
-			conn=DriverManager.getConnection(url,username,password);
+			mysql_DB db=new mysql_DB();
+			conn=db.connectDB();
 			pstm=conn.prepareStatement("select * from manger");
 			rs=pstm.executeQuery();
 			int i=0;
@@ -340,8 +327,7 @@ public class myclass {
 				managertitle[i]=rs.getString(2);
 				i=i+1;
 			}			
-		}catch(ClassNotFoundException e1){
-			e1.printStackTrace();
+		
 		}catch(SQLException ex){
 		ex.printStackTrace();
 		}		

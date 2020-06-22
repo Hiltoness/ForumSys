@@ -8,10 +8,7 @@ import java.sql.SQLException;
 import java.util.ArrayList;
 public class mysql_postlist {
 	private PreparedStatement pstm;     
-	  private String diverclass="com.mysql.jdbc.Driver";
-	  private String username="jdbc:mysql://localhost/visual";
-	  private String password="root";
-	  private String url="root";
+	 
 	  private Connection conn;
 	  private ResultSet rs;
 	  private ArrayList<postlist> list=new ArrayList<postlist> ();
@@ -19,8 +16,8 @@ public class mysql_postlist {
 	  private ArrayList<post> list0=new ArrayList<post> ();
 	  public ArrayList<postlist>  postlist_getData() {
 			 try {
-					Class.forName(diverclass);
-					conn=DriverManager.getConnection(url,username,password);
+				 mysql_DB db=new mysql_DB();
+					conn=db.connectDB();
 					pstm=conn.prepareStatement("select * from post");
 					rs=pstm.executeQuery();
 					while(rs.next()) {
@@ -55,9 +52,7 @@ public class mysql_postlist {
 					}
 					sort sortlist=new sort();
 					solist=sortlist.postlistsort(list);
-					
-				}catch(ClassNotFoundException e1){
-					e1.printStackTrace();
+				
 				}catch(SQLException ex){
 				ex.printStackTrace();
 				}

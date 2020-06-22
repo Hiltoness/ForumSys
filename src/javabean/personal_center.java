@@ -1,7 +1,6 @@
 package javabean;
 //个人中心
 import java.sql.Connection;
-import java.sql.DriverManager;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
@@ -9,10 +8,7 @@ import java.util.ArrayList;
 
 public class personal_center {
 	  private PreparedStatement pstm;     
-	  private String diverclass="com.mysql.jdbc.Driver";
-	  private String username="jdbc:mysql://localhost/visual";
-	  private String password="root";
-	  private String url="root";
+	
 	  private Connection conn;
 	  private ResultSet rs;
 	  private ArrayList<usercomment> commentlist=new ArrayList<usercomment> ();
@@ -23,8 +19,8 @@ public class personal_center {
 	  private ArrayList<userreport_r> rreportlist=new ArrayList<userreport_r> ();
 	public ArrayList<usercomment> getCommentlist(String uid) {
 		try {
-			Class.forName(diverclass);
-			conn=DriverManager.getConnection(url,username,password);
+			mysql_DB db=new mysql_DB();
+			conn=db.connectDB();
 			pstm=conn.prepareStatement("select * from userreply where uid=?");
 			pstm.setString(1, uid);
 			rs=pstm.executeQuery();
@@ -59,8 +55,7 @@ public class personal_center {
 				}
 			}
 		
-		}catch(ClassNotFoundException e1){
-			e1.printStackTrace();
+		
 		}catch(SQLException ex){
 		ex.printStackTrace();
 		}
@@ -69,8 +64,8 @@ public class personal_center {
 
 	public ArrayList<userpraise> getPraiselist(String uid) {
 		try {
-			Class.forName(diverclass);
-			conn=DriverManager.getConnection(url,username,password);
+			mysql_DB db=new mysql_DB();
+			conn=db.connectDB();
 			pstm=conn.prepareStatement("select * from userreply where uid=?");
 			pstm.setString(1, uid);
 			rs=pstm.executeQuery();
@@ -103,8 +98,7 @@ public class personal_center {
 					
 				}
 			}
-		}catch(ClassNotFoundException e1){
-			e1.printStackTrace();
+		
 		}catch(SQLException ex){
 		ex.printStackTrace();
 		}
@@ -113,8 +107,8 @@ public class personal_center {
 
 	public ArrayList<userreply> getReplynum(String uid) {
 		try {
-			Class.forName(diverclass);
-			conn=DriverManager.getConnection(url,username,password);
+			mysql_DB db=new mysql_DB();
+			conn=db.connectDB();
 			pstm=conn.prepareStatement("select * from userpost where uid=?");
 			pstm.setString(1, uid);
 			rs=pstm.executeQuery();
@@ -145,8 +139,7 @@ public class personal_center {
 					
 				}
 			}
-		}catch(ClassNotFoundException e1){
-			e1.printStackTrace();
+	
 		}catch(SQLException ex){
 		ex.printStackTrace();
 		}
@@ -155,8 +148,8 @@ public class personal_center {
 
 	public ArrayList<userreport_a> getAreport(String uid) {
 		try {
-			Class.forName(diverclass);
-			conn=DriverManager.getConnection(url,username,password);
+			mysql_DB db=new mysql_DB();
+			conn=db.connectDB();
 			pstm=conn.prepareStatement("select * from userpost where uid=?");
 			pstm.setString(1, uid);
 			rs=pstm.executeQuery();
@@ -183,8 +176,7 @@ public class personal_center {
 					areportlist.add(bean0);
 				}
 			}			
-		}catch(ClassNotFoundException e1){
-			e1.printStackTrace();
+		
 		}catch(SQLException ex){
 		ex.printStackTrace();
 		}
@@ -194,8 +186,8 @@ public class personal_center {
 	
 	public ArrayList<userreport_r> getRreport(String uid) {
 		try {
-			Class.forName(diverclass);
-			conn=DriverManager.getConnection(url,username,password);					
+			mysql_DB db=new mysql_DB();
+			conn=db.connectDB();					
 			pstm=conn.prepareStatement("select * from userreply where uid=?");
 			pstm.setString(1, uid);
 			rs=pstm.executeQuery();
@@ -228,8 +220,7 @@ public class personal_center {
 				}
 			}
 			
-		}catch(ClassNotFoundException e1){
-			e1.printStackTrace();
+		
 		}catch(SQLException ex){
 		ex.printStackTrace();
 		}
@@ -239,8 +230,8 @@ public class personal_center {
 	
 	public ArrayList<userreport_c> getCreport(String uid) {
 		try {
-			Class.forName(diverclass);
-			conn=DriverManager.getConnection(url,username,password);		
+			mysql_DB db=new mysql_DB();
+			conn=db.connectDB();		
 			pstm=conn.prepareStatement("select * from usercomment where uid=?");
 			pstm.setString(1, uid);
 			rs=pstm.executeQuery();
@@ -276,8 +267,7 @@ public class personal_center {
 				}
 			}
 		
-		}catch(ClassNotFoundException e1){
-			e1.printStackTrace();
+		
 		}catch(SQLException ex){
 		ex.printStackTrace();
 		}
