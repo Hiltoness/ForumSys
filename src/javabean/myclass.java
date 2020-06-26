@@ -305,7 +305,7 @@ public class myclass {
 					}		
 				}
 			}
-			pstm=conn.prepareStatement("select status from mu where uid=?");
+			pstm=conn.prepareStatement("select status from manager_user where uid=?");
 			pstm.setString(1, uid);
 			rs=pstm.executeQuery();
 			while(rs.next()) {
