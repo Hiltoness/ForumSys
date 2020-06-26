@@ -1,14 +1,14 @@
 package javabean;
 
 public class manager_user {
-	private String mid;
+	private String pid;
 	private String uid;
 	private String status;
-	public String getMid() {
-		return mid;
+	public String getPid() {
+		return pid;
 	}
-	public void setMid(String mid) {
-		this.mid = mid;
+	public void setPid(String pid) {
+		this.pid = pid;
 	}
 	public String getUid() {
 		return uid;
@@ -22,5 +22,6 @@ public class manager_user {
 	public void setStatus(String status) {
 		this.status = status;
 	}
+
 	
 }

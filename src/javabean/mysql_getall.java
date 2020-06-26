@@ -18,7 +18,7 @@ public class mysql_getall {
 	private ArrayList<userreport_a> userreport_alist=new ArrayList<userreport_a> ();
 	private ArrayList<userreport_c> userreport_clist=new ArrayList<userreport_c> ();
 	private ArrayList<userreport_r> userreport_rlist=new ArrayList<userreport_r> ();
-	
+	private ArrayList<manager_user> mulist=new ArrayList<manager_user> ();
 	  private PreparedStatement pstm;     
 	  
 	  private Connection conn;
@@ -33,9 +33,10 @@ public ArrayList<manager> manager_getData() {
 			while(rs.next()) {
 				manager bean=new manager();
 				bean.setMid(rs.getString(1));
-				bean.setNotitle(rs.getString(2));
-				bean.setNotice(rs.getString(3));
-				bean.setNotime(rs.getString(4));
+				bean.setPid(rs.getString(2));
+				bean.setNotitle(rs.getString(3));
+				bean.setNotice(rs.getString(4));
+				bean.setNotime(rs.getString(5));
 				managerlist.add(bean);
 			}
 		
@@ -276,6 +277,25 @@ public ArrayList<userreport_r> userreport_r_getData() {
 		ex.printStackTrace();
 		}
 	 return userreport_rlist;
+}
+public ArrayList<manager_user> manager_user_getData() {
+	 try {
+		 mysql_DB db=new mysql_DB();
+			conn=db.connectDB();
+			pstm=conn.prepareStatement("select * from manager_user");;
+			rs=pstm.executeQuery();
+			while(rs.next()) {
+				manager_user bean=new manager_user();
+				bean.setPid(rs.getString(1));
+				bean.setUid(rs.getString(2));
+				bean.setStatus(rs.getString(3));
+				mulist.add(bean);
+			}
+		
+		}catch(SQLException ex){
+		ex.printStackTrace();
+		}
+	 return mulist;
 }
 
 }

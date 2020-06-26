@@ -10,15 +10,16 @@ public class mysql_insert {
 	
 	  private Connection conn;
 	  
-public void manager_InserData(String mid,String notitle,String notice,String notime) {
+public void manager_InserData(String mid,String pid,String notitle,String notice,String notime) {
 	 try {
 		 mysql_DB db=new mysql_DB();
 			conn=db.connectDB();
-			pstm=conn.prepareStatement("insert into manager values(?,?,?,?)");
+			pstm=conn.prepareStatement("insert into manager values(?,?,?,?,?)");
 			pstm.setString(1, mid);
-			pstm.setString(2, notitle);
-			pstm.setString(3,notice );
-			pstm.setString(4,notime );
+			pstm.setString(2, pid);
+			pstm.setString(3, notitle);
+			pstm.setString(4,notice );
+			pstm.setString(5,notime );
 			
 			pstm.executeUpdate();
 		
@@ -195,6 +196,22 @@ public void userreport_r_InserData(String uid,String aid,String rid,String repor
 			pstm.setString(6,status);
 			pstm.executeUpdate();
 	
+		}catch(SQLException ex){
+		ex.printStackTrace();
+		}
+}
+public void manager_user_InserData(String pid,String uid,String status) {
+	 try {
+		 mysql_DB db=new mysql_DB();
+			conn=db.connectDB();
+			pstm=conn.prepareStatement("insert into manager_user values(?,?,?)");
+			pstm.setString(1, pid);
+			pstm.setString(2, uid);
+			pstm.setString(3, status);
+
+			
+			pstm.executeUpdate();
+		
 		}catch(SQLException ex){
 		ex.printStackTrace();
 		}

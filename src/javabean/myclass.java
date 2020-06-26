@@ -329,7 +329,7 @@ public class myclass {
 			rs=pstm.executeQuery();
 			int i=0;
 			while(rs.next()) {				
-				managertitle[i]=rs.getString(2);
+				managertitle[i]=rs.getString(3);
 				i=i+1;
 			}			
 		

@@ -34,9 +34,10 @@ public ArrayList<manager> manager_getData(String attwhere,String attvalue) {
 			while(rs.next()) {
 				manager bean=new manager();
 				bean.setMid(rs.getString(1));
-				bean.setNotitle(rs.getString(2));
-				bean.setNotice(rs.getString(3));
-				bean.setNotime(rs.getString(4));
+				bean.setPid(rs.getString(2));
+				bean.setNotitle(rs.getString(3));
+				bean.setNotice(rs.getString(4));
+				bean.setNotime(rs.getString(5));
 				
 				managerlist.add(bean);
 			}
@@ -291,7 +292,7 @@ public ArrayList<manager_user> manager_user_getData(String attwhere,String attva
 			rs=pstm.executeQuery();
 			while(rs.next()) {
 				manager_user bean=new manager_user();
-				bean.setMid(rs.getString(1));
+				bean.setPid(rs.getString(1));
 				bean.setUid(rs.getString(2));
 				bean.setStatus(rs.getString(3));
 				mulist.add(bean);
