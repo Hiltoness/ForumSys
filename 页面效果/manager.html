@@ -1,0 +1,98 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>积分技术论坛 - 管理系统</title>
+    <link type="text/css" rel="stylesheet" href="base.css"/>
+    <link rel="icon" href="" type="image/x-icon" />
+    <base target="_blank">
+</head>
+<body>
+<script>
+    function deleteTopic_m(aid) {
+        if(confirm("确认删除"+aid)){
+            location.href="deleteTopicMServlet?method=delete&aid="+aid;
+        }else{
+            alert("删除失败");
+        }
+    }
+    function deleteReply(rid) {
+        if(confirm("确认删除"+rid)){
+            location.href="deleteReplyMServlet?method=delete&rid="+rid;
+        }else{
+            alert("删除失败");
+        }
+    }
+</script>
+<div class="viewContainer">
+    <div class="mainHeaderBox">
+        <div class="container">
+            <div class="mainNav">
+                <a class="topTitle1" href="manager.html">积分技术论坛 管理系统</a>
+                <ul class="navList">
+                    <li class="navItem1"><a href="manager.html">管理帖子主题</a></li>
+                    <span class="navText"> | </span>
+                    <li class="navItem1"><a href="publize.html">管理帖子回复</a></li>
+                    <span class="navText"> | </span>
+                    <li class="navItem1"><a href="publize.html">管理用户</a></li>
+                    <span class="navText"> | </span>
+                    <li class="navItem1"><a href="publize.html">发布公告</a></li>
+                </ul>
+            </div>
+            <div class="mainLogin">
+                <ul class="navLogin">
+                    <li class="navItem"><a href="modify.html">管理员Name</a></li>
+                    <span class="navText"> | </span>
+                    <li class="navItem"><a>退出</a></li>
+                </ul>
+            </div>
+        </div>
+    </div>
+    <div class="mainAsideBox">
+        <div class="container">
+            <main class="manager">
+                <section class="managerSec">
+                    <h3 class="mainArticleTitle">
+                        <span>管理帖子主题</span>
+                        <form class="searchTopic_m" id="searchTopic_m">
+                            <input class="searchInput_m" type="search" placeholder="搜索帖子主题">
+                        </form>
+                    </h3>
+
+                    <ul class="reviewShow">
+                        <li class="infoDetail">xxx举报了xxx的帖子主题“HTML块级元素 包含……”，举报理由为 恶意灌水   <a target="_self" href="javascript:deleteTopic_m(111)">删除此帖</a></li>
+                        <li class="infoDetail">xxx举报了xxx的帖子主题“HTML块级元素 包含……”，举报理由为 恶意灌水   <a>删除此帖</a></li>
+                        <li class="infoDetail">xxx举报了xxx的帖子主题“HTML块级元素 包含……”，举报理由为 恶意灌水   <a>删除此帖</a></li>
+                        <li class="infoDetail">xxx举报了xxx的帖子主题“HTML块级元素 包含……”，举报理由为 恶意灌水   <a>删除此帖</a></li>
+                        <li class="infoDetail">xxx举报了xxx的帖子主题“HTML块级元素 包含……”，举报理由为 恶意灌水   <a>删除此帖</a></li>
+                        <li class="infoDetail">xxx举报了xxx的帖子主题“HTML块级元素 包含……”，举报理由为 恶意灌水   <a>删除此帖</a></li>
+                        <li class="infoDetail">xxx举报了xxx的帖子主题“HTML块级元素 包含……”，举报理由为 恶意灌水   <a>删除此帖</a></li>
+                    </ul>
+                </section>
+                <section class="managerSec">
+                    <h3 class="mainArticleTitle">
+                        <span>管理帖子回复</span>
+                        <form class="searchTopic_m" id="searchReply_m">
+                            <input class="searchInput_m" type="search" placeholder="搜索帖子回复">
+                        </form>
+                    </h3>
+                    <ul class="reviewShow">
+                        <li class="infoDetail">xxx举报了xxx在帖子主题“HTML块级元素 包含……”下的回复“你不会就别用了”，举报理由为 人身攻击   <a target="_self" href="javascript:deleteReply(111)">删除此回复</a></li>
+                        <li class="infoDetail">xxx举报了xxx在帖子主题“HTML块级元素 包含……”下的回复“你不会就别用了”，举报理由为 人身攻击   <a>删除此回复</a></li>
+                        <li class="infoDetail">xxx举报了xxx在帖子主题“HTML块级元素 包含……”下的回复“你不会就别用了”，举报理由为 人身攻击   <a>删除此回复</a></li>
+                    </ul>
+                </section>
+            </main>
+
+        </div>
+    </div>
+    <footer class="footerBox">
+        <div class="container">
+            <div class="footerContent">
+                <p>请联系我们 0000-0000-0000</p>
+            </div>
+        </div>
+    </footer>
+</div>
+</body>
+</html>

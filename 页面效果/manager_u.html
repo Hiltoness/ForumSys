@@ -1,0 +1,178 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>积分技术论坛 - 管理系统</title>
+    <link type="text/css" rel="stylesheet" href="base.css"/>
+    <link rel="icon" href="" type="image/x-icon" />
+    <base target="_blank">
+</head>
+<body>
+//修改框
+<div id="modi_m1" style="display: none;
+    POSITION:absolute;
+    left:50%;
+    top:50%;
+    width:250px;
+    height:250px;
+    margin-left:-100px;
+    margin-top:-200px;
+    padding: 5px;
+    border:1px solid #888;
+    -webkit-border-radius: 5px;
+    background-color: #f5f6f7;
+    z-index: 10;
+    text-align:center">
+    <form class="modiForm1" id="modi_m2" method="post" action="">
+        <label class="modiForm">用户ID:<label>100001</label></label>
+        <label class="modiForm">用户昵称：emokoshilo</label>
+        <label class="modiForm">注册时间：2020-01-11</label>
+        <label class="modiForm">性别：male</label>
+        <label class="modiForm">密码：<input class="modiInput" type="text" id="modi_m_psw" value="00110011"></label>
+        <button class="btnM" type="submit">确认修改</button>
+        <button class="btnM1" formtarget="_self" onclick="closeDiv()">取消</button>
+    </form>
+</div>
+<script type="application/javascript">
+    function modiInfo_m() {
+        document.getElementById("modi_m1").style.display="";
+    }
+    function closeDiv() {
+        document.getElementById("modi_m1").style.display="none";
+    }
+    function deleteUser_m(uid) {
+        if(confirm("确认删除"+uid)){
+            location.href="deleteServlet?method=delete&uid="+uid;
+        }else{
+            alert("删除失败");
+        }
+    }
+
+</script>
+<div class="viewContainer">
+    <div class="mainHeaderBox">
+        <div class="container">
+            <div class="mainNav">
+                <a class="topTitle1" href="manager.html">积分技术论坛 管理系统</a>
+                <ul class="navList">
+                    <li class="navItem1"><a href="manager.html">管理帖子主题</a></li>
+                    <span class="navText"> | </span>
+                    <li class="navItem1"><a href="publize.html">管理帖子回复</a></li>
+                    <span class="navText"> | </span>
+                    <li class="navItem1"><a href="publize.html">管理用户</a></li>
+                    <span class="navText"> | </span>
+                    <li class="navItem1"><a href="publize.html">发布公告</a></li>
+                </ul>
+            </div>
+            <div class="mainLogin">
+                <ul class="navLogin">
+                    <li class="navItem"><a href="modify.html">管理员Name</a></li>
+                    <span class="navText"> | </span>
+                    <li class="navItem"><a>退出</a></li>
+                </ul>
+            </div>
+        </div>
+    </div>
+    <div class="mainAsideBox">
+        <div class="container">
+            <main class="manager">
+                <section class="managerSec">
+                    <h3 class="mainArticleTitle">
+                        <span>管理用户</span>
+                        <form class="searchTopic_m" id="searchUser_m">
+                            <input class="searchInput_m" type="search" placeholder="搜索用户ID">
+                        </form>
+                    </h3>
+                    <div class="mainArticleHead">
+                        <span class="userListHead0">序号</span>
+                        <span class="userListHead1">用户ID</span>
+                        <span class="userListHead1">用户昵称</span>
+                        <span class="userListHead1">注册时间</span>
+                        <span class="userListHead0">性别</span>
+                        <span class="userListHead0">密码</span>
+                    </div>
+                    <ul class="userList">
+                        <li class="userListHead0">1</li>
+                        <li class="userListHead1">100001</li>
+                        <li class="userListHead1">emikoshilo</li>
+                        <li class="userListHead1">2020-01-11</li>
+                        <li class="userListHead0">male</li>
+                        <li class="userListHead0">00110011</li>
+                        <button onclick="modiInfo_m()"> 修改&nbsp;</button>
+                        <button onclick="deleteUser_m(100001)">&nbsp;删除</button>
+                    </ul>
+                    <ul class="userList">
+                        <li class="userListHead0">2</li>
+                        <li class="userListHead1">100002</li>
+                        <li class="userListHead1">emikoshilo</li>
+                        <li class="userListHead1">2020-01-11</li>
+                        <li class="userListHead0">male</li>
+                        <li class="userListHead0">00110011</li>
+                        <a> 修改&nbsp;</a>
+                        <a>&nbsp;删除</a>
+                    </ul>
+                    <ul class="userList">
+                        <li class="userListHead0">3</li>
+                        <li class="userListHead1">100001</li>
+                        <li class="userListHead1">emikoshilo</li>
+                        <li class="userListHead1">2020-01-11</li>
+                        <li class="userListHead0">male</li>
+                        <li class="userListHead0">00110011</li>
+                        <a> 修改&nbsp;</a>
+                        <a>&nbsp;删除</a>
+                    </ul>
+                    <ul class="userList">
+                        <li class="userListHead0">4</li>
+                        <li class="userListHead1">100001</li>
+                        <li class="userListHead1">emikoshilo</li>
+                        <li class="userListHead1">2020-01-11</li>
+                        <li class="userListHead0">male</li>
+                        <li class="userListHead0">00110011</li>
+                        <a> 修改&nbsp;</a>
+                        <a>&nbsp;删除</a>
+                    </ul>
+                    <ul class="userList">
+                        <li class="userListHead0">5</li>
+                        <li class="userListHead1">100001</li>
+                        <li class="userListHead1">emikoshilo</li>
+                        <li class="userListHead1">2020-01-11</li>
+                        <li class="userListHead0">male</li>
+                        <li class="userListHead0">00110011</li>
+                        <a> 修改&nbsp;</a>
+                        <a>&nbsp;删除</a>
+                    </ul>
+                    <ul class="userList">
+                        <li class="userListHead0">6</li>
+                        <li class="userListHead1">100001</li>
+                        <li class="userListHead1">emikoshilo</li>
+                        <li class="userListHead1">2020-01-11</li>
+                        <li class="userListHead0">male</li>
+                        <li class="userListHead0">00110011</li>
+                        <a> 修改&nbsp;</a>
+                        <a>&nbsp;删除</a>
+                    </ul>
+                    <ul class="userList">
+                        <li class="userListHead0">7</li>
+                        <li class="userListHead1">100001</li>
+                        <li class="userListHead1">emikoshilo</li>
+                        <li class="userListHead1">2020-01-11</li>
+                        <li class="userListHead0">male</li>
+                        <li class="userListHead0">00110011</li>
+                        <a> 修改&nbsp;</a>
+                        <a>&nbsp;删除</a>
+                    </ul>
+                </section>
+            </main>
+
+        </div>
+    </div>
+    <footer class="footerBox">
+        <div class="container">
+            <div class="footerContent">
+                <p>请联系我们 0000-0000-0000</p>
+            </div>
+        </div>
+    </footer>
+</div>
+</body>
+</html>
