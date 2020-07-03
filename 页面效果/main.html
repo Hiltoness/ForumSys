@@ -1,0 +1,279 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>积分技术论坛 - 论坛首页</title>
+    <link type="text/css" rel="stylesheet" href="base.css"/>
+    <link rel="icon" href="" type="image/x-icon" />
+    <base target="_blank">
+</head>
+<body onload=loadFresh()>
+<script>
+    var jsp_rnum="<%=rnum%>";//未读回帖
+    var jsp_cnum="<%=cnum%>";//未读评论
+    var jsp_pnum="<%=pnum%>";//未读点赞
+    var jsp_rpnum="<%=rpnum%>";//系统通知
+    var jsp_bnum="<%=bnum%>";//未读公告
+    function loadFresh() {
+        var m=unread();
+        if(jsp_rnum>0){
+            m.replyUnread(jsp_rnum)
+        }
+        if (jsp_cnum>0){
+            m.commentUnread(jsp_cnum);
+        }
+        if(jsp_pnum>0){
+            m.praiseUnread(jsp_pnum)
+        }
+        if (jsp_rpnum>0){
+            m.noticeUnread(jsp_rpnum)
+        }
+        if(jsp_bnum>0){
+            bulletin(jsp_bnum)
+        }
+
+    }
+    function exitout(uid) {
+        window.close();
+    }
+    var num=0;
+    function unread() {//未读消息
+
+        // var num=0;
+        function total() {
+            var unreadNote = document.getElementById("infoUnread");
+            unreadNote.style.display = "contents"
+            unreadNote.innerHTML = this.num;
+        }
+
+        function commentUnread(num1) {// 未读评论
+            var unreadNote = document.getElementById("commentUnread");
+            unreadNote.style.display = "contents"
+            unreadNote.innerHTML = num1;
+            num=num+num1;
+            total()
+        }
+
+        function praiseUnread(num2) { //未读点赞
+            var unreadNote = document.getElementById("praiseUnread");
+            unreadNote.style.display = "contents"
+            unreadNote.innerHTML = num2;
+            num=num+num2;
+            total()
+        }
+
+        function replyUnread(num3) { //未读回帖
+            var unreadNote = document.getElementById("replyUnread");
+            unreadNote.style.display = "contents"
+            unreadNote.innerHTML = num3;
+            num=num+num3;
+            total()
+        }
+
+        function noticeUnread(num4) { //系统通知
+            var unreadNote = document.getElementById("noticeUnread");
+            unreadNote.style.display = "contents"
+            unreadNote.innerHTML = num4;
+            num=num+num4;
+            total()
+        }
+
+
+        return{
+            commentUnread:commentUnread,
+            praiseUnread:praiseUnread,
+            replyUnread:replyUnread,
+            noticeUnread:noticeUnread
+
+        }
+    }
+    function bulletin(numb) {
+        var unreadBull = document.getElementById("bulletinUnread");
+        unreadBull.style.display = "contents"
+        unreadBull.innerHTML = numb;
+    }
+
+</script>
+<div class="viewContainer">
+    <div class="mainHeaderBox">
+        <div class="container">
+            <div class="mainNav">
+                <a class="topTitle" href="main.html">积分技术论坛</a>
+                <ul class="navList">
+                    <li class="navItem"><a href="main.html">首页</a></li>
+                    <span class="navText"> | </span>
+                    <li class="navItem"><a href="publize.html">发帖</a></li>
+                    <li class="navItem">
+                        <form class="searchForm">
+                            <input class="searchInput" type="search" maxlength="50" placeholder="搜索内容">
+                            <input class="searchIcon" type="image" src="icon/search.png" alt="搜索" >
+                        </form>
+                    </li>
+                </ul>
+            </div>
+            <div class="mainLogin">
+                <ul class="navLogin">
+                    <li class="navItem"><a href="modify.html">个人中心</a></li>
+                    <span class="navText"> | </span>
+                    <li class="navItem"><a target="_self" href="javascript:exitout(111)">退出</a></li>
+                </ul>
+            </div>
+        </div>
+    </div>
+    <div class="mainAsideBox">
+        <div class="container_r">
+            <aside class="aside">
+                <div class="myCard">
+                    <div class="asideCardUp">
+                        <img class="headerImg" src="icon/search.png" />
+                        <div class="headerName">
+                            <span>Name</span>
+                            <br/>
+                            <span>Level</span>
+                        </div>
+                        <div class="headerCont">
+                            <a href="my.html#myPost"><span class="headerContItem">我的帖子
+                            <br/>20</span></a>
+                            <span class="headerContItem">我的积分
+                                <br/>20</span>
+                            <a href="my.html#myFav"><span class="headerContItem">我的收藏
+                                <br/>20</span></a>
+                        </div>
+                    </div>
+                    <div class="asideCardDown">
+                        <ul class="MSG">
+                            <li class="headerMSGTitle aHover"><a href="modify.html"><b>消息</b><span id="infoUnread" style="display: none;color: red"></span></a></li>
+                            <li class="headerMSGItem"><a href="modify.html#Info1">评论</a><span id="commentUnread" style="display: none;color: red"></span></li>
+                            <li class="headerMSGItem"><a href="modify.html#Info2">点赞</a><span id="praiseUnread" style="display: none;color: red"></span></li>
+                            <li class="headerMSGItem"><a href="modify.html#Info3">回复</a><span id="replyUnread" style="display: none;color: red"></span></li>
+                            <li class="headerMSGItem"><a href="modify.html#Info4">系统通知<span id="noticeUnread" style="display: none;color: red"></span></a></li>
+                        </ul>
+                        <ul class="MSG">
+                            <li class="headerMSGTitle"><a href="modify.html#Info5"><b>资料</b></a></li>
+                            <li class="headerMSGItem"><a href="modify.html#Info5">修改资料</a></li>
+                            <li class="headerMSGItem"><a href="modify.html#Info6">修改密码</a></li>
+                        </ul>
+                    </div>
+                </div>
+                <div class="mainBullet">
+                    <span class="headerMSGTitle"><a href="modify.html#bulletin"><b>论坛公告</b><span id="bulletinUnread" style="display: none;color: red"></span></a></span>
+                    <ul>
+                        <li class="mainBulletItem"><a>有奖征集</a></li>
+                        <li class="mainBulletItem"><a>博主排名更新</a></li>
+                        <li class="mainBulletItem"><a>系统升级通知</a></li>
+                    </ul>
+                </div>
+            </aside>
+
+
+        </div>
+        <div class="container_l">
+            <main class="mainLeft">
+                <section class="mainArticleList">
+                    <h3 class="mainArticleTitle">
+                        <span>热门帖子列表</span>
+                    </h3>
+                    <div class="mainArticleHead">
+                        <span class="Head0">标题</span>
+                        <span class="Head1">提问人</span>
+                        <span class="Head2">时间</span>
+                        <span class="Head3">回复数</span>
+                    </div>
+                    <ul class="mainTitleList">
+                        <li>
+                            <a class="mainQuesTitle" href="">银行家算法问题如何用Python求解银行家算法问题如何用Python求解银行家算法问题如何用Python求解</a>
+                            <a class="mainQuestioner">最牛的人</a>
+                            <span class="mainQuesTime">2020-05-20</span>
+                            <span class="mainQuesReply">20</span>
+                        </li>
+                        <li><a class="mainQuesTitle" href="">Linux和Windows装机求指教</a>
+                            <a class="mainQuestioner" href="">emikoshilo</a>
+                            <span class="mainQuesTime">2020-05-04</span>
+                            <span class="mainQuesReply">30</span>
+                        </li>
+                        <li><a class="mainQuesTitle" href="">Linux和Windows装机求指教</a>
+                            <a class="mainQuestioner" href="">emikoshilo</a>
+                            <span class="mainQuesTime">2020-05-04</span>
+                            <span class="mainQuesReply">30</span>
+                        </li>
+                        <li><a class="mainQuesTitle" href="">Linux和Windows装机求指教</a>
+                            <a class="mainQuestioner" href="">emikoshilo</a>
+                            <span class="mainQuesTime">2020-05-04</span>
+                            <span class="mainQuesReply">30</span>
+                        </li>
+                        <li><a class="mainQuesTitle" href="">Linux和Windows装机求指教</a>
+                            <a class="mainQuestioner" href="">emikoshilo</a>
+                            <span class="mainQuesTime">2020-05-04</span>
+                            <span class="mainQuesReply">30</span>
+                        </li>
+                        <li><a class="mainQuesTitle" href="">Linux和Windows装机求指教</a>
+                            <a class="mainQuestioner" href="">emikoshilo</a>
+                            <span class="mainQuesTime">2020-05-04</span>
+                            <span class="mainQuesReply">30</span>
+                        </li>
+                        <li><a class="mainQuesTitle" href="">Linux和Windows装机求指教</a>
+                            <a class="mainQuestioner" href="">emikoshilo</a>
+                            <span class="mainQuesTime">2020-05-04</span>
+                            <span class="mainQuesReply">30</span>
+                        </li>
+                        <li><a class="mainQuesTitle" href="">Linux和Windows装机求指教</a>
+                            <a class="mainQuestioner" href="">emikoshilo</a>
+                            <span class="mainQuesTime">2020-05-04</span>
+                            <span class="mainQuesReply">30</span>
+                        </li>
+                        <li><a class="mainQuesTitle" href="">Linux和Windows装机求指教</a>
+                            <a class="mainQuestioner" href="">emikoshilo</a>
+                            <span class="mainQuesTime">2020-05-04</span>
+                            <span class="mainQuesReply">30</span>
+                        </li>
+                        <li><a class="mainQuesTitle" href="">Linux和Windows装机求指教</a>
+                            <a class="mainQuestioner" href="">emikoshilo</a>
+                            <span class="mainQuesTime">2020-05-04</span>
+                            <span class="mainQuesReply">30</span>
+                        </li>
+                        <li><a class="mainQuesTitle" href="">Linux和Windows装机求指教</a>
+                            <a class="mainQuestioner" href="">emikoshilo</a>
+                            <span class="mainQuesTime">2020-05-04</span>
+                            <span class="mainQuesReply">30</span>
+                        </li>
+                        <li><a class="mainQuesTitle" href="">Linux和Windows装机求指教</a>
+                            <a class="mainQuestioner" href="">emikoshilo</a>
+                            <span class="mainQuesTime">2020-05-04</span>
+                            <span class="mainQuesReply">30</span>
+                        </li>
+                        <li><a class="mainQuesTitle" href="">Linux和Windows装机求指教</a>
+                            <a class="mainQuestioner" href="">emikoshilo</a>
+                            <span class="mainQuesTime">2020-05-04</span>
+                            <span class="mainQuesReply">30</span>
+                        </li>
+                        <li><a class="mainQuesTitle" href="">Linux和Windows装机求指教</a>
+                            <a class="mainQuestioner" href="">emikoshilo</a>
+                            <span class="mainQuesTime">2020-05-04</span>
+                            <span class="mainQuesReply">30</span>
+                        </li>
+                        <li><a class="mainQuesTitle" href="">Linux和Windows装机求指教</a>
+                            <a class="mainQuestioner" href="">emikoshilo</a>
+                            <span class="mainQuesTime">2020-05-04</span>
+                            <span class="mainQuesReply">30</span>
+                        </li>
+                        <li><a class="mainQuesTitle" href="">Linux和Windows装机求指教</a>
+                            <a class="mainQuestioner" href="">emikoshilo</a>
+                            <span class="mainQuesTime">2020-05-04</span>
+                            <span class="mainQuesReply">30</span>
+                        </li>
+                    </ul>
+                </section>
+            </main>
+        </div>
+
+    </div>
+    <footer class="footerBox">
+        <div class="container">
+            <div class="footerContent">
+                <p class="content">请联系我们 0000-0000-0000</p>
+            </div>
+        </div>
+    </footer>
+</div>
+</body>
+</html>
