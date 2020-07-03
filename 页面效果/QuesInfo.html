@@ -1,0 +1,430 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>积分技术论坛 - 浏览帖子详情</title>
+    <link type="text/css" rel="stylesheet" href="base.css"/>
+    <link rel="icon" href="" type="image/x-icon" />
+</head>
+<body>
+<script>
+    function fav(aid) {//收藏
+        var fDiv=document.getElementById("fav");
+        if(fDiv.innerHTML==="收藏"){
+            // location.href="favServlet?method=fav&aid="+aid;
+            fDiv.innerHTML="已收藏";
+        }else {//取消收藏
+            // location.href="cancelfavServlet?method=cancelfav&aid="+aid;
+            fDiv.innerHTML="收藏";
+        }
+    }
+    function read(uid,i) {//只看楼主/TA
+        var rDiv=document.getElementsByClassName("read")[i];
+        if(rDiv.style.color=="rgb(103, 103, 103)"){
+            // location.href="readServlet?method=read&aid="+aid;
+            rDiv.style.color="#e40d01";
+            rDiv.style.fontWeight="bold";
+        }else {//取消只看楼主/TA
+            // location.href="cancelreadServlet?method=cancelread&aid="+aid;
+            document.getElementById("read").style.color="#676767";
+            rDiv.style.fontWeight="normal";
+        }
+    }
+    function report1(aid) {
+        //点击举报主贴
+        document.getElementById("reportDiv").style.display="";
+        var hideobj=document.getElementById("hidebg");
+        hideobj.style.display="block";  //显示隐藏层
+        hideobj.style.height=document.body.clientHeight+"px";  //设置隐藏层的高度为当前页面高度
+    }
+    function closeRDiv() {//关闭举报框
+        document.getElementById("reportDiv").style.display="none";
+        document.getElementById("hidebg").style.display="none";
+    }
+    function praise(rid,i) {//点赞
+        var pDiv=document.getElementsByClassName("praise")[i];
+        if(pDiv.style.color=="rgb(103, 103, 103)"){
+            // location.href="praiseServlet?method=praise&aid="+aid;
+            pDiv.style.color="red";
+            pDiv.innerHTML="取消点赞"
+        }else {//取消点赞
+            // location.href="cancelpraiseServlet?method=cancelpraise&aid="+aid;
+            pDiv.style.color = "#676767"
+            pDiv.innerHTML = "点赞"
+        }
+    }
+    function $(el) {
+        return document.getElementById(el);
+    }
+    function comment(obj,cid) {//评论
+        var oComment=obj.parentNode.parentNode.parentNode;
+        oComment.appendChild($("response"));
+        $("response").style.display="flex";
+        var commentID=document.getElementById("commentCid");
+        commentID.setAttribute("value",cid);
+    }
+
+</script>
+//举报框
+<div id="reportDiv" style="display: none;
+    POSITION:absolute;
+    left:50%;
+    top:50%;
+    width:350px;
+    height:460px;
+    margin-left:-100px;
+    margin-top:-200px;
+    padding: 5px;
+    border:1px solid #cccccc;
+    -webkit-border-radius: 5px;
+    background-color: #fbfcfd;
+    z-index: 10;
+    text-align:center">
+    <div class="boxTitle"><p>举报</p>
+        <button class="close" type="button" onclick="closeRDiv()" aria-label="Close">
+            <span aria-hidden="true">×</span>
+        </button>
+    </div>
+
+    <div class="boxCenter">
+        <form class="reportForm1" id="reportCon" method="post" action="">
+            <div class="boxHeader">
+                <span>你觉得这个帖子有什么问题？（必选）</span>
+            </div>
+            <label class="reportBan"><input type="radio" name="report1" value="1" />内容涉黄</label>
+            <label class="reportBan"><input type="radio" name="report1" value="2" />政治相关</label>
+            <label class="reportBan"><input type="radio" name="report1" value="3" />其他</label>
+            <label class="reportBan"><input type="radio" name="report1" value="4" />涉嫌广告</label>
+            <label class="reportBan"><input type="radio" name="report1" value="5" />招聘</label>
+            <label class="reportBan"><input type="radio" name="report1" value="6" />刷屏</label>
+            <label class="reportBan"><input type="radio" name="report1" value="7" />恶意灌水</label>
+            <label class="reportBan"><input type="radio" name="report1" value="8" />跑题</label>
+            <label class="reportBan"><input type="radio" name="report1" value="9" />言语攻击</label>
+
+            <div class="boxHeader">
+                <span>补充说明（选填）</span>
+            </div>
+            <textarea rows="5" cols="30" class="reportInput" id="reportInput"></textarea>
+
+            <button class="btnM" type="submit">提交</button>
+            <button class="btnM1" formtarget="_self" onclick="closeRDiv()">取消</button>
+        </form>
+    </div>
+
+</div>
+//隐藏遮罩层
+ <div id="hidebg" style="position:absolute;left:0px;top:0px;
+        background-color:gray;
+        width:100%;  /*宽度设置为100%，这样才能使隐藏背景层覆盖原页面*/
+        opacity:0.6;  /*非IE浏览器下设置透明度为60%*/
+        display:none; /* http://www.jb51.net */
+        z-Index:9"></div>
+//评论框
+<div id="response" style="display: none;margin: 10px 15px">
+    <form id="commentForm" name="commentForm" style="display: contents" accept-charset="utf-8" method="post" action="">
+<!--        评论cid-->
+        <input style="display: none" id="commentCid" value=""/>
+        <textarea id="commentSend" style="display:inline;width: 100%;height: 80px;-webkit-border-radius: 3px;padding: 2px 5px"></textarea>
+        <input class="btnModi" value="发表评论" type="submit" />
+    </form>
+</div>
+<div class="viewContainer">
+    <div class="mainHeaderBox">
+        <div class="container">
+            <div class="mainNav">
+                <a class="topTitle" href="main.html">积分技术论坛</a>
+                <ul class="navList">
+                    <li class="navItem"><a href="main.html">首页</a></li>
+                    <span class="navText"> | </span>
+                    <li class="navItem"><a href="">发帖</a></li>
+                    <li class="navItem">
+                        <form class="searchForm">
+                            <input class="searchInput" type="search" maxlength="50" placeholder="搜索内容">
+                            <input class="searchIcon" type="image" src="icon/search.png" alt="搜索" >
+                        </form>
+                    </li>
+                </ul>
+            </div>
+            <div class="mainLogin">
+                <ul class="navLogin">
+                    <li class="navItem"><a>个人中心</a></li>
+                    <span class="navText"> | </span>
+                    <li class="navItem"><a>退出</a></li>
+                </ul>
+            </div>
+        </div>
+    </div>
+    <div class="mainAsideBox">
+        <div class="container">
+            <aside class="aside">
+                <div class="myCard">
+                    <div class="asideCardUp">
+                        <img class="headerImg" src="icon/search.png" />
+                        <div class="headerName">
+                            <span>Name</span>
+                            <br/>
+                            <span>Level</span>
+                        </div>
+                        <div class="headerCont">
+                            <a><span class="headerContItem">我的帖子
+                            <br/>20</span></a>
+                            <a><span class="headerContItem">我的积分
+                                <br/>20</span></a>
+                            <a ><span class="headerContItem">我的收藏
+                                <br/>20</span></a>
+                        </div>
+                    </div>
+                    <div class="asideCardDown">
+                        <ul class="MSG">
+                            <li class="headerMSGTitle aHover"><a><b>消息</b></a></li>
+                            <li class="headerMSGItem"><a>评论</a></li>
+                            <li class="headerMSGItem"><a>点赞</a></li>
+                            <li class="headerMSGItem"><a>回复</a></li>
+                            <li class="headerMSGItem"><a>系统通知</a></li>
+                        </ul>
+                        <ul class="MSG">
+                            <li class="headerMSGTitle"><a><b>资料</b></a></li>
+                            <li class="headerMSGItem"><a>修改资料</a></li>
+                            <li class="headerMSGItem"><a>修改密码</a></li>
+                        </ul>
+                    </div>
+                </div>
+                <div class="mainBullet">
+                    <span class="headerMSGTitle"><b>论坛公告</b></span>
+                    <ul>
+                        <li class="mainBulletItem"><a>有奖征集</a></li>
+                        <li class="mainBulletItem"><a>博主排名更新</a></li>
+                        <li class="mainBulletItem"><a>系统升级通知</a></li>
+                    </ul>
+                </div>
+            </aside>
+            <div class="mainLeft">
+                <div class="quesFloor">
+                    <h3 class="quesTitle">C/C++，下面代码运行后会出现什么结果，为什么</h3>
+                    <section class="quesTitleNEr">
+                        <div class="erInfoBox">
+                            <img src="icon/search.png" class="headerImg2">
+                            <div class="headerName">
+                                <span>Name</span>
+                                <br/>
+                                <span>Level</span>
+                            </div>
+                        </div>
+                        <div class="erQues">
+                            <div class="erCont">
+                                void fun1(char* p1)
+                                {
+                                p1 = (char*)malloc(100);
+                                }
+                                void fun2()
+                                {
+                                char* p2 = nullptr;
+                                fun1(p2);
+                                strcpy(p2, "大风起兮云飞扬");<br/>
+                                printf(p2);<br/>
+                                }<br/>
+                                int main()<br/>
+                                {<br/>
+                                fun2();<br/>
+                                return 0;<br/>
+                                }<br/>
+                            </div>
+                            <div class="erControl">
+                                <div class="erControlL">
+                                    <label class="datetime">2020-05-22 11:34:26</label>
+                                </div>
+                                <div class="erControlR">
+                                    <a href="javascript:fav(111)"><span id="fav">收藏</span></a>
+                                    <span>回复数</span>
+                                    <a href="javascript:read(111)"><span class="read" style="color: rgb(103,103,103)">只看楼主</span></a>
+                                    <a href="javascript:report1(111)">举报</a>
+                                </div>
+                            </div>
+                        </div>
+                    </section>
+                    <section class="quesTitleNEr">
+                        <div class="erInfoBox">
+                            <img src="icon/search.png" class="headerImg">
+                            <div class="headerName">
+                                <span>Name</span>
+                                <br/>
+                                <span>Level</span>
+                            </div>
+                        </div>
+                        <div class="erQues">
+                            <div class="erCont">
+                                肯定会crash的，<br/>
+                                有两种改法<br/>
+                                第一种：<br/>
+                                void fun1(char*& p1)<br/>
+                                第二种<br/>
+                                void fun1(char* *p1)<br/>
+                            </div>
+                            <div class="erControl">
+                                <div class="erControlL">
+                                    <label class="datetime">2020-05-22 11:40:26</label>
+                                </div>
+                                <div class="erControlR">
+                                    <a href="javascript:read(111)"><span class="read">只看TA</span></a>
+                                    <a href="javascript:praise(111)"><span class="praise">点赞</span></a>
+                                    <div class="commentBtn" onclick="comment(this,111)"><span class="comment">评论</span></div>
+                                    <a href="javascript:report1(1111)">举报</a>
+                                    <span>1 楼</span>
+                                </div>
+
+                            </div>
+                            <div class="erComment">
+                                <div class="commentHead">
+                                    <span>Name&nbsp</span><span style="color: #1e88e5">level</span>
+                                    <span class="commentCon">这倒是，我平常也是拿稳定器拍,只有几次少数拿手持，还是稳定器没带</span>
+                                </div>
+                                <div class="erControl1">
+                                    <div class="erControlR">
+                                        <label class="datetime">2020-05-22 11:40:26</label>
+                                        <a href="javascript:praise(111)"><span class="praise">点赞</span></a>
+                                        <a href="javascript:report1(1111)">举报</a>
+                                    </div>
+                                </div>
+
+                            </div>
+                            <div class="erComment">
+                                <div class="commentHead">
+                                    <span><a>Name</a>level</span>
+                                    <span class="commentCon">这倒是，我平常也是拿稳定器拍,只有几次少数拿手持，还是稳定器没带</span>
+                                </div>
+                                <div class="erControl1">
+                                    <div class="erControlR">
+                                        <label class="datetime">2020-05-22 11:40:26</label>
+                                        <a href="javascript:praise(111)"><span class="praise">点赞</span></a>
+                                        <a href="javascript:report1(1111)">举报</a>
+                                    </div>
+                                </div>
+
+                            </div>
+                        </div>
+                    </section>
+                    <section class="quesTitleNEr">
+                        <div class="erInfoBox">
+                            <img src="icon/search.png" class="headerImg">
+                            <div class="headerName">
+                                <span>Name</span>
+                                <br/>
+                                <span>Level</span>
+                            </div>
+                        </div>
+                        <div class="erQues">
+                            <div class="erCont">
+                                肯定会crash的，<br/>
+                                有两种改法<br/>
+                                第一种：<br/>
+                                void fun1(char*& p1)<br/>
+                                第二种<br/>
+                                void fun1(char* *p1)<br/>
+                            </div>
+                            <div class="erControl">
+                                <div class="erControlL">
+                                    <label class="datetime">2020-05-22 11:40:26</label>
+                                </div>
+                                <div class="erControlR">
+                                    <a >只看TA</a>
+                                    <a >点赞</a>
+                                    <a >评论</a>
+                                    <a>举报</a>
+                                    <span>2 楼</span>
+                                </div>
+                            </div>
+                        </div>
+                    </section>
+                    <section class="quesTitleNEr">
+                        <div class="erInfoBox">
+                            <img src="icon/search.png" class="headerImg">
+                            <div class="headerName">
+                                <span>Name</span>
+                                <br/>
+                                <span>Level</span>
+                            </div>
+                        </div>
+                        <div class="erQues">
+                            <div class="erCont">
+                                肯定会crash的，<br/>
+                                有两种改法<br/>
+                                第一种：<br/>
+                                void fun1(char*& p1)<br/>
+                                第二种<br/>
+                                void fun1(char* *p1)<br/>
+                            </div>
+                            <div class="erControl">
+                                <div class="erControlL">
+                                    <label class="datetime">2020-05-22 11:40:26</label>
+                                </div>
+                                <div class="erControlR">
+                                    <a >只看TA</a>
+                                    <a >点赞</a>
+                                    <a >评论</a>
+                                    <a>举报</a>
+                                    <span>3 楼</span>
+                                </div>
+                            </div>
+                        </div>
+                    </section>
+                    <section class="quesTitleNEr">
+                        <div class="erInfoBox">
+                            <img src="icon/search.png" class="headerImg">
+                            <div class="headerName">
+                                <span>Name</span>
+                                <br/>
+                                <span>Level</span>
+                            </div>
+                        </div>
+                        <div class="erQues">
+                            <div class="erCont">
+                                肯定会crash的，<br/>
+                                有两种改法<br/>
+                                第一种：<br/>
+                                void fun1(char*& p1)<br/>
+                                第二种<br/>
+                                void fun1(char* *p1)<br/>
+                            </div>
+                            <div class="erControl">
+                                <div class="erControlL">
+                                    <label class="datetime">2020-05-22 11:40:26</label>
+                                </div>
+                                <div class="erControlR">
+                                    <a >只看TA</a>
+                                    <a >点赞</a>
+                                    <a >评论</a>
+                                    <a>举报</a>
+                                    <span>4 楼</span>
+                                </div>
+                            </div>
+                        </div>
+                    </section>
+                </div>
+                    <div class="replyEdit">
+                        <div class="mainArticleList" id="editor1">
+                            <p>发表你的观点</p>
+                        </div>
+                        <form id="reply_ques">
+                            <script type="text/javascript" src="wangEditor-3.1.1/release/wangEditor.min.js"></script>
+                            <script language="JavaScript">
+                                var rich_editor=window.wangEditor
+                                var ed=new rich_editor('#editor1')
+                                ed.create()
+                            </script>
+                            <input class="btnCommit" type="submit" id="reply_commit" name="reply_commit" value="发表" onclick="">
+                        </form>
+                    </div>
+                </div>
+
+        </div>
+    </div>
+    <footer class="footerBox">
+        <div class="container">
+            <div class="footerContent">
+                <p>请联系我们 0000-0000-0000</p>
+            </div>
+        </div>
+    </footer>
+</div>
+</body>
+</html>

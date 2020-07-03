@@ -1,0 +1,164 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>积分技术论坛 - 我的帖子 我的收藏</title>
+    <link type="text/css" rel="stylesheet" href="base.css"/>
+    <link rel="icon" href="" type="image/x-icon" />
+</head>
+<body>
+<script>
+    function deleteMyPost(aid) {
+        if(confirm("确认删除")){
+            location.href="deleteTopicServlet?method=delete&aid="+aid;
+        }else{
+            alert("删除失败");
+        }
+    }
+    function deleteMyUco(uid,aid) {
+        if(confirm("确认删除")){
+            location.href="deleteUcoServlet?method=delete&uid="+uid+"aid="+aid;
+        }else{
+            alert("删除失败");
+        }
+    }
+</script>
+<div class="viewContainer">
+    <div class="mainHeaderBox">
+        <div class="container">
+            <div class="mainNav">
+                <a class="topTitle" href="main.html">积分技术论坛</a>
+                <ul class="navList">
+                    <li class="navItem"><a href="main.html">首页</a></li>
+                    <span class="navText"> | </span>
+                    <li class="navItem"><a href="">发帖</a></li>
+                    <li class="navItem">
+                        <form class="searchForm">
+                            <input class="searchInput" type="search" maxlength="50" placeholder="搜索内容">
+                            <input class="searchIcon" type="image" src="icon/search.png" alt="搜索" >
+                        </form>
+                    </li>
+                </ul>
+            </div>
+            <div class="mainLogin">
+                <ul class="navLogin">
+                    <li class="navItem"><a>个人中心</a></li>
+                    <span class="navText"> | </span>
+                    <li class="navItem"><a>退出</a></li>
+                </ul>
+            </div>
+        </div>
+    </div>
+    <div class="mainAsideBox">
+        <div class="container">
+            <aside class="aside">
+                <div class="myCard">
+                    <div class="asideCardUp">
+                        <img class="headerImg" src="icon/search.png" />
+                        <div class="headerName">
+                            <span>Name</span>
+                            <br/>
+                            <span>Level</span>
+                        </div>
+                        <div class="headerCont">
+                            <a><span class="headerContItem">我的帖子
+                            <br/>20</span></a>
+                            <a><span class="headerContItem">我的积分
+                                <br/>20</span></a>
+                            <a ><span class="headerContItem">我的收藏
+                                <br/>20</span></a>
+                        </div>
+                    </div>
+                    <div class="asideCardDown">
+                        <ul class="MSG">
+                            <li class="headerMSGTitle aHover"><a><b>消息</b></a></li>
+                            <li class="headerMSGItem"><a>评论</a></li>
+                            <li class="headerMSGItem"><a>点赞</a></li>
+                            <li class="headerMSGItem"><a>回复</a></li>
+                            <li class="headerMSGItem"><a>系统通知</a></li>
+                        </ul>
+                        <ul class="MSG">
+                            <li class="headerMSGTitle"><a><b>资料</b></a></li>
+                            <li class="headerMSGItem"><a>修改资料</a></li>
+                            <li class="headerMSGItem"><a>修改密码</a></li>
+                        </ul>
+                    </div>
+                </div>
+                <div class="mainBullet">
+                    <span class="headerMSGTitle"><b>论坛公告</b></span>
+                    <ul>
+                        <li class="mainBulletItem"><a>有奖征集</a></li>
+                        <li class="mainBulletItem"><a>博主排名更新</a></li>
+                        <li class="mainBulletItem"><a>系统升级通知</a></li>
+                    </ul>
+                </div>
+            </aside>
+            <div class="mainLeft">
+                <section class="mainArticleList">
+                    <div class="mainArticleList">
+                        <h3 class="mainArticleTitle"><a name="myPost">我的帖子</a></h3>
+                        <div class="infoList">
+                            <ul class="infoShow">
+                                <li class="topicList" >
+                                    <h4 class="infoTitle"><a name="Info1">谁能提供一下基于C#的Winform使用CocketIO的一些案例或代码谁能提供一下基于C#的Winform使用CocketIO的一些案例或代码谁能提供一下基于C#的Winform使用CocketIO的一些案例或代码</a></h4>
+                                    <p class="topicDetail">RT! 谁能提供一下基于C#的Winform使用CocketIO的一些案例或代码RT! 谁能提供一下基于C#的Winform使用CocketIO的一些案例或代码RT! 谁能提供一下基于C#的Winform使用CocketIO的一些案例或代码</p>
+                                        <p class="topicBottom">
+                                        <span class="datetime">2020-04-20 22:30:30</span>
+                                        <span >&nbsp;&nbsp;回复(10)</span>
+                                        <a target="_self" href="javascript:deleteMyPost(111)">&nbsp;&nbsp;删除</a>
+                                    </p>
+                                </li>
+                                <li class="topicList">
+                                    <h4 class="infoTitle"><a name="Info1">帖子标题</a></h4>
+                                    <p class="topicDetail">11111111111111111111111111</p>
+                                    <p class="topicBottom">
+                                        <span class="datetime">2020-04-20 22:30:30</span>
+                                        <span >&nbsp;&nbsp;回复(10)</span>
+                                        <a>&nbsp;&nbsp;删除</a>
+                                    </p>
+                                </li>
+                                <li class="topicList">
+                                    <h4 class="infoTitle"><a name="Info1">C# 如何给XML文件加密</a></h4>
+                                    <p class="topicDetail">本人小白，用xml来保存一些信息，想把这个xml文件加密起来。
+                                        只有通过程序才能访问，直接打开是打不开的或者是乱码。
+                                        请高手给点详细的代码和解释</p>
+                                    <p class="topicBottom">
+                                        <span class="datetime">2020-04-20 22:30:30</span>
+                                        <span >&nbsp;&nbsp;回复(10)</span>
+                                        <a >&nbsp;&nbsp;删除</a>
+                                    </p>
+                                </li>
+                            </ul>
+                        </div>
+                    </div>
+                    <div class="mainArticleList">
+                        <h3 class="mainArticleTitle"><a name="myFav">我的收藏</a></h3>
+                        <div class="infoList">
+                            <ul class="infoShow">
+                                <li class="topicList">
+                                    <h4 class="infoTitle"><a name="Info1">帖子标题</a></h4>
+                                    <p class="topicDetail">RT! 谁能提供一下基于C#的Winform使用CocketIO的一些案例或代码</p>
+                                    <p class="topicBottom">
+                                        <span class="datetime">2020-04-20 22:30:30</span>
+                                        <span >&nbsp;&nbsp;回复(10)</span>
+                                        <span >&nbsp;&nbsp;提问人：小明</span>
+                                        <a target="_self" href="javascript:deleteMyUco(11,111)">&nbsp;&nbsp;删除</a>
+                                    </p>
+                                </li>
+                            </ul>
+                        </div>
+                    </div>
+                </section>
+            </div>
+        </div>
+    </div>
+    <footer class="footerBox">
+        <div class="container">
+            <div class="footerContent">
+                <p>请联系我们 0000-0000-0000</p>
+            </div>
+        </div>
+    </footer>
+</div>
+</body>
+</html>

@@ -1,0 +1,108 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>积分技术论坛 - 发帖</title>
+    <link type="text/css" rel="stylesheet" href="base.css"/>
+    <link rel="icon" href="" type="image/x-icon" />
+
+</head>
+<body>
+<div class="viewContainer">
+    <div class="mainHeaderBox">
+        <div class="container">
+            <div class="mainNav">
+                <a class="topTitle" href="main.html">积分技术论坛</a>
+                <ul class="navList">
+                    <li class="navItem"><a href="main.html">首页</a></li>
+                    <span class="navText"> | </span>
+                    <li class="navItem"><a href="">发帖</a></li>
+                    <li class="navItem">
+                        <form class="searchForm">
+                            <input class="searchInput" type="search" maxlength="50" placeholder="搜索内容">
+                            <input class="searchIcon" type="image" src="icon/search.png" alt="搜索" >
+                        </form>
+                    </li>
+                </ul>
+            </div>
+            <div class="mainLogin">
+                <ul class="navLogin">
+                    <li class="navItem"><a>个人中心</a></li>
+                    <span class="navText"> | </span>
+                    <li class="navItem"><a>退出</a></li>
+                </ul>
+            </div>
+        </div>
+    </div>
+    <div class="mainAsideBox">
+        <div class="container">
+            <aside class="aside">
+                <div class="myCard">
+                    <div class="asideCardUp">
+                        <img class="headerImg" src="icon/search.png" />
+                        <div class="headerName">
+                            <span>Name</span>
+                            <br/>
+                            <span>Level</span>
+                        </div>
+                        <div class="headerCont">
+                            <a><span class="headerContItem">我的帖子
+                            <br/>20</span></a>
+                            <a><span class="headerContItem">我的积分
+                                <br/>20</span></a>
+                            <a ><span class="headerContItem">我的收藏
+                                <br/>20</span></a>
+                        </div>
+                    </div>
+                    <div class="asideCardDown">
+                        <ul class="MSG">
+                            <li class="headerMSGTitle aHover"><a><b>消息</b></a></li>
+                            <li class="headerMSGItem"><a>评论</a></li>
+                            <li class="headerMSGItem"><a>点赞</a></li>
+                            <li class="headerMSGItem"><a>回复</a></li>
+                            <li class="headerMSGItem"><a>系统通知</a></li>
+                        </ul>
+                        <ul class="MSG">
+                            <li class="headerMSGTitle"><a><b>资料</b></a></li>
+                            <li class="headerMSGItem"><a>修改资料</a></li>
+                            <li class="headerMSGItem"><a>修改密码</a></li>
+                        </ul>
+                    </div>
+                </div>
+                <div class="mainBullet">
+                    <span class="headerMSGTitle"><b>论坛公告</b></span>
+                    <ul>
+                        <li class="mainBulletItem"><a>有奖征集</a></li>
+                        <li class="mainBulletItem"><a>博主排名更新</a></li>
+                        <li class="mainBulletItem"><a>系统升级通知</a></li>
+                    </ul>
+                </div>
+            </aside>
+            <div class="publicize">
+                <form class="searchTopic">
+                    <input id="topic_title" class="inputTitle" autocomplete="off" maxlength="80" placeholder="输入帖子标题" size="60" type="text">
+
+                <div class="replyEdit" id="editor1">
+                    <p>发表帖子</p>
+                </div>
+                    <script type="text/javascript" src="wangEditor-3.1.1/release/wangEditor.min.js"></script>
+                    <script type="text/javascript">
+                            var rich_editor=window.wangEditor;
+                            var ed=new rich_editor('#editor1');
+                            ed.create();
+                    </script>
+                    <input class="btnCommit" type="submit" id="topic_commit" name="topic_commit" value="发表" onclick="">
+                </form>
+            </div>
+        </div>
+    </div>
+    <footer class="footerBox">
+        <div class="container">
+            <div class="footerContent">
+                <p>请联系我们 0000-0000-0000</p>
+            </div>
+        </div>
+    </footer>
+</div>
+</body>
+</html>
