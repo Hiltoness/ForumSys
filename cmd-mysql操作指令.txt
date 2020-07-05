@@ -5,7 +5,7 @@ create database 库名；
 use 库名；//进入该库，对该库进行操作
  create table 表名 （ 字段名 数据类型，设置主键)
 create table user(username varchar(30),primary key(username));
-drop 表名/库名；  //删除
+drop table/database 表名/库名；  //删除
 select * from user; //查询user表的所有数据
 select 列名1 from 表名 where 列名2=' 属性值（字符型）';//从表中查找指定值的对应值，注意字符型数据一定要加单引号括住。
 insert into type  (id,name) values(101,'中午');//插入数据
@@ -62,7 +62,7 @@ create table userreport_c(uid  int(20) NOT NULL,aid  int(20) NOT NULL,rid int(20
 create table uco(uid int(20) NOT NULL,aid int(20) NOT NULL,cotime varchar(50),foreign key(uid) references user(uid),foreign key(aid) references post(aid))ENGINE=InnoDB DEFAULT CHARSET=utf8;
 create table adm(mid int(20) NOT NULL auto_increment primary key, password varchar(20) )ENGINE=InnoDB DEFAULT CHARSET=utf8;
 create table manager_user(pid int(20) NOT NULL auto_increment primary key,uid int(20) NOT NULL,status varchar(20),foreign key(uid) references user(uid))ENGINE=InnoDB DEFAULT CHARSET=utf8;
-create table manager(mid int(20) NOT NULL,pid int(20) NOT NULL,status varchar(20),foreign key(mid) references adm(mid),foreign key(pid) references manager_user(pid))ENGINE=InnoDB DEFAULT CHARSET=utf8;
+create table manager(mid int(20) NOT NULL,pid int(20) NOT NULL,notitle varchar(20) NOT NULL,notice varchar(1000) NOT NULL,notime varchar(50) NOT NULL,foreign key(mid) references adm(mid),foreign key(pid) references manager_user(pid))ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 
 //其他
