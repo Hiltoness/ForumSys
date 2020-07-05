@@ -17,7 +17,7 @@ public class myclass {
 	private int praisenum;     //点赞未读数目
 	private int replynum;      //回复未读数目
 	private int reportnum;     //系统通知未读数目
-	private String[]   managertitle;    //论坛公告标题
+	private ArrayList<String>   managertitle;    //论坛公告标题
 	
 	  private PreparedStatement pstm;     	
 	  private Connection conn;
@@ -321,16 +321,15 @@ public class myclass {
 		return reportnum;
 	}
 
-	public String[] getManagertitle() {
+	public ArrayList<String>  getManagertitle() {
 		try {
 			mysql_DB db=new mysql_DB();
 			conn=db.connectDB();
 			pstm=conn.prepareStatement("select * from manger");
 			rs=pstm.executeQuery();
-			int i=0;
+			managertitle=new ArrayList<String> ();
 			while(rs.next()) {				
-				managertitle[i]=rs.getString(3);
-				i=i+1;
+				managertitle.add(rs.getString(3));
 			}			
 		
 		}catch(SQLException ex){
