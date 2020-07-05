@@ -25,7 +25,7 @@ public class search {
 					rs=pstm.executeQuery();
 					while(rs.next()) {
 						post bean=new post();
-						bean.setAid(rs.getString(1));
+						bean.setAid(rs.getInt(1));
 						bean.setTitle(rs.getString(2));
 						bean.setContent(rs.getString(3));
 						list0.add(bean);
@@ -35,17 +35,17 @@ public class search {
 						pstm=conn.prepareStatement("select * from userpost where aid=?");
 						post post0=new post();
 						post0=list0.get(i);
-						pstm.setString(1, post0.getAid());
+						pstm.setInt(1, post0.getAid());
 						rs=pstm.executeQuery();
 						postlist bean=new postlist();
 						while(rs.next()) {							
-							bean.setUid(rs.getString(1));
-							bean.setAid(rs.getString(2));
+							bean.setUid(rs.getInt(1));
+							bean.setAid(rs.getInt(2));
 							bean.setTitle(post0.getTitle());
 							bean.setAtime(rs.getString(3));							
 						}
 						pstm=conn.prepareStatement("select * from userreply where aid=?");
-						pstm.setString(1, post0.getAid());
+						pstm.setInt(1, post0.getAid());
 						rs=pstm.executeQuery();
 						while(rs.next()) {
 							num1=num1+1;

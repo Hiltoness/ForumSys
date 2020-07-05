@@ -1,13 +1,13 @@
 package javabean;
 //帖子表
 public class post {
-	private String aid;  
+	private int aid;  
 	private String title;
 	private String content;
-	public String getAid() {
+	public int getAid() {
 		return aid;
 	}
-	public void setAid(String aid) {
+	public void setAid(int aid) {
 		this.aid = aid;
 	}
 	public String getTitle() {

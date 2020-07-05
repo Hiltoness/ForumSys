@@ -1,7 +1,7 @@
 package javabean;
 //用户表
 public class user {
-	private String uid;  
+	private int uid;  
 	private String uname;
 	private String utime;
 	private String sex;
@@ -9,10 +9,10 @@ public class user {
 	private  int point;
 	private int  level;
 	private String college;
-	public String getUid() {
+	public int getUid() {
 		return uid;
 	}
-	public void setUid(String uid) {
+	public void setUid(int uid) {
 		this.uid = uid;
 	}
 	public String getUname() {

@@ -9,7 +9,21 @@ public class mysql_operate {
 	  private PreparedStatement pstm;     
 
 	  private Connection conn;
-	  public void delete_DB(String table,String wherevalue,String whereatt) {
+	//删掉where的那个数是整数类型
+	  public void delete_DBInt(String table,int wherevalue,String whereatt) {
+			 try {
+				 mysql_DB db=new mysql_DB();
+					conn=db.connectDB();
+					pstm=conn.prepareStatement("delete from "+table+" where "+whereatt+" =?");
+					pstm.setInt(1, wherevalue);
+					pstm.executeUpdate();
+				
+				}catch(SQLException ex){
+				ex.printStackTrace();
+				}
+		}
+	//删掉where的那个数是字符串类型
+	  public void delete_DBString(String table,String wherevalue,String whereatt) {
 			 try {
 				 mysql_DB db=new mysql_DB();
 					conn=db.connectDB();

@@ -13,17 +13,17 @@ public class mysql_mypostlist {
 	  private ResultSet rs;
 	  private ArrayList<postlist> list=new ArrayList<postlist> ();
 	  private ArrayList<userpost> list0=new ArrayList<userpost> ();
-	  public ArrayList<postlist>  postlist_getData(String attvalue) {
+	  public ArrayList<postlist>  postlist_getData(int attvalue) {
 			 try {
 				 mysql_DB db=new mysql_DB();
 					conn=db.connectDB();
 					pstm=conn.prepareStatement("select * from userpost where uid=?");
-					pstm.setString(1, attvalue);
+					pstm.setInt(1, attvalue);
 					rs=pstm.executeQuery();
 					while(rs.next()) {
 						userpost bean=new userpost();
-						bean.setUid(rs.getString(1));
-						bean.setAid(rs.getString(2));
+						bean.setUid(rs.getInt(1));
+						bean.setAid(rs.getInt(2));
 						bean.setAtime(rs.getString(3));
 						list0.add(bean);
 					}
@@ -32,17 +32,17 @@ public class mysql_mypostlist {
 						pstm=conn.prepareStatement("select * from post where aid=?");
 						userpost post0=new userpost();
 						post0=list0.get(i);
-						pstm.setString(1, post0.getAid());
+						pstm.setInt(1, post0.getAid());
 						rs=pstm.executeQuery();
 						postlist bean=new postlist();
 						while(rs.next()) {							
 							bean.setUid(post0.getUid());
-							bean.setAid(rs.getString(1));
+							bean.setAid(rs.getInt(1));
 							bean.setTitle(rs.getString(2));
 							bean.setAtime(post0.getAtime());							
 						}
 						pstm=conn.prepareStatement("select * from userreply where aid=?");
-						pstm.setString(1, post0.getAid());
+						pstm.setInt(1, post0.getAid());
 						rs=pstm.executeQuery();
 						while(rs.next()) {
 							num1=num1+1;

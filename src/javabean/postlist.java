@@ -4,22 +4,22 @@ import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 public class postlist {
-	private String uid; 
-	private String aid;  
+	private int uid; 
+	private int aid;  
 	private String title;
 	private String atime;
 	private int num;        //回复数
 	
-	public String getUid() {
+	public int getUid() {
 		return uid;
 	}
-	public void setUid(String uid) {
+	public void setUid(int uid) {
 		this.uid = uid;
 	}
-	public String getAid() {
+	public int getAid() {
 		return aid;
 	}
-	public void setAid(String aid) {
+	public void setAid(int aid) {
 		this.aid = aid;
 	}
 	public String getTitle() {

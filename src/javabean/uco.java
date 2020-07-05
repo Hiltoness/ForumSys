@@ -1,19 +1,19 @@
 package javabean;
 //用户收藏表
 public class uco {
-	private String uid;  
-	private String aid;
+	private int uid;  
+	private int aid;
 	private String cotime;
-	public String getUid() {
+	public int getUid() {
 		return uid;
 	}
-	public void setUid(String uid) {
+	public void setUid(int uid) {
 		this.uid = uid;
 	}
-	public String getAid() {
+	public int getAid() {
 		return aid;
 	}
-	public void setAid(String aid) {
+	public void setAid(int aid) {
 		this.aid = aid;
 	}
 	public String getCotime() {
@@ -22,5 +22,6 @@ public class uco {
 	public void setCotime(String cotime) {
 		this.cotime = cotime;
 	}
+	
 	
 }

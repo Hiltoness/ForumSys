@@ -12,19 +12,19 @@ public class only {
 	private PreparedStatement pstm;     	  
 	  private Connection conn;
 	  private ResultSet rs;
-	public ArrayList<userreply> userreply_getData(String attvalue1,String attvalue2) {
+	public ArrayList<userreply> userreply_getData(int attvalue1,int attvalue2) {
 		 try {
 			 mysql_DB db=new mysql_DB();
 				conn=db.connectDB();
 				pstm=conn.prepareStatement("select * from userreply where aid =? and uid=?");
-				pstm.setString(1, attvalue1);
-				pstm.setString(1, attvalue2);
+				pstm.setInt(1, attvalue1);
+				pstm.setInt(1, attvalue2);
 				rs=pstm.executeQuery();
 				while(rs.next()) {
 					userreply bean=new userreply();
-					bean.setUid(rs.getString(1));
-					bean.setAid(rs.getString(2));
-					bean.setRid(rs.getString(3));
+					bean.setUid(rs.getInt(1));
+					bean.setAid(rs.getInt(2));
+					bean.setRid(rs.getInt(3));
 					bean.setReply(rs.getString(4));
 					bean.setRtime(rs.getString(5));
 					bean.setStatus(rs.getString(6));
@@ -36,20 +36,20 @@ public class only {
 			}
 		 return userreplylist;
 	}
-	public ArrayList<usercomment> usercomment_getData(String attvalue1,String attvalue2) {
+	public ArrayList<usercomment> usercomment_getData(int attvalue1,int attvalue2) {
 		 try {
 			 mysql_DB db=new mysql_DB();
 				conn=db.connectDB();
 				pstm=conn.prepareStatement("select * from usercomment where aid=? and rid=?");
-				pstm.setString(1, attvalue1);
-				pstm.setString(2, attvalue2);
+				pstm.setInt(1, attvalue1);
+				pstm.setInt(2, attvalue2);
 				rs=pstm.executeQuery();
 				while(rs.next()) {
 					usercomment bean=new usercomment();
-					bean.setUid(rs.getString(1));
-					bean.setAid(rs.getString(2));
-					bean.setRid(rs.getString(3));
-					bean.setCid(rs.getString(4));
+					bean.setUid(rs.getInt(1));
+					bean.setAid(rs.getInt(2));
+					bean.setRid(rs.getInt(3));
+					bean.setCid(rs.getInt(4));
 					bean.setComment(rs.getString(5));
 					bean.setCtime(rs.getString(6));
 					bean.setStatus(rs.getString(7));

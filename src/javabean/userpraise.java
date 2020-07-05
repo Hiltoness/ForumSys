@@ -1,28 +1,28 @@
 package javabean;
 //用户点赞表
 public class userpraise {
-	private String uid;  
-	private String aid;
-	private String rid;
+	private int uid;  
+	private int aid;
+	private int rid;
 	private String praise;
 	private String ptime;
 	private String status;
-	public String getUid() {
+	public int getUid() {
 		return uid;
 	}
-	public void setUid(String uid) {
+	public void setUid(int uid) {
 		this.uid = uid;
 	}
-	public String getAid() {
+	public int getAid() {
 		return aid;
 	}
-	public void setAid(String aid) {
+	public void setAid(int aid) {
 		this.aid = aid;
 	}
-	public String getRid() {
+	public int getRid() {
 		return rid;
 	}
-	public void setRid(String rid) {
+	public void setRid(int rid) {
 		this.rid = rid;
 	}
 	public String getPraise() {
@@ -43,5 +43,6 @@ public class userpraise {
 	public void setStatus(String status) {
 		this.status = status;
 	}
+	
 
 }

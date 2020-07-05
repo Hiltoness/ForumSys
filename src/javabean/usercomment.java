@@ -1,35 +1,35 @@
 package javabean;
 //用户评论表
 public class usercomment {
-	private String uid;  
-	private String aid;
-	private String rid;
-	private String cid;
+	private int uid;  
+	private int aid;
+	private int rid;
+	private int cid;
 	private String comment;
 	private String ctime;
 	private String status;
-	public String getUid() {
+	public int getUid() {
 		return uid;
 	}
-	public void setUid(String uid) {
+	public void setUid(int uid) {
 		this.uid = uid;
 	}
-	public String getAid() {
+	public int getAid() {
 		return aid;
 	}
-	public void setAid(String aid) {
+	public void setAid(int aid) {
 		this.aid = aid;
 	}
-	public String getRid() {
+	public int getRid() {
 		return rid;
 	}
-	public void setRid(String rid) {
+	public void setRid(int rid) {
 		this.rid = rid;
 	}
-	public String getCid() {
+	public int getCid() {
 		return cid;
 	}
-	public void setCid(String cid) {
+	public void setCid(int cid) {
 		this.cid = cid;
 	}
 	public String getComment() {
@@ -50,4 +50,5 @@ public class usercomment {
 	public void setStatus(String status) {
 		this.status = status;
 	}
+	
 }

@@ -1,19 +1,19 @@
 package javabean;
 
 public class manager_user {
-	private String pid;
-	private String uid;
+	private int pid;
+	private int uid;
 	private String status;
-	public String getPid() {
+	public int getPid() {
 		return pid;
 	}
-	public void setPid(String pid) {
+	public void setPid(int pid) {
 		this.pid = pid;
 	}
-	public String getUid() {
+	public int getUid() {
 		return uid;
 	}
-	public void setUid(String uid) {
+	public void setUid(int uid) {
 		this.uid = uid;
 	}
 	public String getStatus() {
@@ -22,6 +22,7 @@ public class manager_user {
 	public void setStatus(String status) {
 		this.status = status;
 	}
+	
 
 	
 }

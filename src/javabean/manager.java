@@ -1,21 +1,21 @@
 package javabean;
 //管理员公告表
 public class manager {
-	private String mid;  
-	private String pid; 
+	private int mid;  
+	private int pid; 
 	private String notitle;
 	private String notice;  
 	private String notime;
-	public String getMid() {
+	public int getMid() {
 		return mid;
 	}
-	public void setMid(String mid) {
+	public void setMid(int mid) {
 		this.mid = mid;
 	}
-	public String getPid() {
+	public int getPid() {
 		return pid;
 	}
-	public void setPid(String pid) {
+	public void setPid(int pid) {
 		this.pid = pid;
 	}
 	public String getNotitle() {
@@ -37,6 +37,5 @@ public class manager {
 		this.notime = notime;
 	}
 	
-
 
 }

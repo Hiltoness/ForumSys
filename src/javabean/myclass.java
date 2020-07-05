@@ -22,12 +22,12 @@ public class myclass {
 	  private PreparedStatement pstm;     	
 	  private Connection conn;
 	  private ResultSet rs;
-	public String getName(String uid) {
+	public String getName(int uid) {
 		try {
 			mysql_DB db=new mysql_DB();
 			conn=db.connectDB();
 			pstm=conn.prepareStatement("select uname from user where uid =?");
-			pstm.setString(1, uid);
+			pstm.setInt(1, uid);
 			rs=pstm.executeQuery();
 			while(rs.next()) {
 				name=rs.getString(1);
@@ -39,12 +39,12 @@ public class myclass {
 		return name;
 	}
 
-	public int getLevel(String uid) {
+	public int getLevel(int uid) {
 		try {
 			mysql_DB db=new mysql_DB();
 			conn=db.connectDB();
 			pstm=conn.prepareStatement("select level from user where uid =?");
-			pstm.setString(1, uid);
+			pstm.setInt(1, uid);
 			rs=pstm.executeQuery();
 			while(rs.next()) {
 				level=rs.getInt(1);
@@ -56,13 +56,13 @@ public class myclass {
 		return level;
 	}
 
-	public int getPostnum(String uid) {
+	public int getPostnum(int uid) {
 		postnum=0;
 		try {
 			mysql_DB db=new mysql_DB();
 			conn=db.connectDB();
 			pstm=conn.prepareStatement("select * from userpost where uid =?");
-			pstm.setString(1, uid);
+			pstm.setInt(1, uid);
 			rs=pstm.executeQuery();
 			while(rs.next()) {
 				postnum=postnum+1;
@@ -74,12 +74,12 @@ public class myclass {
 		return postnum;
 	}
 
-	public int getPoint(String uid) {
+	public int getPoint(int uid) {
 		try {
 			mysql_DB db=new mysql_DB();
 			conn=db.connectDB();
 			pstm=conn.prepareStatement("select point from user where uid =?");
-			pstm.setString(1, uid);
+			pstm.setInt(1, uid);
 			rs=pstm.executeQuery();
 			while(rs.next()) {
 				point=rs.getInt(1);
@@ -91,13 +91,13 @@ public class myclass {
 		return point;
 	}
 
-	public int getUconum(String uid) {
+	public int getUconum(int uid) {
 		try {
 			uconum=0;
 			mysql_DB db=new mysql_DB();
 			conn=db.connectDB();
 			pstm=conn.prepareStatement("select * from uco where uid =?");
-			pstm.setString(1, uid);
+			pstm.setInt(1, uid);
 			rs=pstm.executeQuery();
 			while(rs.next()) {
 				uconum=uconum+1;
@@ -109,19 +109,19 @@ public class myclass {
 		return uconum;
 	}
 
-	public int getCommentnum(String uid) {
+	public int getCommentnum(int uid) {
 		try {
 			mysql_DB db=new mysql_DB();
 			conn=db.connectDB();
 			pstm=conn.prepareStatement("select * from userreply where uid=?");
-			pstm.setString(1, uid);
+			pstm.setInt(1, uid);
 			rs=pstm.executeQuery();
 			ArrayList<userreply> list=new ArrayList<userreply> ();
 			while(rs.next()) {
 				userreply bean=new userreply();
-				bean.setUid(rs.getString(1));
-				bean.setAid(rs.getString(2));
-				bean.setRid(rs.getString(3));
+				bean.setUid(rs.getInt(1));
+				bean.setAid(rs.getInt(2));
+				bean.setRid(rs.getInt(3));
 				bean.setReply(rs.getString(4));
 				bean.setRtime(rs.getString(5));
 				bean.setStatus(rs.getString(6));
@@ -131,8 +131,8 @@ public class myclass {
 			for(int i=0;i<list.size();i++) {
 				pstm=conn.prepareStatement("select * from usercomment where aid =? and rid=?");
 				userreply reply=list.get(i);
-				pstm.setString(1, reply.getAid());
-				pstm.setString(2, reply.getRid());
+				pstm.setInt(1, reply.getAid());
+				pstm.setInt(2, reply.getRid());
 				rs=pstm.executeQuery();
 				while(rs.next()) {
 					if(rs.getString(7)=="unread") {
@@ -149,19 +149,19 @@ public class myclass {
 		return commentnum;
 	}
 
-	public int getPraisenum(String uid) {
+	public int getPraisenum(int uid) {
 		try {
 			mysql_DB db=new mysql_DB();
 			conn=db.connectDB();
 			pstm=conn.prepareStatement("select * from userreply where uid=?");
-			pstm.setString(1, uid);
+			pstm.setInt(1, uid);
 			rs=pstm.executeQuery();
 			ArrayList<userreply> list=new ArrayList<userreply> ();
 			while(rs.next()) {
 				userreply bean=new userreply();
-				bean.setUid(rs.getString(1));
-				bean.setAid(rs.getString(2));
-				bean.setRid(rs.getString(3));
+				bean.setUid(rs.getInt(1));
+				bean.setAid(rs.getInt(2));
+				bean.setRid(rs.getInt(3));
 				bean.setReply(rs.getString(4));
 				bean.setRtime(rs.getString(5));
 				bean.setStatus(rs.getString(6));
@@ -171,8 +171,8 @@ public class myclass {
 			for(int i=0;i<list.size();i++) {
 				pstm=conn.prepareStatement("select * from userpraise where aid =? and rid=?");
 				userreply reply=list.get(i);
-				pstm.setString(1, reply.getAid());
-				pstm.setString(2, reply.getRid());
+				pstm.setInt(1, reply.getAid());
+				pstm.setInt(2, reply.getRid());
 				rs=pstm.executeQuery();
 				while(rs.next()) {
                  if(rs.getString(6)=="unread") {
@@ -188,18 +188,18 @@ public class myclass {
 		return praisenum;
 	}
 
-	public int getReplynum(String uid) {
+	public int getReplynum(int uid) {
 		try {
 			mysql_DB db=new mysql_DB();
 			conn=db.connectDB();
 			pstm=conn.prepareStatement("select * from userpost where uid=?");
-			pstm.setString(1, uid);
+			pstm.setInt(1, uid);
 			rs=pstm.executeQuery();
 			ArrayList<userpost> list=new ArrayList<userpost> ();
 			while(rs.next()) {
 				userpost bean=new userpost();
-				bean.setUid(rs.getString(1));
-				bean.setAid(rs.getString(2));
+				bean.setUid(rs.getInt(1));
+				bean.setAid(rs.getInt(2));
 				bean.setAtime(rs.getString(3));
 				list.add(bean);
 			}
@@ -207,7 +207,7 @@ public class myclass {
 			for(int i=0;i<list.size();i++) {
 				pstm=conn.prepareStatement("select * from userreply where aid =?");
 				userpost reply=list.get(i);
-				pstm.setString(1, reply.getAid());
+				pstm.setInt(1, reply.getAid());
 				rs=pstm.executeQuery();
 				while(rs.next()) {
                 if(rs.getString(6)=="unread") {
@@ -223,18 +223,18 @@ public class myclass {
 		return replynum;
 	}
 
-	public int getReportnum(String uid) {
+	public int getReportnum(int uid) {
 		try {
 			mysql_DB db=new mysql_DB();
 			conn=db.connectDB();
 			pstm=conn.prepareStatement("select * from userpost where uid=?");
-			pstm.setString(1, uid);
+			pstm.setInt(1, uid);
 			rs=pstm.executeQuery();
 			ArrayList<userpost> list=new ArrayList<userpost> ();
 			while(rs.next()) {
 				userpost bean=new userpost();
-				bean.setUid(rs.getString(1));
-				bean.setAid(rs.getString(2));
+				bean.setUid(rs.getInt(1));
+				bean.setAid(rs.getInt(2));
 				bean.setAtime(rs.getString(3));
 				list.add(bean);
 			}
@@ -242,7 +242,7 @@ public class myclass {
 			for(int i=0;i<list.size();i++) {
 				pstm=conn.prepareStatement("select * from userreport_a where aid =?");
 				userpost reply=list.get(i);
-				pstm.setString(1, reply.getAid());
+				pstm.setInt(1, reply.getAid());
 				rs=pstm.executeQuery();
 				while(rs.next()) {
                 if(rs.getString(5)=="unread") {
@@ -252,14 +252,14 @@ public class myclass {
 			}
 			
 			pstm=conn.prepareStatement("select * from userreply where uid=?");
-			pstm.setString(1, uid);
+			pstm.setInt(1, uid);
 			rs=pstm.executeQuery();
 			ArrayList<userreply> replylist=new ArrayList<userreply> ();
 			while(rs.next()) {
 				userreply bean=new userreply();
-				bean.setUid(rs.getString(1));
-				bean.setAid(rs.getString(2));
-				bean.setRid(rs.getString(3));
+				bean.setUid(rs.getInt(1));
+				bean.setAid(rs.getInt(2));
+				bean.setRid(rs.getInt(3));
 				bean.setReply(rs.getString(4));
 				bean.setRtime(rs.getString(5));
 				bean.setStatus(rs.getString(6));
@@ -268,8 +268,8 @@ public class myclass {
 			for(int i=0;i<replylist.size();i++) {
 				pstm=conn.prepareStatement("select * from userreport_r where aid =? and rid=?");
 				userreply reply=replylist.get(i);
-				pstm.setString(1, reply.getAid());
-				pstm.setString(2, reply.getRid());
+				pstm.setInt(1, reply.getAid());
+				pstm.setInt(2, reply.getRid());
 				rs=pstm.executeQuery();
 				while(rs.next()) {
                 if(rs.getString(6)=="unread") {
@@ -278,15 +278,15 @@ public class myclass {
 				}
 			}
 			pstm=conn.prepareStatement("select * from usercomment where uid=?");
-			pstm.setString(1, uid);
+			pstm.setInt(1, uid);
 			rs=pstm.executeQuery();
 			ArrayList<usercomment> commentlist=new ArrayList<usercomment> ();
 			while(rs.next()) {
 				usercomment bean=new usercomment();
-				bean.setUid(rs.getString(1));
-				bean.setAid(rs.getString(2));
-				bean.setRid(rs.getString(3));
-				bean.setCid(rs.getString(4));
+				bean.setUid(rs.getInt(1));
+				bean.setAid(rs.getInt(2));
+				bean.setRid(rs.getInt(3));
+				bean.setCid(rs.getInt(4));
 				bean.setComment(rs.getString(5));
 				bean.setCtime(rs.getString(6));
 				bean.setStatus(rs.getString(7));
@@ -295,9 +295,9 @@ public class myclass {
 			for(int i=0;i<commentlist.size();i++) {
 				pstm=conn.prepareStatement("select * from userreport_c where aid =? and rid=? and cid=?");
 				usercomment reply=commentlist.get(i);
-				pstm.setString(1, reply.getAid());
-				pstm.setString(2, reply.getRid());
-				pstm.setString(3, reply.getCid());
+				pstm.setInt(1, reply.getAid());
+				pstm.setInt(2, reply.getRid());
+				pstm.setInt(3, reply.getCid());
 				rs=pstm.executeQuery();
 				while(rs.next()) {
                 if(rs.getString(7)=="unread") {
@@ -306,7 +306,7 @@ public class myclass {
 				}
 			}
 			pstm=conn.prepareStatement("select status from manager_user where uid=?");
-			pstm.setString(1, uid);
+			pstm.setInt(1, uid);
 			rs=pstm.executeQuery();
 			while(rs.next()) {
 				if(rs.getString(1)=="unread"){

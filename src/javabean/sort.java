@@ -11,9 +11,9 @@ public class sort {
     	 ArrayList<postlist> list=new ArrayList<postlist> ();
       for(int i=0;i<postlist.size();i++) {		 
     	  postlist post=postlist.get(i);
-    	  arrnum[i]=post.getNum();
-    	  arrvalue[i][0]=post.getUid();
-    	  arrvalue[i][1]=post.getAid();
+    	  arrnum[i]=post.getNum();    	
+    	  arrvalue[i][0]= String.valueOf(post.getUid());
+    	  arrvalue[i][1]=String.valueOf(post.getAid());
     	  arrvalue[i][2]=post.getTitle();
     	  arrvalue[i][3]=post.getAtime();
       }
@@ -23,8 +23,8 @@ public class sort {
 		mergeSort(arrnum,arrvalue,0,arrnum.length-1,tmpnum,tmpvalue);
 		for(int i=arrnum.length-1;i>=0;i--){
 			postlist post1 = null;
-			post1.setUid(arrvalue[i][0]);
-			post1.setAid(arrvalue[i][1]);
+			post1.setUid(Integer.parseInt(arrvalue[i][0]));
+			post1.setAid(Integer.parseInt(arrvalue[i][1]));
 			post1.setTitle(arrvalue[i][2]);
 			post1.setAtime(arrvalue[i][3]);
 			post1.setNum(arrnum[i]);
