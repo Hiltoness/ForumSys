@@ -51,13 +51,13 @@ public class mysql_operate {
 				}
 		}
 	  //更新的那个数是整数类型
-	  public void update_DBInt(String table,int setvalue,String setatt,String wherevalue,String whereatt) {
+	  public void update_DBInt(String table,String setvalue,String setatt,int wherevalue,String whereatt) {
 			 try {
 				 mysql_DB db=new mysql_DB();
 					conn=db.connectDB();
 					pstm=conn.prepareStatement("update "+table+" set "+setatt+" =? where "+whereatt+" =?");					
-					pstm.setInt(1, setvalue);
-					pstm.setString(2, wherevalue);
+					pstm.setString(1, setvalue);
+					pstm.setInt(2, wherevalue);
 					pstm.executeUpdate();
 							
 				}catch(SQLException ex){
