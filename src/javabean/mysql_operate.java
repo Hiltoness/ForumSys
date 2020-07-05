@@ -36,7 +36,7 @@ public class mysql_operate {
 				}
 		}
 
-	  //更新的那个数是字符串类型
+	  //更新的where是字符串类型
 	  public void update_DBString(String table,String setvalue,String setatt,String wherevalue,String whereatt) {
 			 try {
 				 mysql_DB db=new mysql_DB();
@@ -50,7 +50,7 @@ public class mysql_operate {
 				ex.printStackTrace();
 				}
 		}
-	  //更新的那个数是整数类型
+	  //更新的where是整数类型
 	  public void update_DBInt(String table,String setvalue,String setatt,int wherevalue,String whereatt) {
 			 try {
 				 mysql_DB db=new mysql_DB();
