@@ -15,15 +15,16 @@
 </head>
 <body>
 <%
-	String uid=(String)session.getAttribute("uid");
-	session.setAttribute("uid", uid);
+	int uid=(Integer)session.getAttribute("uid");
+	String u=Integer.toString(uid);
+	session.setAttribute("uid", u);
 
 %>
 <jsp:include page="TopMenu.jsp"/>
-<jsp:include page="RightBan.jsp"/>
-<jsp:include page="foot.jsp"/>
+
 <div class="viewContainer" id="Main">
     <div class="mainAsideBox" id="Center">
+    <jsp:include page="RightBan.jsp"></jsp:include>
         <div class="container_l">
             <main class="mainLeft">
                 <section class="mainArticleList">
@@ -40,13 +41,13 @@
 					<%	
 						mysql_postlist obj=new mysql_postlist();
 						mysql_get obj1=new mysql_get();
+						mysql_getint obj2=new mysql_getint();
 						List<postlist> post=obj.postlist_getData();
 						for(int i=0;i<post.size();i++){
 							postlist ms=post.get(i);
-							String aid=ms.getAid();
-							user us=obj1.user_getData("uid", ms.getUid()).get(0);
+							int aid=ms.getAid();
+							user us=obj2.user_getData("uid", ms.getUid()).get(0);
 							String name=us.getUname();
-							
 					%>
                         <li>
                             <a class="mainQuesTitle" href="QuesInfo.jsp?aid=<%=aid%>"><%=ms.getTitle()%></a>
@@ -64,5 +65,6 @@
     </div>
 
 </div>
+<jsp:include page="foot.jsp"/>
 </body>
 </html>
