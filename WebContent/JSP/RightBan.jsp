@@ -1,6 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
-<%@ page import=javabean.* %>
+<%@ page import="javabean.*" %>
 <%@ page import="java.util.*" %>
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
 <html>
@@ -16,30 +16,29 @@
      myclass obj =new myclass();
 	 mysql_getall obj1=new mysql_getall();
 	 mysql_get obj2=new mysql_get();
-     String uid=(String)session.getAttribute("uid");
+	 mysql_getint obj3=new mysql_getint();
+     int uid=Integer.parseInt(session.getAttribute("uid").toString());
 	 String name=obj.getName(uid);
 	 int level=obj.getLevel(uid);
 	 int postnum=obj.getPostnum(uid);
 	 int point=obj.getPoint(uid);
 	 int uconum=obj.getUconum(uid);
 %>
-<div class="viewContainer" id="Main">
-<div class="mainAsideBox" id="Center">
 <div class="container_r">
 <aside class="aside">
                 <div class="myCard">
                     <div class="asideCardUp">
                         <img class="headerImg" src="icon/search.png" />
                         <div class="headerName">
-                            <span><%=name %>></span>
+                            <span><%=name %></span>
                             <br/>
-                            <span><%=level %>></span>
+                            <span><%=level %></span>
                         </div>
                         <div class="headerCont">
                             <a href="my.jsp#myPost?uid=<%=uid%>"><span class="headerContItem">我的帖子
                             <br/><%=postnum %></span></a>
                             <span class="headerContItem">我的积分
-                                <br/><%=point %>></span>
+                                <br/><%=point %></span>
                             <a href="my.jsp#myFav?uid=<%=uid %>" ><span class="headerContItem">我的收藏
                                 <br/><%=uconum %></span></a>
                         </div>
@@ -69,27 +68,27 @@
                 <div class="mainBullet">
                     <span class="headerMSGTitle"><a href="modify.jsp#bulletin?uid=<%=uid%>"><b>论坛公告</b><span id="bulletinUnread" style="display: none;color: red"></span></a></span>
                     <ul>
-                    <%
+                    	<%
                     	int bnum=0;
-                    	List<manager_user> bull=obj2.manager_user_getData("uid",uid);
+                    	List<manager_user> bull=obj3.manager_user_getData("uid",uid);
                     	for(int m=0;m<bull.size();m++){
                     		manager_user bullur=bull.get(m);
                     		if(bullur.getStatus()=="unread")
                     			bnum++;
                     	}
-                    %>
-                    	<%
-                    		String bulletin[]=obj.getManagertitle();
-                    		for(int k=0;k<bulletin.length;k++){
-                    		
                     	%>
-                        <li class="mainBulletItem"><a><%=bulletin[k] %></a></li>
-                        <%} %>
+						<%
+							List<String> bulletin=obj.getManagertitle();
+							for(int k=0;k<bulletin.size();k++){
+							
+						%>
+						<li class="mainBulletItem"><a><%=bulletin.get(k) %></a></li>
+						<%
+							}
+						%>
                     </ul>
                 </div>
             </aside>
-</div>
-</div>
 </div>
 <script language="javascript">
 	//未读回帖
@@ -105,19 +104,19 @@
     function loadFresh() {
         var m=unread();
         if(jsp_rnum>0){
-            m.replyUnread(jsp_rnum)
+            m.replyUnread(jsp_rnum);
         }
         if (jsp_cnum>0){
             m.commentUnread(jsp_cnum);
         }
         if(jsp_pnum>0){
-            m.praiseUnread(jsp_pnum)
+            m.praiseUnread(jsp_pnum);
         }
         if (jsp_rpnum>0){
-            m.noticeUnread(jsp_rpnum)
+            m.noticeUnread(jsp_rpnum);
         }
         if(jsp_bnum>0){
-            bulletin(jsp_bnum)
+            bulletin(jsp_bnum);
         }
 
     }
@@ -130,58 +129,57 @@
         // var num=0;
         function total() {
             var unreadNote = document.getElementById("infoUnread");
-            unreadNote.style.display = "contents"
+            unreadNote.style.display = "contents";
             unreadNote.innerHTML = this.num;
         }
 
         function commentUnread(num1) {// 未读评论
             var unreadNote = document.getElementById("commentUnread");
-            unreadNote.style.display = "contents"
+            unreadNote.style.display = "contents";
             unreadNote.innerHTML = num1;
             num=num+num1;
-            total()
+            total();
         }
 
         function praiseUnread(num2) { //未读点赞
             var unreadNote = document.getElementById("praiseUnread");
-            unreadNote.style.display = "contents"
+            unreadNote.style.display = "contents";
             unreadNote.innerHTML = num2;
             num=num+num2;
-            total()
+            total();
         }
 
         function replyUnread(num3) { //未读回帖
             var unreadNote = document.getElementById("replyUnread");
-            unreadNote.style.display = "contents"
+            unreadNote.style.display = "contents";
             unreadNote.innerHTML = num3;
             num=num+num3;
-            total()
+            total();
         }
 
         function noticeUnread(num4) { //系统通知
             var unreadNote = document.getElementById("noticeUnread");
-            unreadNote.style.display = "contents"
+            unreadNote.style.display = "contents";
             unreadNote.innerHTML = num4;
             num=num+num4;
-            total()
+            total();
         }
 
 
         return{
-            commentUnread:commentUnread,
-            praiseUnread:praiseUnread,
-            replyUnread:replyUnread,
-            noticeUnread:noticeUnread
-
-        }
+            "commentUnread":commentUnread,
+            "praiseUnread":praiseUnread,
+            "replyUnread":replyUnread,
+            "noticeUnread":noticeUnread
+        };
     }
 
     function bulletin(numb) {
-        var unreadBull = document.getElementById("bulletinUnread");
+    	var unreadBull = document.getElementById("bulletinUnread");
         unreadBull.style.display = "contents";
         unreadBull.innerHTML = numb;
-       
     }
+        
 
 </script>
 </body>
