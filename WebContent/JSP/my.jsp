@@ -14,8 +14,7 @@
 </head>
 <body>
 <jsp:include page="TopMenu.jsp"/>
-<jsp:include page="RightBan.jsp"/>
-<jsp:include page="foot.jsp"/>
+
 <script>
     function deleteMyPost(aid){//删除我的帖子
     	if(confirm("确认删除")){
@@ -36,6 +35,7 @@
 <div class="viewContainer">
     
     <div class="mainAsideBox">
+    <jsp:include page="RightBan.jsp"/>
         <div class="container_1">
             <div class="mainLeft">
                 <section class="mainArticleList">
@@ -44,17 +44,19 @@
                         <div class="infoList">
                             <ul class="infoShow">
                             <%
-                            	String uid=(String)session.getAttribute("uid");
-                            	session.setAttribute("uid", uid);
+	                            int uid=Integer.parseInt(session.getAttribute("uid").toString());
+	                        	String u=Integer.toString(uid);
+	                        	session.setAttribute("uid", u);
                             	mysql_get obj=new mysql_get();
                             	mysql_mypostlist obj1=new mysql_mypostlist();
+                            	mysql_getint obj2=new mysql_getint();
                             	List<postlist> post=obj1.postlist_getData(uid);
                             	for(int i=0;i<post.size();i++){
                             		postlist pp=post.get(i);
-                            		List<post> ppd=obj.post_getData("aid", pp.getAid());
+                            		List<post> ppd=obj2.post_getData("aid", pp.getAid());
                             		String ppd_t=ppd.get(0).getContent();
                             		int ppd_n=pp.getNum();
-                            		String aid=pp.getAid();
+                            		int aid=pp.getAid();
                             		String atime=pp.getAtime();
                             %>
                                 <li class="topicList">
@@ -75,12 +77,12 @@
                         <div class="infoList">
                             <ul class="infoShow">
                             <%
-                            	List<uco> favs=obj.uco_getData("uid",uid);
+                            	List<uco> favs=obj2.uco_getData("uid",uid);
                             	for(int i=0;i<favs.size();i++){
                             		uco fav=favs.get(i);
-                            		List<post> ppd=obj.post_getData("aid",fav.getAid());
-                            		List<userpost> ups=obj.userpost_getData("aid", fav.getAid());
-                            		List<user> upub=obj.user_getData("uid", ups.get(0).getUid());
+                            		List<post> ppd=obj2.post_getData("aid",fav.getAid());
+                            		List<userpost> ups=obj2.userpost_getData("aid", fav.getAid());
+                            		List<user> upub=obj2.user_getData("uid", ups.get(0).getUid());
                             		List<postlist> ppdl=obj1.postlist_getData(upub.get(0).getUid());
                             		String ppd_t=ppd.get(0).getTitle();
                             		String ppd_c=ppd.get(0).getContent();
@@ -107,5 +109,6 @@
         </div>
     </div>
 </div>
+<jsp:include page="foot.jsp"/>
 </body>
 </html>
