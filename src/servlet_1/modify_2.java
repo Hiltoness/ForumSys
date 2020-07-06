@@ -48,13 +48,13 @@ public class modify_2 extends HttpServlet {
 		
         PrintWriter out = response.getWriter();
 
-        out.println("<script language = javascript>alert('ĞŞ¸Ä³É¹¦£¡');");
+        out.println("<script language = javascript>alert('ä¿®æ”¹æˆåŠŸï¼');");
         out.println("location.href='modify.jsp'</script>");
         }
         else {
         PrintWriter out = response.getWriter();
 
-        out.println("<script language = javascript>alert('Á½´ÎÊäÈëÃÜÂë²»Ò»ÖÂ£¡ÇëÖØĞÂÊäÈë');");
+        out.println("<script language = javascript>alert('ä¸¤æ¬¡è¾“å…¥å¯†ç ä¸ä¸€è‡´ï¼è¯·é‡æ–°è¾“å…¥');");
         out.println("location.href='modify.jsp'</script>");
         }
         

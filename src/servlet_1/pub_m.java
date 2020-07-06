@@ -50,7 +50,7 @@ public class pub_m extends HttpServlet {
 		
         PrintWriter out = response.getWriter();
 
-        out.println("<script language = javascript>alert('¹«¸æ·¢²¼³É¹¦£¡');");
+        out.println("<script language = javascript>alert('å…¬å‘Šå‘å¸ƒæˆåŠŸï¼');");
         out.println("location.href='pub_m.jsp'</script>");
 	}
 

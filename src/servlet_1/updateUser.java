@@ -45,7 +45,7 @@ public class updateUser extends HttpServlet {
      
         PrintWriter out = response.getWriter();
 
-        out.println("<script language = javascript>alert('�޸ĳɹ���');");
+        out.println("<script language = javascript>alert('修改成功！');");
         out.println("location.href='manager_u.jsp'</script>");        
         
 	}

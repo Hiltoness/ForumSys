@@ -48,13 +48,13 @@ public class modify_1 extends HttpServlet {
 		String sex = "sex";
 		String college = "college";
 		String uid = "uid";
-		update.update_DBString(user,uname,name,uid,id);//ĞŞ¸ÄĞÕÃû
-		update.update_DBString(user,sex,gender,uid,id);//ĞŞ¸ÄĞÔ±ğ	
-		update.update_DBString(user,college,coll,uid,id);//ĞŞ¸Ä´óÑ§
+		update.update_DBString(user,uname,name,uid,id);//ä¿®æ”¹å§“å
+		update.update_DBString(user,sex,gender,uid,id);//ä¿®æ”¹æ€§åˆ«	
+		update.update_DBString(user,college,coll,uid,id);//ä¿®æ”¹å¤§å­¦
         
         PrintWriter out = response.getWriter();
 
-        out.println("<script language = javascript>alert('ĞŞ¸Ä³É¹¦£¡');");
+        out.println("<script language = javascript>alert('ä¿®æ”¹æˆåŠŸï¼');");
         out.println("location.href='modify.jsp'</script>");
         }
 

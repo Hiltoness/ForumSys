@@ -43,7 +43,7 @@ public class deleteServlet extends HttpServlet {
         
         PrintWriter out = response.getWriter();
 
-        out.println("<script language = javascript>alert('É¾³ı³É¹¦£¡');");
+        out.println("<script language = javascript>alert('åˆ é™¤æˆåŠŸï¼');");
         out.println("location.href='manager_u.jsp'</script>");
 	}
 

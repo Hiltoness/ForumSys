@@ -52,7 +52,7 @@ public class publize extends HttpServlet {
         
         PrintWriter out = response.getWriter();
 
-        out.println("<script language = javascript>alert('·¢Ìû³É¹¦£¡');");
+        out.println("<script language = javascript>alert('å‘å¸–æˆåŠŸï¼');");
         out.println("location.href='publize.jsp'</script>");
 	}
 

@@ -42,21 +42,21 @@ public class comment extends HttpServlet {
         response.setContentType("text/html charset=utf-8");
         
         HttpSession session = request.getSession();
-        int id=(int)session.getAttribute("id");//»ñÈ¡sessionÖĞ±£´æµÄÓÃ»§id
+        int id=(int)session.getAttribute("id");//è·å–sessionä¸­ä¿å­˜çš„ç”¨æˆ·id
         String replyCid=request.getParameter("replyCid");
         String commentSend=request.getParameter("commentSend");
         Date date = new Date();
-        SimpleDateFormat df = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");//ÉèÖÃÈÕÆÚ¸ñÊ½
+        SimpleDateFormat df = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");//è®¾ç½®æ—¥æœŸæ ¼å¼
         String dateTime = df.format(date);
         
         mysql_insert insert=new mysql_insert();
 
 		String status="unread";
-		insert.usercomment_InserData(id,aid,rid,replyCid,commentSend,dateTime,status); //aidºÍrid²»ÖªµÀ´ÓÄÄ»ñÈ¡
+		insert.usercomment_InserData(id,aid,rid,replyCid,commentSend,dateTime,status); //aidå’Œridä¸çŸ¥é“ä»å“ªè·å–
         
         PrintWriter out = response.getWriter();
 
-        out.println("<script language = javascript>alert('ÆÀÂÛ³É¹¦£¡');");
+        out.println("<script language = javascript>alert('è¯„è®ºæˆåŠŸï¼');");
         out.println("location.href='QuesInfo.jsp'</script>");
 	}
 
