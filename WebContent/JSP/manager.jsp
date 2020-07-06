@@ -54,15 +54,16 @@ function deleteComment(cid){//删除评论
                     <%
                       mysql_getall obj=new mysql_getall();
                     mysql_get obj1=new mysql_get();
+                    mysql_getint obj2=new mysql_getint();
                       List<userreport_a> ua=obj.userreport_a_getData();
                       for(int i=0;i<ua.size();i++){
                     	  userreport_a uaa=ua.get(i);
-                    	  List<userpost> us1=obj1.userpost_getData("aid",uaa.getAid());
-                    	  List<post> ps1=obj1.post_getData("aid", uaa.getAid());
+                    	  List<userpost> us1=obj2.userpost_getData("aid",uaa.getAid());
+                    	  List<post> ps1=obj2.post_getData("aid", uaa.getAid());
                     	  String psTitle=ps1.get(0).getTitle();//帖子主题
-                    	  List<user> us2=obj1.user_getData("uid",us1.get(0).getUid());
+                    	  List<user> us2=obj2.user_getData("uid",us1.get(0).getUid());
                     	  String pbName=us2.get(0).getUname();//发帖人名字
-                    	  List<user> us3=obj1.user_getData("uid", uaa.getUid());
+                    	  List<user> us3=obj2.user_getData("uid", uaa.getUid());
                     	  String coName=us3.get(0).getUname();//举报人用户名
                       
                     %>
@@ -84,14 +85,14 @@ function deleteComment(cid){//删除评论
                       List<userreport_r> ur=obj.userreport_r_getData();
                       for(int i=0;i<ur.size();i++){
                     	  userreport_r urr=ur.get(i);
-                    	  List<userreply> ur1=obj1.userreply_getData("rid", urr.getRid());
-                    	  List<userpost> up1=obj1.userpost_getData("aid",urr.getAid());
-                    	  List<post> psr1=obj1.post_getData("aid", urr.getAid());
+                    	  List<userreply> ur1=obj2.userreply_getData("rid", urr.getRid());
+                    	  List<userpost> up1=obj2.userpost_getData("aid",urr.getAid());
+                    	  List<post> psr1=obj2.post_getData("aid", urr.getAid());
                     	  String psrTitle=psr1.get(0).getTitle();//帖子主题
                     	  String urcon=ur1.get(0).getReply();//回帖内容
-                    	  List<user> usr2=obj1.user_getData("uid",ur1.get(0).getUid());
+                    	  List<user> usr2=obj2.user_getData("uid",ur1.get(0).getUid());
                     	  String pbrName=usr2.get(0).getUname();//发帖人名字
-                    	  List<user> usr3=obj1.user_getData("uid", urr.getUid());
+                    	  List<user> usr3=obj2.user_getData("uid", urr.getUid());
                     	  String corName=usr3.get(0).getUname();//举报人用户名
                       
                     %>
@@ -113,13 +114,13 @@ function deleteComment(cid){//删除评论
                       List<userreport_c> uc=obj.userreport_c_getData();
                       for(int i=0;i<ur.size();i++){
                     	  userreport_c ucc=uc.get(i);
-                    	  List<userreply> uc1=obj1.userreply_getData("rid", ucc.getRid());
+                    	  List<userreply> uc1=obj2.userreply_getData("rid", ucc.getRid());
                     	  String uccon=uc1.get(0).getReply();//回帖内容
-                    	  List<usercomment> comm=obj1.usercomment_getData("rid", ucc.getRid(), "cid", ucc.getCid());
+                    	  List<usercomment> comm=obj2.usercomment_getData("rid", ucc.getRid(), "cid", ucc.getCid());
                     	  String comm1=comm.get(0).getComment();//评论内容
-                    	  List<user> usc2=obj1.user_getData("uid",comm.get(0).getUid());
+                    	  List<user> usc2=obj2.user_getData("uid",comm.get(0).getUid());
                     	  String pbcName=usc2.get(0).getUname();//评论人名字
-                    	  List<user> usc3=obj1.user_getData("uid", ucc.getUid());
+                    	  List<user> usc3=obj2.user_getData("uid", ucc.getUid());
                     	  String cocName=usc3.get(0).getUname();//举报人用户名
                       
                     %>
