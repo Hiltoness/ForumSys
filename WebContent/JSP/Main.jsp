@@ -15,7 +15,7 @@
 </head>
 <body>
 <%
-	int uid=(Integer)session.getAttribute("uid");
+	int uid=Integer.parseInt(session.getAttribute("uid").toString());
 	String u=Integer.toString(uid);
 	session.setAttribute("uid", u);
 
