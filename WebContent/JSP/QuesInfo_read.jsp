@@ -14,8 +14,7 @@
 </head>
 <body>
 <jsp:include page="TopMenu.jsp"/>
-<jsp:include page="RightBan.jsp"/>
-<jsp:include page="foot.jsp"/>
+
 <script>
     function fav(aid) {//收藏
         var fDiv=document.getElementById("fav");
@@ -117,43 +116,50 @@
     </div>
 
 </div>
-//隐藏遮罩层
+<%--隐藏遮罩层--%>
  <div id="hidebg" style="position:absolute;left:0px;top:0px;
         background-color:gray;
         width:100%;  /*宽度设置为100%，这样才能使隐藏背景层覆盖原页面*/
         opacity:0.6;  /*非IE浏览器下设置透明度为60%*/
         display:none; /* http://www.jb51.net */
         z-Index:9"></div>
-//评论框
+<%--评论框--%>
 <div id="response" style="display: none;margin: 10px 15px">
     <form id="commentForm" name="commentForm" style="display: contents" accept-charset="utf-8" method="post" action="">
-    	//评论cid
+    	<!--评论cid-->
     	<input style="display: none" id="replyCid" value=""/>
-    	//评论内容
+    	<!--评论内容-->
         <textarea id="commentSend" style="display:inline;width: 100%;height: 80px;-webkit-border-radius: 3px;padding: 2px 5px"></textarea>
-        //提交按钮
+        <!--提交按钮-->
         <input class="btnModi" value="发表评论" type="submit" />
     </form>
 </div>
 <div class="viewContainer">
-    
+    <%
+    int uid=Integer.parseInt(session.getAttribute("uid").toString());
+	String u=Integer.toString(uid);
+	session.setAttribute("uid", u);
+    %>
     <div class="mainAsideBox">
+    <jsp:include page="RightBan.jsp"/>
         <div class="container_1">
             
             <div class="mainLeft">
                 <div class="quesFloor">
                 <%
-                  String aid=request.getParameter("aid");//主贴id
+                
+                  int aid=Integer.parseInt(request.getParameter("aid").toString());//主贴id
                   mysql_get obj=new mysql_get();
                   only obj1=new only();
-                  List<post> post=obj.post_getData("aid", aid);
-                  List<userpost> userpost=obj.userpost_getData("aid", aid);
-                  List<userreply> repost1=obj.userreply_getData("aid", aid);
+                  mysql_getint obj2=new mysql_getint();
+                  List<post> post=obj2.post_getData("aid", aid);
+                  List<userpost> userpost=obj2.userpost_getData("aid", aid);
+                  List<userreply> repost1=obj2.userreply_getData("aid", aid);
                   post pp=post.get(0);//帖子表
                   userpost up=userpost.get(0);//用户发帖表
                   String title=pp.getTitle();//标题
-                  String userid=up.getUid();//用户id
-                  List<user> user=obj.user_getData("uid", userid);
+                  int userid=up.getUid();//用户id
+                  List<user> user=obj2.user_getData("uid", userid);
                   String username=user.get(0).getUname();//用户名
                   int level=user.get(0).getLevel();//等级
                   String time=up.getAtime();//发帖时间
@@ -190,12 +196,12 @@
                     </section>
                     <%	
                     	String rUid=request.getParameter("rUid");//指定“只看TA”的uid
-                    	List<userreply> rr=obj.userreply_getData("aid", aid);
+                    	List<userreply> rr=obj2.userreply_getData("aid", aid);
                     	for(int i=0;i<rr.size();i++){
                     		userreply rr_1=rr.get(i);
-                    		String rid=rr_1.getRid();//回帖id
-                    		String ruid=rr_1.getUid();
-                    		List<user> us=obj.user_getData("uid", ruid);
+                    		int rid=rr_1.getRid();//回帖id
+                    		int ruid=rr_1.getUid();
+                    		List<user> us=obj2.user_getData("uid", ruid);
                     		List<usercomment> com=obj1.usercomment_getData(aid,rid );//评论list
                     		String rname=us.get(0).getUname();//回帖用户名
                     		int rlevel=us.get(0).getLevel();//回帖用户等级
@@ -229,7 +235,7 @@
                             <%
                             	for(int j=0;j<com.size();j++){
                             		usercomment com1=com.get(j);
-                            		List<user> us_c=obj.user_getData("uid", com1.getUid());
+                            		List<user> us_c=obj2.user_getData("uid", com1.getUid());
                             		String us_cname=us_c.get(0).getUname();//评论人用户名
                             		int us_clevel=us_c.get(0).getLevel();//评论人等级
                             	
@@ -258,5 +264,7 @@
         </div>
     </div>
 </div>
+
+<jsp:include page="foot.jsp"/>
 </body>
 </html>

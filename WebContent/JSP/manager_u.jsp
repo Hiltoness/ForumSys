@@ -27,7 +27,6 @@
             alert("删除失败");
         }
     }
-
 </script>
 <jsp:include page="TopMenu_m.jsp"></jsp:include>
 <div class="viewContainer">
@@ -57,7 +56,7 @@
                     List<user> usinfo=obj.user_getData();
                     for(int i=0;i<usinfo.size();i++){
                     	user info=usinfo.get(i);
-                    	String id=info.getUid();
+                    	int id=info.getUid();
                     	String name=info.getUname();
                     	String time=info.getUtime();
                     	String gender=info.getSex();
@@ -74,7 +73,7 @@
                         <button onclick="modiInfo_m()"> 修改&nbsp;</button>
                         <button onclick="deleteUser_m(<%=id%>)">&nbsp;删除</button>
                     </ul>
-                    //修改用户信息框
+                    <%-- 修改用户信息框--%>
                     <div id="modi_m1" style="display: none;
 					    POSITION:absolute;
 					    left:50%;
@@ -89,9 +88,9 @@
 					    background-color: #f5f6f7;
 					    z-index: 10;
 					    text-align:center">
-					    //修改用户信息
+					    <%-- 修改用户信息--%>
 					    <form class="modiForm1" id="modi_m2" name="modi_m2" method="post" action="">
-					        <label class="modiForm">用户ID:<label id="modi_uid"><%=id %></label></label>
+					        <label class="modiForm">用户ID:<label id="modi_uid"><%=id --%></label></label>
 					        <label class="modiForm">用户昵称：<%=name %></label>
 					        <label class="modiForm">注册时间：<%=time %></label>
 					        <label class="modiForm">性别：<%=gender %></label>

@@ -11,16 +11,17 @@
 </head>
 <body>
 <%
-	String uid=(String)session.getAttribute("uid");
-	session.setAttribute("uid", uid);
+	int uid=Integer.parseInt(session.getAttribute("uid").toString());
+	String u=Integer.toString(uid);
+	session.setAttribute("uid", u);
 %>
 <jsp:include page="TopMenu.jsp"/>
-<jsp:include page="RightBan.jsp"/>
-<jsp:include page="foot.jsp"/>
+
 <div class="viewContainer">
     <div class="mainAsideBox">
-        <div class="container_1">
-            
+    
+        <div class="container_l">
+            <jsp:include page="RightBan.jsp"/>
             <div class="publicize">
                 <form class="searchTopic" method="post" action="" name="publize">
                     <input id="topic_title" name="topic_title" class="inputTitle" autocomplete="off" maxlength="80" placeholder="输入帖子标题" size="60" type="text">
@@ -34,17 +35,20 @@
                             var ed=new rich_editor('#editor1');
                             ed.create();
                             
-                            $("#topic_commit").click(function getContent(){
-                            	var text=ed.txt.text();
-                            	HttpSession session=request.getSession();
-                            	session.setAttribute("posttext",text);
-                            });
                     </script>
                     <input class="btnCommit" type="submit" id="topic_commit" name="topic_commit" value="发表" onclick="">
                 </form>
+                <script>
+                	document.getElementById('topic_commit').addEventListener('click', function(){
+                	var text=ed.txt.text();
+                    HttpSession session=request.getSession();
+                    session.setAttribute("posttext",text);
+                }, false)
+                </script>
             </div>
         </div>
     </div>
 </div>
+<jsp:include page="foot.jsp"/>
 </body>
 </html>
