@@ -22,6 +22,20 @@ public class mysql_operate {
 				ex.printStackTrace();
 				}
 		}
+		//删掉where的那个数是整数类型 两个参数
+	  public void delete_DBInt2(String table,int wherevalue,String whereatt,int wherevalue2,String whereatt2) {
+			 try {
+				 mysql_DB db=new mysql_DB();
+					conn=db.connectDB();
+					pstm=conn.prepareStatement("delete from "+table+" where "+whereatt+" =? and "+whereatt2+" =? ");
+					pstm.setInt(1, wherevalue);
+					pstm.setInt(2, wherevalue2);
+					pstm.executeUpdate();
+				
+				}catch(SQLException ex){
+				ex.printStackTrace();
+				}
+		}
 	//删掉where的那个数是字符串类型
 	  public void delete_DBString(String table,String wherevalue,String whereatt) {
 			 try {
@@ -35,6 +49,7 @@ public class mysql_operate {
 				ex.printStackTrace();
 				}
 		}
+
 
 	  //更新的where是字符串类型
 	  public void update_DBString(String table,String setvalue,String setatt,String wherevalue,String whereatt) {
