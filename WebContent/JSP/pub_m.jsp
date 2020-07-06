@@ -10,7 +10,6 @@
     <base target="_blank">
 </head>
 <body>
-<jsp:include page="foot.jsp"/>
 <div class="viewContainer">
     <div class="mainHeaderBox">
         <div class="container">
@@ -50,17 +49,20 @@
                         var ed=new rich_editor('#editor1');
                         ed.create();
                         
-                        $("#pubm_commit").click(function getContent(){
-                        	var text=ed.txt.text();
-                        	HttpSession session=request.getSession();
-                        	session.setAttribute("pubm",text);
-                        });
                     </script>
                     <input class="btnCommit" type="submit" id="pubm_commit" name="topic_commit" value="发表" onclick="">
                 </form>
+                <script>
+                	document.getElementById('pubm_commit').addEventListener('click', function(){
+                	var text=ed.txt.text();
+                    HttpSession session=request.getSession();
+                    session.setAttribute("pubm",text);
+                }, false)
+                </script>
             </div>
         </div>
     </div>
 </div>
+<jsp:include page="foot.jsp"/>
 </body>
 </html>
