@@ -22,7 +22,7 @@ public class sort {
 		String [][] tmpvalue=new String [postlist.size()][4];
 		mergeSort(arrnum,arrvalue,0,arrnum.length-1,tmpnum,tmpvalue);
 		for(int i=arrnum.length-1;i>=0;i--){
-			postlist post1 = null;
+			postlist post1 = new postlist();
 			post1.setUid(Integer.parseInt(arrvalue[i][0]));
 			post1.setAid(Integer.parseInt(arrvalue[i][1]));
 			post1.setTitle(arrvalue[i][2]);
