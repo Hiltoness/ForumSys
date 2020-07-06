@@ -325,7 +325,7 @@ public class myclass {
 		try {
 			mysql_DB db=new mysql_DB();
 			conn=db.connectDB();
-			pstm=conn.prepareStatement("select * from manger");
+			pstm=conn.prepareStatement("select * from manager");
 			rs=pstm.executeQuery();
 			managertitle=new ArrayList<String> ();
 			while(rs.next()) {				
