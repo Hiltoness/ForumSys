@@ -19,6 +19,7 @@ public class mysql_getint {
 	private ArrayList<userreport_c> userreport_clist=new ArrayList<userreport_c> ();
 	private ArrayList<userreport_r> userreport_rlist=new ArrayList<userreport_r> ();
 	private ArrayList<manager_user> mulist=new ArrayList<manager_user> ();
+	private ArrayList<manager_user> mulist2=new ArrayList<manager_user> ();
 	  private PreparedStatement pstm;     
 	  
 	  private Connection conn;
@@ -282,6 +283,27 @@ public ArrayList<userreport_r> userreport_r_getData(String attwhere,int attvalue
 		}
 	 return userreport_rlist;
 }
+public ArrayList<manager_user> manager_user_getData2(String attwhere,int attvalue,String attwhere2,int attvalue2) {
+	 try {
+		 mysql_DB db=new mysql_DB();
+			conn=db.connectDB();
+			pstm=conn.prepareStatement("select * from manager_user where "+attwhere+" =? and "+attwhere2+" =? ");
+			pstm.setInt(1, attvalue);
+			pstm.setInt(2, attvalue2);
+			rs=pstm.executeQuery();
+			while(rs.next()) {
+				manager_user bean=new manager_user();
+				bean.setPid(rs.getInt(1));
+				bean.setUid(rs.getInt(2));
+				bean.setStatus(rs.getString(3));
+				mulist2.add(bean);
+			}
+		
+		}catch(SQLException ex){
+		ex.printStackTrace();
+		}
+	 return mulist2;
+}
 
 public ArrayList<manager_user> manager_user_getData(String attwhere,int attvalue) {
 	 try {
@@ -303,5 +325,6 @@ public ArrayList<manager_user> manager_user_getData(String attwhere,int attvalue
 		}
 	 return mulist;
 }
+
 
 }
