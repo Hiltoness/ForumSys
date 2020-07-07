@@ -330,7 +330,7 @@ public int userID(String table,String col,int value){
 	try {
 		 mysql_DB db=new mysql_DB();
 			conn=db.connectDB();
-			pstm=conn.prepareStatement("select uid from+ table + where "+col+" =?");
+			pstm=conn.prepareStatement("select uid from"+ table + "where "+col+" =?");
 			pstm.setInt(1, value);
 			rs=pstm.executeQuery();
 			while(rs.next()) {
@@ -342,6 +342,40 @@ public int userID(String table,String col,int value){
 		}
 	return uid;
 	
+}
+public int point(int uid){
+	int point=0;
+	try {
+		 mysql_DB db=new mysql_DB();
+			conn=db.connectDB();
+			pstm=conn.prepareStatement("select point from user where uid =?");
+			pstm.setInt(1, uid);
+			rs=pstm.executeQuery();
+			while(rs.next()) {
+				point=rs.getInt(1);
+			}
+		
+		}catch(SQLException ex){
+		ex.printStackTrace();
+		}
+	return point;
+}
+public int level(int uid){
+	int level=0;
+	try {
+		 mysql_DB db=new mysql_DB();
+			conn=db.connectDB();
+			pstm=conn.prepareStatement("select level from user where uid =?");
+			pstm.setInt(1, uid);
+			rs=pstm.executeQuery();
+			while(rs.next()) {
+				level=rs.getInt(1);
+			}
+		
+		}catch(SQLException ex){
+		ex.printStackTrace();
+		}
+	return level;
 }
 
 
