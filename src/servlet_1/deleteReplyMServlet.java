@@ -1,4 +1,4 @@
-package com.servlet;
+package servlet_1;
 
 import java.io.IOException;
 import java.io.PrintWriter;
@@ -9,6 +9,7 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
+import javabean.mysql_getint;
 import javabean.mysql_operate;
 
 /**
@@ -45,13 +46,20 @@ public class deleteReplyMServlet extends HttpServlet {
         String tab7="userreport_c";       
              
         mysql_operate del=new mysql_operate();
-        del.delete_DB(tab1, delId, rid);
-        del.delete_DB(tab2, delId, rid);
-        del.delete_DB(tab3, delId, rid);
-        del.delete_DB(tab4, delId, rid);
-        del.delete_DB(tab5, delId, rid);
-        del.delete_DB(tab6, delId, rid);
-        del.delete_DB(tab7, delId, rid);
+        del.delete_DBInt(tab1, delId, rid);
+        del.delete_DBInt(tab2, delId, rid);
+        del.delete_DBInt(tab3, delId, rid);
+        del.delete_DBInt(tab4, delId, rid);
+        del.delete_DBInt(tab5, delId, rid);
+        del.delete_DBInt(tab6, delId, rid);
+        del.delete_DBInt(tab7, delId, rid);
+        
+      //扣分
+        mysql_getint obj=new mysql_getint();
+        int id=obj.userID("userreply", "rid", delId);
+        mysql_operate obj1=new mysql_operate();
+        obj1.update_DBInt("user","point-8", "point", id, "uid");
+
         
         PrintWriter out = response.getWriter();
 
