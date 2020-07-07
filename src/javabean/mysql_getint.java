@@ -325,6 +325,24 @@ public ArrayList<manager_user> manager_user_getData(String attwhere,int attvalue
 		}
 	 return mulist;
 }
+public int userID(String table,String col,int value){
+	int uid=0;
+	try {
+		 mysql_DB db=new mysql_DB();
+			conn=db.connectDB();
+			pstm=conn.prepareStatement("select uid from+ table + where "+col+" =?");
+			pstm.setInt(1, value);
+			rs=pstm.executeQuery();
+			while(rs.next()) {
+				uid=rs.getInt(1);
+			}
+		
+		}catch(SQLException ex){
+		ex.printStackTrace();
+		}
+	return uid;
+	
+}
 
 
 }
