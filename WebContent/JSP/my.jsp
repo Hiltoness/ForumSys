@@ -36,7 +36,7 @@
     
     <div class="mainAsideBox">
     <jsp:include page="RightBan.jsp"/>
-        <div class="container_1">
+        <div class="container_l">
             <div class="mainLeft">
                 <section class="mainArticleList">
                     <div class="mainArticleList">
