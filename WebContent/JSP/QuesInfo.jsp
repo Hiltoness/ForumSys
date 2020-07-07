@@ -74,13 +74,15 @@
     function $(el) {
         return document.getElementById(el);
     }
-    function comment(obj,rid) {//评论
+    function comment(obj,rid,aid) {//评论
         var oComment=obj.parentNode.parentNode.parentNode;
         console.log(oComment)
         oComment.appendChild($("response"));
         $("response").style.display="flex";
-        var replyID=document.getElementById("replyCid");//回帖的id
+        var replyID=document.getElementById("replyRid");//回帖的id
         replyID.setAttribute("value",rid);
+        var replyAD=document.getElementById("replyAid");
+        replyAD.setAttribute("value",aid);
     }
 
 </script>
@@ -142,7 +144,8 @@
 <div id="response" style="display: none;margin: 10px 15px">
     <form id="commentForm" name="commentForm" style="display: contents" accept-charset="utf-8" method="post" action="">
     	<!--评论cid-->
-    	<input style="display: none" id="replyCid" value=""/>
+    	<input style="display: none" id="replyAid" value=""/>
+    	<input style="display: none" id="replyRid" value=""/>
     	<!-- 评论内容-->
         <textarea id="commentSend" style="display:inline;width: 100%;height: 80px;-webkit-border-radius: 3px;padding: 2px 5px"></textarea>
         <!-- 提交按钮-->
@@ -154,7 +157,7 @@
     <div class="mainAsideBox">
 	<jsp:include page="RightBan.jsp"/>
     
-        <div class="container_1">
+        <div class="container_l">
             
             <div class="mainLeft">
                 <div class="quesFloor">
@@ -243,7 +246,7 @@
                                 <div class="erControlR">
                                     <a href="javascript:read(<%=us.get(0).getUid()%>,aid,i+1)"><span class="read">只看TA</span></a>
                                     <a href="javascript:praise(<%=ruid%>)"><span class="praise">点赞</span></a>
-                                    <div class="commentBtn" onclick="comment(this,<%=rr_1.getRid()%>)"><span class="comment">评论</span></div>
+                                    <div class="commentBtn" onclick="comment(this,<%=rid%>,<%=aid%>)"><span class="comment">评论</span></div>
                                     <a href="javascript:report1(<%=ruid%>)">举报</a>
                                     <span><%=i+1 %> 楼</span>
                                 </div>
@@ -277,7 +280,28 @@
                     <% } %>
                     
                 </div>
-
+				 <div class="replyEdit">
+                        <div class="mainArticleList" id="editor1">
+                            <p>发表你的观点</p>
+                        </div>
+                        <form id="reply_ques" method="post" action="">
+                            <script type="text/javascript" src="wangEditor-3.1.1/release/wangEditor.min.js"></script>
+                            <script language="JavaScript">
+                                var rich_editor=window.wangEditor
+                                var ed=new rich_editor('#editor1')
+                                ed.create()
+                            </script>
+                            <input style="display:none" value="<%=aid%>" name="aid">
+                            <input class="btnCommit" type="submit" id="reply_commit" name="reply_commit" value="发表" onclick="">
+                        </form>
+                        <script>
+		                	document.getElementById('reply_commit').addEventListener('click', function(){
+		                	var text=ed.txt.text();
+		                    HttpSession session=request.getSession();
+		                    session.setAttribute("replytext",text);
+		                }, false)
+		                </script>
+                    </div>
         </div>
     </div>
 </div>

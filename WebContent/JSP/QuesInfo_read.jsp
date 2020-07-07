@@ -142,7 +142,7 @@
     %>
     <div class="mainAsideBox">
     <jsp:include page="RightBan.jsp"/>
-        <div class="container_1">
+        <div class="container_l">
             
             <div class="mainLeft">
                 <div class="quesFloor">
@@ -260,7 +260,28 @@
                     <%} %>
                     
                 </div>
-
+				 <div class="replyEdit">
+                        <div class="mainArticleList" id="editor1">
+                            <p>发表你的观点</p>
+                        </div>
+                        <form id="reply_ques" method="post" action="">
+                            <script type="text/javascript" src="wangEditor-3.1.1/release/wangEditor.min.js"></script>
+                            <script language="JavaScript">
+                                var rich_editor=window.wangEditor
+                                var ed=new rich_editor('#editor1')
+                                ed.create()
+                            </script>
+                            <input style="display:none" value="<%=aid%>" name="aid">
+                            <input class="btnCommit" type="submit" id="reply_commit" name="reply_commit" value="发表" onclick="">
+                        </form>
+                        <script>
+		                	document.getElementById('reply_commit').addEventListener('click', function(){
+		                	var text=ed.txt.text();
+		                    HttpSession session=request.getSession();
+		                    session.setAttribute("replytext",text);
+		                }, false)
+		                </script>
+                    </div>
         </div>
     </div>
 </div>
