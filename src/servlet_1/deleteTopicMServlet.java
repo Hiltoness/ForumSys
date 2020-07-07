@@ -1,5 +1,6 @@
-package com.servlet;
+package servlet_1;
 
+import javabean.*;
 import java.io.IOException;
 import java.io.PrintWriter;
 
@@ -47,15 +48,21 @@ public class deleteTopicMServlet extends HttpServlet {
         String tab9="uco";
              
         mysql_operate del=new mysql_operate();
-        del.delete_DB(tab1, delId, aid);
-        del.delete_DB(tab2, delId, aid);
-        del.delete_DB(tab3, delId, aid);
-        del.delete_DB(tab4, delId, aid);
-        del.delete_DB(tab5, delId, aid);
-        del.delete_DB(tab6, delId, aid);
-        del.delete_DB(tab7, delId, aid);
-        del.delete_DB(tab8, delId, aid);
-        del.delete_DB(tab9, delId, aid);
+        del.delete_DBInt(tab1, delId, aid);
+        del.delete_DBInt(tab2, delId, aid);
+        del.delete_DBInt(tab3, delId, aid);
+        del.delete_DBInt(tab4, delId, aid);
+        del.delete_DBInt(tab5, delId, aid);
+        del.delete_DBInt(tab6, delId, aid);
+        del.delete_DBInt(tab7, delId, aid);
+        del.delete_DBInt(tab8, delId, aid);
+        del.delete_DBInt(tab9, delId, aid);
+        
+        //扣分
+        mysql_getint obj=new mysql_getint();
+        int id=obj.userID("userpost", "aid", delId);
+        mysql_operate obj1=new mysql_operate();
+        obj1.update_DBInt("user","point-10", "point", id, "uid");
         
         PrintWriter out = response.getWriter();
 
