@@ -10,16 +10,15 @@ public class mysql_insert {
 	
 	  private Connection conn;
 	  
-public void manager_InserData(int mid,int pid,String notitle,String notice,String notime) {
+public void manager_InserData(int mid,String notitle,String notice,String notime) {
 	 try {
 		 mysql_DB db=new mysql_DB();
 			conn=db.connectDB();
-			pstm=conn.prepareStatement("insert into manager values(?,?,?,?,?)");
+			pstm=conn.prepareStatement("insert into manager values(?,0,?,?,?)");
 			pstm.setInt(1, mid);
-			pstm.setInt(2, pid);
-			pstm.setString(3, notitle);
-			pstm.setString(4,notice );
-			pstm.setString(5,notime );
+			pstm.setString(2, notitle);
+			pstm.setString(3,notice );
+			pstm.setString(4,notime );
 			
 			pstm.executeUpdate();
 		
@@ -28,14 +27,14 @@ public void manager_InserData(int mid,int pid,String notitle,String notice,Strin
 		}
 }
 
-public void post_InserData(int aid,String title,String content) {
+public void post_InserData(String title,String content) {
 	 try {
 		 mysql_DB db=new mysql_DB();
 			conn=db.connectDB();
-			pstm=conn.prepareStatement("insert into post values(?,?,?)");
-			pstm.setInt(1, aid);
-			pstm.setString(2, title);
-			pstm.setString(3,content );
+			pstm=conn.prepareStatement("insert into post values(0,?,?)");
+			
+			pstm.setString(1, title);
+			pstm.setString(2,content );
 			pstm.executeUpdate();
 		
 		}catch(SQLException ex){
@@ -58,19 +57,19 @@ public void uco_InserData(int uid,int aid,String cotime) {
 		}
 }
 
-public void user_InserData(int uid,String uname,String utime,String sex,String password,int point,int level,String college) {
+public void user_InserData(String uname,String utime,String sex,String password,int point,int level,String college) {
 	 try {
 		 mysql_DB db=new mysql_DB();
 			conn=db.connectDB();
-			pstm=conn.prepareStatement("insert into user values(?,?,?,?,?,?,?,?)");
-			pstm.setInt(1, uid);
-			pstm.setString(2, uname);
-			pstm.setString(3,utime);
-			pstm.setString(4,sex);
-			pstm.setString(5,password);
-			pstm.setInt(6,point);
-			pstm.setInt(7,level);
-			pstm.setString(8,college);
+			pstm=conn.prepareStatement("insert into user values(0,?,?,?,?,?,?,?)");
+			
+			pstm.setString(1, uname);
+			pstm.setString(2,utime);
+			pstm.setString(3,sex);
+			pstm.setString(4,password);
+			pstm.setInt(5,point);
+			pstm.setInt(6,level);
+			pstm.setString(7,college);
 			pstm.executeUpdate();
 		
 		}catch(SQLException ex){
@@ -78,18 +77,18 @@ public void user_InserData(int uid,String uname,String utime,String sex,String p
 		}
 }
 
-public void usercomment_InserData(int uid,int aid,int rid,int cid,String comment,String ctime,String status) {
+public void usercomment_InserData(int uid,int aid,int rid,String comment,String ctime,String status) {
 	 try {
 		 mysql_DB db=new mysql_DB();
 			conn=db.connectDB();
-			pstm=conn.prepareStatement("insert into usercomment values(?,?,?,?,?,?,?)");
+			pstm=conn.prepareStatement("insert into usercomment values(?,?,?,0,?,?,?)");
 			pstm.setInt(1, uid);
 			pstm.setInt(2, aid);
 			pstm.setInt(3,rid);
-			pstm.setInt(4,cid);
-			pstm.setString(5,comment);
-			pstm.setString(6,ctime);
-			pstm.setString(7,status);
+		
+			pstm.setString(4,comment);
+			pstm.setString(5,ctime);
+			pstm.setString(6,status);
 			pstm.executeUpdate();
 		
 		}catch(SQLException ex){
@@ -130,17 +129,17 @@ public void userpraise_InserData(int uid,int aid,int rid,String praise,String pt
 		}
 }
 
-public void userreply_InserData(int uid,int aid,int rid,String reply,String rtime,String status) {
+public void userreply_InserData(int uid,int aid,String reply,String rtime,String status) {
 	 try {
 		 mysql_DB db=new mysql_DB();
 			conn=db.connectDB();
-			pstm=conn.prepareStatement("insert into user values(?,?,?,?,?,?)");
+			pstm=conn.prepareStatement("insert into user values(?,?,0,?,?,?)");
 			pstm.setInt(1, uid);
 			pstm.setInt(2, aid);
-			pstm.setInt(3,rid);
-			pstm.setString(4,reply);
-			pstm.setString(5,rtime);
-			pstm.setString(6,status);
+			
+			pstm.setString(3,reply);
+			pstm.setString(4,rtime);
+			pstm.setString(5,status);
 			pstm.executeUpdate();
 		
 		}catch(SQLException ex){
