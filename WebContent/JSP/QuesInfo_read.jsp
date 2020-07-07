@@ -36,6 +36,38 @@
     function report1(aid) {
         //点击举报主贴
         document.getElementById("reportDiv").style.display="";
+        var reportobj=document.getElementById("reportCon");
+        reportobj.setAttribute("action", "reportPostServlet");
+        var postobj=document.getElementById("postId");
+        postobj.setAttribute("value", aid);
+        var hideobj=document.getElementById("hidebg");
+        hideobj.style.display="block";  //显示隐藏层
+        hideobj.style.height=document.body.clientHeight+"px";  //设置隐藏层的高度为当前页面高度
+    }
+    function reportReply(rid,aid){
+    	//点击举报回帖
+    	document.getElementById("reportDiv").style.display="";
+        var reportobj=document.getElementById("reportCon");
+        reportobj.setAttribute("action", "reportReplyServlet");
+        var postobj=document.getElementById("postId");
+        postobj.setAttribute("value", aid);
+        var replyobj=document.getElementById("replyId");
+        postobj.setAttribute("value", rid);
+        var hideobj=document.getElementById("hidebg");
+        hideobj.style.display="block";  //显示隐藏层
+        hideobj.style.height=document.body.clientHeight+"px";  //设置隐藏层的高度为当前页面高度
+    }
+    function reportCom1(rid,aid,cid){
+    	//点击举报评论
+    	document.getElementById("reportDiv").style.display="";
+        var reportobj=document.getElementById("reportCon");
+        reportobj.setAttribute("action", "reportComServlet");
+        var postobj=document.getElementById("postId");
+        postobj.setAttribute("value", aid);
+        var replyobj=document.getElementById("replyId");
+        postobj.setAttribute("value", rid);
+        var replyobj=document.getElementById("comId");
+        postobj.setAttribute("value", cid);
         var hideobj=document.getElementById("hidebg");
         hideobj.style.display="block";  //显示隐藏层
         hideobj.style.height=document.body.clientHeight+"px";  //设置隐藏层的高度为当前页面高度
@@ -44,7 +76,7 @@
         document.getElementById("reportDiv").style.display="none";
         document.getElementById("hidebg").style.display="none";
     }
-    function praise(rid,i) {//点赞
+    function praise(rid,aid,i) {//点赞
         var pDiv=document.getElementsByClassName("praise")[i];
         if(pDiv.style.color=="rgb(103, 103, 103)"){
             // location.href="praiseServlet?method=praise&aid="+aid;
@@ -104,7 +136,9 @@
             <label class="reportBan"><input type="radio" name="report1" value="7" />恶意灌水</label>
             <label class="reportBan"><input type="radio" name="report1" value="8" />跑题</label>
             <label class="reportBan"><input type="radio" name="report1" value="9" />言语攻击</label>
-
+			<input style="display:none" id="postId" name="postId" value="">
+			<input style="display:none" id="replyId" name="replyId" value="">
+			<input style="display:none" id="comId" name="comId" value="">
             <div class="boxHeader">
                 <span>补充说明（选填）</span>
             </div>
@@ -165,6 +199,7 @@
                   String time=up.getAtime();//发帖时间
                   String content=pp.getContent();//帖子内容
                   int num=repost1.size();//帖子回复数
+                  int reNum=0;//回帖数
                   
                 %>
                     <h3 class="quesTitle"><%=post.get(0).getTitle() %></h3>
@@ -227,9 +262,9 @@
                                     <label class="datetime"><%=rtime %></label>
                                 </div>
                                 <div class="erControlR">
-                                    <a href="javascript:praise(<%=ruid%>)"><span class="praise">点赞</span></a>
+                                    <a href="javascript:praise(<%=rid%>,<%=aid%>,<%=reNum%>)"><span class="praise">点赞</span></a>
                                     <div class="commentBtn" onclick="comment(this,<%=rr_1.getRid()%>)"><span class="comment">评论</span></div>
-                                    <a href="javascript:report1(<%=ruid%>)">举报</a>
+                                    <a href="javascript:reportReply(<%=ruid%>,<%=aid%>)">举报</a>
                                 </div>
                             </div>
                             <%
@@ -248,13 +283,15 @@
                                 <div class="erControl1">
                                     <div class="erControlR">
                                         <label class="datetime"><%=com1.getCtime() %></label>
-                                        <a href="javascript:praiseCom(<%=com1.getCid() %>)"><span class="praise">点赞</span></a>
-                                        <a href="javascript:reportCom1(<%=com1.getCid() %>)">举报</a>
+                                        <%-- <a href="javascript:praiseCom(<%=com1.getCid() %>)"><span class="praise">点赞</span></a>
+                                        --%>
+                                        <a href="javascript:reportCom1(<%=rid %>,<%=aid %>,<%=com1.getCid() %>)">举报</a>
                                     </div>
                                 </div>
 
                             </div>
-                            <%} %>
+                            <% reNum++;
+                            } %>
                         </div>
                     </section>
                     <%} %>
