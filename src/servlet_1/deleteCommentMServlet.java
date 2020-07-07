@@ -36,6 +36,10 @@ public class deleteCommentMServlet extends HttpServlet {
         response.setContentType("text/html charset=utf-8");
         
         int delId=Integer.parseInt(request.getParameter("cid"));
+        mysql_getint obj=new mysql_getint();
+        int id=obj.userID("usercomment", "cid", delId);
+        int uid=obj.userID("userreport_c", "cid", delId);
+        
         String cid="cid";
         String tab1="usercomment";              
         String tab2="userreport_c";        
@@ -45,10 +49,10 @@ public class deleteCommentMServlet extends HttpServlet {
         del.delete_DBInt(tab2, delId, cid);
         
       //扣分
-        mysql_getint obj=new mysql_getint();
-        int id=obj.userID("usercomment", "cid", delId);
         mysql_operate obj1=new mysql_operate();
         obj1.update_DBInt("user","point-5", "point", id, "uid");
+        //加分
+        obj1.update_DBInt("user","point+1", "point", uid, "uid");
         
         PrintWriter out = response.getWriter();
 

@@ -36,6 +36,10 @@ public class deleteReplyMServlet extends HttpServlet {
         response.setContentType("text/html charset=utf-8");
         
         int delId=Integer.parseInt(request.getParameter("rid"));
+        mysql_getint obj=new mysql_getint();
+        int id=obj.userID("userreply", "rid", delId);
+        int uid=obj.userID("userreport_r", "rid", delId);
+        
         String rid="rid";
         String tab1="userreply";              
         String tab2="usercomment";        
@@ -54,12 +58,11 @@ public class deleteReplyMServlet extends HttpServlet {
         del.delete_DBInt(tab6, delId, rid);
         del.delete_DBInt(tab7, delId, rid);
         
-      //扣分
-        mysql_getint obj=new mysql_getint();
-        int id=obj.userID("userreply", "rid", delId);
+        //扣分
         mysql_operate obj1=new mysql_operate();
         obj1.update_DBInt("user","point-8", "point", id, "uid");
-
+        //加分
+        obj1.update_DBInt("user","point+2", "point", uid, "uid");
         
         PrintWriter out = response.getWriter();
 
