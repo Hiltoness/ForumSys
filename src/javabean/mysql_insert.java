@@ -133,7 +133,7 @@ public void userreply_InserData(int uid,int aid,String reply,String rtime,String
 	 try {
 		 mysql_DB db=new mysql_DB();
 			conn=db.connectDB();
-			pstm=conn.prepareStatement("insert into user values(?,?,0,?,?,?)");
+			pstm=conn.prepareStatement("insert into userreply values(?,?,0,?,?,?)");
 			pstm.setInt(1, uid);
 			pstm.setInt(2, aid);
 			
@@ -150,7 +150,7 @@ public void userreport_a_InserData(int uid,int aid,String report,String retime,S
 	 try {
 		 mysql_DB db=new mysql_DB();
 			conn=db.connectDB();
-			pstm=conn.prepareStatement("insert into user values(?,?,?,?,?)");
+			pstm=conn.prepareStatement("insert into userreport_a values(?,?,?,?,?)");
 			pstm.setInt(1, uid);
 			pstm.setInt(2, aid);
 			pstm.setString(3,report);
@@ -167,7 +167,7 @@ public void userreport_c_InserData(int uid,int aid,int rid,int cid,String report
 	 try {
 		 mysql_DB db=new mysql_DB();
 			conn=db.connectDB();
-			pstm=conn.prepareStatement("insert into user values(?,?,?,?,?,?,?)");
+			pstm=conn.prepareStatement("insert into userreport_c values(?,?,?,?,?,?,?)");
 			pstm.setInt(1, uid);
 			pstm.setInt(2, aid);
 			pstm.setInt(3, rid);
@@ -186,7 +186,7 @@ public void userreport_r_InserData(int uid,int aid,int rid,String report,String 
 	 try {
 		 mysql_DB db=new mysql_DB();
 			conn=db.connectDB();
-			pstm=conn.prepareStatement("insert into user values(?,?,?,?,?,?)");
+			pstm=conn.prepareStatement("insert into userreport_r values(?,?,?,?,?,?)");
 			pstm.setInt(1, uid);
 			pstm.setInt(2, aid);
 			pstm.setInt(3, rid);
