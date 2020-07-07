@@ -1,5 +1,6 @@
 package javabean;
 
+import java.sql.*;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.SQLException;
@@ -10,8 +11,9 @@ public class mysql_insert {
 	
 	  private Connection conn;
 	  
-public void manager_InserData(int mid,String notitle,String notice,String notime) {
-	 try {
+public int manager_InserData(int mid,String notitle,String notice,String notime) {
+	int pid=0; 
+	try {
 		 mysql_DB db=new mysql_DB();
 			conn=db.connectDB();
 			pstm=conn.prepareStatement("insert into manager values(?,0,?,?,?)");
@@ -21,13 +23,21 @@ public void manager_InserData(int mid,String notitle,String notice,String notime
 			pstm.setString(4,notime );
 			
 			pstm.executeUpdate();
+			
+			pstm=conn.prepareStatement("SELECT LAST_INSERT_ID()");
+			ResultSet rs=pstm.executeQuery();
+			while(rs.next()){
+				pid=rs.getInt(1);
+			}
 		
 		}catch(SQLException ex){
 		ex.printStackTrace();
 		}
+	return pid;
 }
 
-public void post_InserData(String title,String content) {
+public int post_InserData(String title,String content) {
+	int aid=0;
 	 try {
 		 mysql_DB db=new mysql_DB();
 			conn=db.connectDB();
@@ -36,10 +46,17 @@ public void post_InserData(String title,String content) {
 			pstm.setString(1, title);
 			pstm.setString(2,content );
 			pstm.executeUpdate();
+			
+			pstm=conn.prepareStatement("SELECT LAST_INSERT_ID()");
+			ResultSet rs=pstm.executeQuery();
+			while(rs.next()){
+				aid=rs.getInt(1);
+			}
 		
 		}catch(SQLException ex){
 		ex.printStackTrace();
 		}
+	 return aid;
 }
 
 public void uco_InserData(int uid,int aid,String cotime) {
