@@ -65,6 +65,54 @@ public class mysql_operate {
 				ex.printStackTrace();
 				}
 		}
+	//更新的where是字符串类型 2个参数
+	  public void update_DBString2(String table,String setvalue,String setatt,String wherevalue,String whereatt,String wherevalue2,String whereatt2) {
+			 try {
+				 mysql_DB db=new mysql_DB();
+					conn=db.connectDB();
+					pstm=conn.prepareStatement("update "+table+" set "+setatt+" =? where "+whereatt+" =? and"+whereatt2+" =?");					
+					pstm.setString(1, setvalue);
+					pstm.setString(2, wherevalue);
+					pstm.setString(3, wherevalue2);
+					pstm.executeUpdate();
+							
+				}catch(SQLException ex){
+				ex.printStackTrace();
+				}
+		}
+		//更新的where是字符串类型 3个参数
+	  public void update_DBString3(String table,String setvalue,String setatt,String wherevalue,String whereatt,String wherevalue2,String whereatt2,String wherevalue3,String whereatt3) {
+			 try {
+				 mysql_DB db=new mysql_DB();
+					conn=db.connectDB();
+					pstm=conn.prepareStatement("update "+table+" set "+setatt+" =? where "+whereatt+" =? and"+whereatt2+" =? and"+whereatt3+" =?");					
+					pstm.setString(1, setvalue);
+					pstm.setString(2, wherevalue);
+					pstm.setString(3, wherevalue2);
+					pstm.setString(4, wherevalue3);
+					pstm.executeUpdate();
+							
+				}catch(SQLException ex){
+				ex.printStackTrace();
+				}
+		}
+		//更新的where是字符串类型 4个参数
+	  public void update_DBString4(String table,String setvalue,String setatt,String wherevalue,String whereatt,String wherevalue2,String whereatt2,String wherevalue3,String whereatt3,String wherevalue4,String whereatt4) {
+			 try {
+				 mysql_DB db=new mysql_DB();
+					conn=db.connectDB();
+					pstm=conn.prepareStatement("update "+table+" set "+setatt+" =? where "+whereatt+" =? and"+whereatt2+" =? and"+whereatt3+" =? and"+whereatt4+" =?");					
+					pstm.setString(1, setvalue);
+					pstm.setString(2, wherevalue);
+					pstm.setString(3, wherevalue2);
+					pstm.setString(4, wherevalue3);
+					pstm.setString(5, wherevalue4);
+					pstm.executeUpdate();
+							
+				}catch(SQLException ex){
+				ex.printStackTrace();
+				}
+		}
 	  //更新的where是整数类型
 	  public void update_DBInt(String table,String setvalue,String setatt,int wherevalue,String whereatt) {
 			 try {
@@ -73,6 +121,54 @@ public class mysql_operate {
 					pstm=conn.prepareStatement("update "+table+" set "+setatt+" =? where "+whereatt+" =?");					
 					pstm.setString(1, setvalue);
 					pstm.setInt(2, wherevalue);
+					pstm.executeUpdate();
+							
+				}catch(SQLException ex){
+				ex.printStackTrace();
+				}
+		}
+		//更新的where是整数类型 2个参数
+	  public void update_DBInt2(String table,String setvalue,String setatt,int wherevalue,String whereatt,int wherevalue2,String whereatt2) {
+			 try {
+				 mysql_DB db=new mysql_DB();
+					conn=db.connectDB();
+					pstm=conn.prepareStatement("update "+table+" set "+setatt+" =? where "+whereatt+" =? and"+whereatt2+" =?");					
+					pstm.setString(1, setvalue);
+					pstm.setInt(2, wherevalue);
+					pstm.setInt(3, wherevalue2);
+					pstm.executeUpdate();
+							
+				}catch(SQLException ex){
+				ex.printStackTrace();
+				}
+		}
+	//更新的where是整数类型 3个参数
+	  public void update_DBInt3(String table,String setvalue,String setatt,int wherevalue,String whereatt,int wherevalue2,String whereatt2,int wherevalue3,String whereatt3) {
+			 try {
+				 mysql_DB db=new mysql_DB();
+					conn=db.connectDB();
+					pstm=conn.prepareStatement("update "+table+" set "+setatt+" =? where "+whereatt+" =? and"+whereatt2+" =? and"+whereatt3+" =?");					
+					pstm.setString(1, setvalue);
+					pstm.setInt(2, wherevalue);
+					pstm.setInt(3, wherevalue2);
+					pstm.setInt(4, wherevalue3);
+					pstm.executeUpdate();
+							
+				}catch(SQLException ex){
+				ex.printStackTrace();
+				}
+		}
+		//更新的where是整数类型 4个参数
+	  public void update_DBInt4(String table,String setvalue,String setatt,int wherevalue,String whereatt,int wherevalue2,String whereatt2,int wherevalue3,String whereatt3,int wherevalue4,String whereatt4) {
+			 try {
+				 mysql_DB db=new mysql_DB();
+					conn=db.connectDB();
+					pstm=conn.prepareStatement("update "+table+" set "+setatt+" =? where "+whereatt+" =? and"+whereatt2+" =? and"+whereatt3+" =? and"+whereatt4+" =?");					
+					pstm.setString(1, setvalue);
+					pstm.setInt(2, wherevalue);
+					pstm.setInt(3, wherevalue2);
+					pstm.setInt(4, wherevalue3);
+					pstm.setInt(5, wherevalue4);
 					pstm.executeUpdate();
 							
 				}catch(SQLException ex){
