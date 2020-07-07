@@ -23,28 +23,33 @@
         <div class="container_l">
             <jsp:include page="RightBan.jsp"/>
             <div class="publicize">
-                <form class="searchTopic" method="post" action="" name="publize">
+                <form class="searchTopic" method="post" action="" name="publize" id="publize">
                     <input id="topic_title" name="topic_title" class="inputTitle" autocomplete="off" maxlength="80" placeholder="输入帖子标题" size="60" type="text">
-
-                <div class="replyEdit" id="editor1">
-                    <p>发表帖子</p>
-                </div>
-                    <script type="text/javascript" src="wangEditor-3.1.1/release/wangEditor.min.js"></script>
+					<input id="posttext" name="posttext" style="display:none" value="">
+	                <div class="replyEdit" id="editor1">
+	                </div>
+	                <script type="text/javascript" src="wangEditor-3.1.1/release/wangEditor.min.js"></script>
+                    
+                    <input class="btnCommit" type="submit" id="topic_commit" name="topic_commit" value="发表">
                     <script type="text/javascript">
                             var rich_editor=window.wangEditor;
                             var ed=new rich_editor('#editor1');
                             ed.create();
                             
+                            document.getElementById('topic_commit').addEventListener('click', function(){
+                            	var text=ed.txt.text();
+                            	if(text==null){
+                            		alert("请输入帖子内容");
+                            	}else{
+                            		alert(text);
+                            		document.getElementById("posttext").setAttribute("value", text);
+                            		document.getElementById("publize").setAttribute("action", "publize");
+                            	}
+                            	
+                            }, false)
+                            
                     </script>
-                    <input class="btnCommit" type="submit" id="topic_commit" name="topic_commit" value="发表" onclick="">
                 </form>
-                <script>
-                	document.getElementById('topic_commit').addEventListener('click', function(){
-                	var text=ed.txt.text();
-                    HttpSession session=request.getSession();
-                    session.setAttribute("posttext",text);
-                }, false)
-                </script>
             </div>
         </div>
     </div>
