@@ -1,4 +1,4 @@
-package com.servlet;
+package servlet_1;
 
 import java.io.IOException;
 import java.io.PrintWriter;
@@ -9,6 +9,7 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
+import javabean.mysql_getint;
 import javabean.mysql_operate;
 
 /**
@@ -47,15 +48,20 @@ public class deleteTopicServlet extends HttpServlet {
         String tab9="uco";
              
         mysql_operate del=new mysql_operate();
-        del.delete_DB(tab1, delId, aid);
-        del.delete_DB(tab2, delId, aid);
-        del.delete_DB(tab3, delId, aid);
-        del.delete_DB(tab4, delId, aid);
-        del.delete_DB(tab5, delId, aid);
-        del.delete_DB(tab6, delId, aid);
-        del.delete_DB(tab7, delId, aid);
-        del.delete_DB(tab8, delId, aid);
-        del.delete_DB(tab9, delId, aid);
+        del.delete_DBInt(tab1, delId, aid);
+        del.delete_DBInt(tab2, delId, aid);
+        del.delete_DBInt(tab3, delId, aid);
+        del.delete_DBInt(tab4, delId, aid);
+        del.delete_DBInt(tab5, delId, aid);
+        del.delete_DBInt(tab6, delId, aid);
+        del.delete_DBInt(tab7, delId, aid);
+        del.delete_DBInt(tab8, delId, aid);
+        del.delete_DBInt(tab9, delId, aid);
+        
+        //扣分
+        int id=Integer.parseInt(request.getParameter("uid"));
+        mysql_operate obj1=new mysql_operate();
+        obj1.update_DBInt("user","point-5", "point", id, "uid");
         
         PrintWriter out = response.getWriter();
 
