@@ -396,6 +396,7 @@ span{
     font-size: 16px;
     white-space: normal;
     flex-wrap: wrap;
+    line-hight:30px;
 }
 .erControl{
     display: flex;
@@ -405,6 +406,10 @@ span{
 }
 .erComment{
     padding: 5px 10px;
+    color:chocolate;
+    font-size:13.5px;
+    border-top:1px black dashed;
+    background-color:ghostwhite;
 }
 .commentHead{
     display: flex;

@@ -245,7 +245,7 @@
                             String sex=uss.getSex();
                             String college=uss.getCollege();
                             %>
-                            <form method="post" action="" id="modiInfo" name="modiInfo">
+                            <form method="post" action="modify_1" id="modiInfo" name="modiInfo">
                             	<div class="infoBox"><div class="infoModify"> 你的昵称：</div><input class="infoModify" id="info_name" name="info_name" type="text" size="50"  placeholder="<%=name %>" /></div>
                                 <div class="infoBox"><div class="infoModify">你的性别：</div>
                                 <select class="infoModify" name=info_gender>
@@ -261,7 +261,7 @@
                         <li class="infoList">
                             <h3 class="infoTitle"><a name="Info6">修改密码</a></h3>
                             <div class="reviewShow">
-                                <form method="post" action="" id="modiPSW">
+                                <form method="post" action="modify_2" id="modiPSW">
                                     <div class="infoBox"> <div class="infoModify">输入原密码：</div><input type="password" class="psw" name="info_former_psw" id="info_former_psw"></div>
                                     <div class="infoBox"> <div class="infoModify">输入新密码：</div><input type="password" class="psw" name="info_new_psw" id="info_new_psw"></div>
                                     <div class="infoBox"><div class="infoModify">再次输入新密码：</div><input type="password" class="psw" name="info_confirm_psw" id="info_confirm_psw"></div>

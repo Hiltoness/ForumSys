@@ -15,93 +15,7 @@
 <body>
 <jsp:include page="TopMenu.jsp"/>
 
-<script>
-    function fav(aid) {//收藏
-        var fDiv=document.getElementById("fav");
-        if(fDiv.innerHTML==="收藏"){
-            // location.href="favServlet?method=fav&aid="+aid;
-            fDiv.innerHTML="已收藏";
-        }else {//取消收藏
-            // location.href="cancelfavServlet?method=cancelfav&aid="+aid;
-            fDiv.innerHTML="收藏";
-        }
-    }
-    function backAll(aid) {//返回查看全部
-        var rDiv=document.getElementsById("back"); 
-        rDiv.style.color="#e40d01";
-        rDiv.style.fontWeight="bold";
-         // location.href="readServlet?method=read&aid="+aid;
-         location.href="QuesInfo.jsp?aid="+aid;
-    }
-    function report1(aid) {
-        //点击举报主贴
-        document.getElementById("reportDiv").style.display="";
-        var reportobj=document.getElementById("reportCon");
-        reportobj.setAttribute("action", "reportPostServlet");
-        var postobj=document.getElementById("postId");
-        postobj.setAttribute("value", aid);
-        var hideobj=document.getElementById("hidebg");
-        hideobj.style.display="block";  //显示隐藏层
-        hideobj.style.height=document.body.clientHeight+"px";  //设置隐藏层的高度为当前页面高度
-    }
-    function reportReply(rid,aid){
-    	//点击举报回帖
-    	document.getElementById("reportDiv").style.display="";
-        var reportobj=document.getElementById("reportCon");
-        reportobj.setAttribute("action", "reportReplyServlet");
-        var postobj=document.getElementById("postId");
-        postobj.setAttribute("value", aid);
-        var replyobj=document.getElementById("replyId");
-        postobj.setAttribute("value", rid);
-        var hideobj=document.getElementById("hidebg");
-        hideobj.style.display="block";  //显示隐藏层
-        hideobj.style.height=document.body.clientHeight+"px";  //设置隐藏层的高度为当前页面高度
-    }
-    function reportCom1(rid,aid,cid){
-    	//点击举报评论
-    	document.getElementById("reportDiv").style.display="";
-        var reportobj=document.getElementById("reportCon");
-        reportobj.setAttribute("action", "reportComServlet");
-        var postobj=document.getElementById("postId");
-        postobj.setAttribute("value", aid);
-        var replyobj=document.getElementById("replyId");
-        postobj.setAttribute("value", rid);
-        var replyobj=document.getElementById("comId");
-        postobj.setAttribute("value", cid);
-        var hideobj=document.getElementById("hidebg");
-        hideobj.style.display="block";  //显示隐藏层
-        hideobj.style.height=document.body.clientHeight+"px";  //设置隐藏层的高度为当前页面高度
-    }
-    function closeRDiv() {//关闭举报框
-        document.getElementById("reportDiv").style.display="none";
-        document.getElementById("hidebg").style.display="none";
-    }
-    function praise(rid,aid,i) {//点赞
-        var pDiv=document.getElementsByClassName("praise")[i];
-        if(pDiv.style.color=="rgb(103, 103, 103)"){
-            // location.href="praiseServlet?method=praise&aid="+aid;
-            pDiv.style.color="red";
-            pDiv.innerHTML="取消点赞"
-        }else {//取消点赞
-            // location.href="cancelpraiseServlet?method=cancelpraise&aid="+aid;
-            pDiv.style.color = "#676767"
-            pDiv.innerHTML = "点赞"
-        }
-    }
-    function $(el) {
-        return document.getElementById(el);
-    }
-    function comment(obj,rid) {//评论
-        var oComment=obj.parentNode.parentNode.parentNode;
-        console.log(oComment)
-        oComment.appendChild($("response"));
-        $("response").style.display="flex";
-        var replyID=document.getElementById("replyCid");//回帖的id
-        replyID.setAttribute("value",rid);
-    }
-
-</script>
-//举报框
+<%-- 举报框--%>
 <div id="reportDiv" style="display: none;
     POSITION:absolute;
     left:50%;
@@ -324,5 +238,93 @@
 </div>
 
 <jsp:include page="foot.jsp"/>
+
+<script>
+    function fav(aid) {//收藏
+        var fDiv=document.getElementById("fav");
+        if(fDiv.innerHTML==="收藏"){
+            location.href="favServlet?method=fav&aid="+aid;
+            fDiv.innerHTML="已收藏";
+        }else {//取消收藏
+             location.href="cancelfavServlet?method=cancelfav&aid="+aid;
+            fDiv.innerHTML="收藏";
+        }
+    }
+    function backAll(aid) {//返回查看全部
+        var rDiv=document.getElementById("back"); 
+        rDiv.style.color="#e40d01";
+        rDiv.style.fontWeight="bold";
+         // location.href="readServlet?method=read&aid="+aid;
+         location.href="QuesInfo.jsp?aid="+aid;
+         //window.history.go(-1);
+    }
+    function report1(aid) {
+        //点击举报主贴
+        document.getElementById("reportDiv").style.display="";
+        var reportobj=document.getElementById("reportCon");
+        reportobj.setAttribute("action", "reportPostServlet");
+        var postobj=document.getElementById("postId");
+        postobj.setAttribute("value", aid);
+        var hideobj=document.getElementById("hidebg");
+        hideobj.style.display="block";  //显示隐藏层
+        hideobj.style.height=document.body.clientHeight+"px";  //设置隐藏层的高度为当前页面高度
+    }
+    function reportReply(rid,aid){
+    	//点击举报回帖
+    	document.getElementById("reportDiv").style.display="";
+        var reportobj=document.getElementById("reportCon");
+        reportobj.setAttribute("action", "reportReplyServlet");
+        var postobj=document.getElementById("postId");
+        postobj.setAttribute("value", aid);
+        var replyobj=document.getElementById("replyId");
+        postobj.setAttribute("value", rid);
+        var hideobj=document.getElementById("hidebg");
+        hideobj.style.display="block";  //显示隐藏层
+        hideobj.style.height=document.body.clientHeight+"px";  //设置隐藏层的高度为当前页面高度
+    }
+    function reportCom1(rid,aid,cid){
+    	//点击举报评论
+    	document.getElementById("reportDiv").style.display="";
+        var reportobj=document.getElementById("reportCon");
+        reportobj.setAttribute("action", "reportComServlet");
+        var postobj=document.getElementById("postId");
+        postobj.setAttribute("value", aid);
+        var replyobj=document.getElementById("replyId");
+        postobj.setAttribute("value", rid);
+        var replyobj=document.getElementById("comId");
+        postobj.setAttribute("value", cid);
+        var hideobj=document.getElementById("hidebg");
+        hideobj.style.display="block";  //显示隐藏层
+        hideobj.style.height=document.body.clientHeight+"px";  //设置隐藏层的高度为当前页面高度
+    }
+    function closeRDiv() {//关闭举报框
+        document.getElementById("reportDiv").style.display="none";
+        document.getElementById("hidebg").style.display="none";
+    }
+    function praise(rid,aid,i) {//点赞
+        var pDiv=document.getElementsByClassName("praise")[i];
+        if(pDiv.style.color=="rgb(103, 103, 103)"){
+            location.href="praiseServlet?method=praise&aid="+aid+"&rid="+rid;
+            pDiv.style.color="red";
+            pDiv.innerHTML="取消点赞"
+        }else {//取消点赞
+            location.href="cancelpraiseServlet?method=cancelpraise&aid="+aid+"&rid="+rid;
+            pDiv.style.color = "#676767"
+            pDiv.innerHTML = "点赞"
+        }
+    }
+    function $(el) {
+        return document.getElementById(el);
+    }
+    function comment(obj,rid) {//评论
+        var oComment=obj.parentNode.parentNode.parentNode;
+        console.log(oComment)
+        oComment.appendChild($("response"));
+        $("response").style.display="flex";
+        var replyID=document.getElementById("replyCid");//回帖的id
+        replyID.setAttribute("value",rid);
+    }
+
+</script>
 </body>
 </html>

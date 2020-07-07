@@ -30,8 +30,8 @@
                     <span class="navText"> | </span>
                     <li class="navItem"><a href="publize.jsp?uid=<%=uid%>">发帖</a></li>
                     <li class="navItem">
-                    	//搜索框
-                        <form class="searchForm" id="MainSearch" name="MainSearch" method="post" action="">
+                    	<!--搜索框-->
+                        <form class="searchForm" id="MainSearch" name="MainSearch" method="post" action="searchPost">
                             <input class="searchInput" type="search" maxlength="50" id="MainSearchCont" name="MainSearchCont" placeholder="搜索内容">
                             <input class="searchIcon" type="image" src="icon/search.png" alt="搜索" >
                         </form>
