@@ -1,4 +1,4 @@
-package com.servlet;
+package servlet_1;
 
 import java.io.IOException;
 import java.text.SimpleDateFormat;
@@ -37,7 +37,7 @@ public class reportPostServlet extends HttpServlet {
         response.setContentType("text/html charset=utf-8");
         
         HttpSession session = request.getSession();
-        int id=(int)session.getAttribute("id");
+        int id=Integer.parseInt(session.getAttribute("uid").toString());
         int aid=Integer.parseInt(request.getParameter("postId"));
         String report=request.getParameter("report1"+"  "+"reportInput");        
         Date date = new Date();

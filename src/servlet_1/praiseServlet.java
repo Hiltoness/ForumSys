@@ -1,6 +1,7 @@
 package servlet_1;
 
 import java.io.IOException;
+import java.io.PrintWriter;
 import java.text.SimpleDateFormat;
 import java.util.Date;
 
@@ -40,14 +41,14 @@ public class praiseServlet extends HttpServlet {
         response.setContentType("text/html charset=utf-8");
         
         HttpSession session = request.getSession();
-        int id=(int)session.getAttribute("id");
+        int id=Integer.parseInt(session.getAttribute("uid").toString());
         int aid=Integer.parseInt(request.getParameter("aid"));
         int rid=Integer.parseInt(request.getParameter("rid"));
         
         String praise="null";
         String status="unread";
         Date date = new Date();
-        SimpleDateFormat df = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
+        SimpleDateFormat df = new SimpleDateFormat("yyyy-MM-dd HH:mm");
         String dateTime = df.format(date);
         
         mysql_insert insert=new mysql_insert();
@@ -61,7 +62,8 @@ public class praiseServlet extends HttpServlet {
         obj1.update_DBInt("user","point+1", "point", uid, "uid");
         LevelUpgrade up=new LevelUpgrade();
         up.up(uid);
-	
+        response.sendRedirect("QuesInfo.jsp?aid="+aid);
+            
 	}
 
 	/**

@@ -1,4 +1,4 @@
-package com.servlet;
+package servlet_1;
 
 import java.io.IOException;
 import java.io.PrintWriter;
@@ -38,7 +38,7 @@ public class favServlet extends HttpServlet {
         response.setContentType("text/html charset=utf-8");
         
         HttpSession session = request.getSession();
-        int id=(int)session.getAttribute("id");
+        int id=Integer.parseInt(session.getAttribute("uid").toString());
         int delId=Integer.parseInt(request.getParameter("aid"));       
         Date date = new Date();
         SimpleDateFormat df = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
@@ -47,6 +47,12 @@ public class favServlet extends HttpServlet {
         mysql_insert insert=new mysql_insert();
 
 		insert.uco_InserData(id, delId, dateTime);
+		
+		response.sendRedirect("QuesInfo.jsp?aid="+delId);
+		PrintWriter out = response.getWriter();
+
+        out.println("<script language = javascript>document.getElementById('fav').innerHTML='已收藏'");
+        out.println("</script>");
 	}
 
 	/**

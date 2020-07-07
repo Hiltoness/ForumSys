@@ -3,6 +3,7 @@ package servlet_1;
 import javabean.*;
 
 import java.io.IOException;
+import java.io.PrintWriter;
 import java.text.SimpleDateFormat;
 import java.util.Date;
 
@@ -41,11 +42,11 @@ public class reply_post extends HttpServlet {
         response.setContentType("text/html charset=utf-8");
         
         HttpSession session = request.getSession();
-        int id=(int)session.getAttribute("id");
+        int id=Integer.parseInt(session.getAttribute("uid").toString());
         int aid=Integer.parseInt(request.getParameter("aid")); 
-        String reply=(String)session.getAttribute("replytext");
+        String reply=request.getParameter("replytext");
         Date date = new Date();
-        SimpleDateFormat df = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
+        SimpleDateFormat df = new SimpleDateFormat("yyyy-MM-dd HH:mm");
         String dateTime = df.format(date);
         String status="unread";
         
@@ -62,6 +63,11 @@ public class reply_post extends HttpServlet {
         LevelUpgrade up=new LevelUpgrade();
         up.up(id);
         up.up(uid);
+        
+        PrintWriter out = response.getWriter();
+        
+        out.println("<script language = javascript>alert('回帖成功！');");
+        out.println("location.href='publize.jsp'</script>");
 	}
 
 	/**

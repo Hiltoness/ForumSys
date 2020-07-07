@@ -1,7 +1,8 @@
-package com.servlet;
+package servlet_1;
 
 import java.io.IOException;
 import java.io.PrintWriter;
+
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
@@ -33,7 +34,7 @@ public class updateUser extends HttpServlet {
         response.setContentType("text/html charset=utf-8");
         
         HttpSession session = request.getSession();
-        int id=(int)session.getAttribute("id");
+        int id=Integer.parseInt(session.getAttribute("uid").toString());
         String pwd=request.getParameter("modi_m_psw");
         
         mysql_operate update=new mysql_operate();
@@ -41,7 +42,7 @@ public class updateUser extends HttpServlet {
         String user = "user";
 		String password = "password";
 		String uid = "uid";
-		update.update_DBString(user,password,pwd,uid,id);
+		update.update_DBInt(user,pwd,password,id,uid);
      
         PrintWriter out = response.getWriter();
 

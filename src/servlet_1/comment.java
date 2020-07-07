@@ -21,7 +21,7 @@ import javabean.*;
 /**
  * Servlet implementation class pinglun
  */
-@WebServlet("/pinglun")
+@WebServlet("/comment")
 public class comment extends HttpServlet {
 	private static final long serialVersionUID = 1L;
 
@@ -29,6 +29,7 @@ public class comment extends HttpServlet {
      * Default constructor. 
      */
     public comment() {
+    	super();
         // TODO Auto-generated constructor stub
     }
 
@@ -41,9 +42,9 @@ public class comment extends HttpServlet {
         response.setContentType("text/html charset=utf-8");
         
         HttpSession session = request.getSession();
-        int id=(int)session.getAttribute("id");//获取session中保存的用户id
-        int rid=Integer.parseInt(request.getParameter("replyRid"));
-        int aid=Integer.parseInt(request.getParameter("replyAid"));
+        int id=Integer.parseInt(session.getAttribute("uid").toString());//获取session中保存的用户id
+        int rid=Integer.parseInt(request.getParameter("replyRid").toString());
+        int aid=Integer.parseInt(request.getParameter("replyAid").toString());
         
         
         String commentSend=request.getParameter("commentSend");
