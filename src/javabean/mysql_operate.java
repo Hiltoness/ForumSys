@@ -175,6 +175,20 @@ public class mysql_operate {
 				ex.printStackTrace();
 				}
 		}
+	//更新的where和set都是整数类型 
+	  public void update_DBInt11(String table,int setvalue,String setatt,int wherevalue,String whereatt) {
+			 try {
+				 mysql_DB db=new mysql_DB();
+					conn=db.connectDB();
+					pstm=conn.prepareStatement("update "+table+" set "+setatt+" =? where "+whereatt+" =?");					
+					pstm.setInt(1, setvalue);
+					pstm.setInt(2, wherevalue);
+					pstm.executeUpdate();
+							
+				}catch(SQLException ex){
+				ex.printStackTrace();
+				}
+		}
 
 
 
