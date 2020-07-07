@@ -1,5 +1,6 @@
-package com.servlet;
+package servlet_1;
 
+import javabean.*;
 import java.io.IOException;
 import java.text.SimpleDateFormat;
 import java.util.Date;
@@ -12,6 +13,7 @@ import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
 import javabean.mysql_insert;
+import javabean.mysql_operate;
 
 /**
  * Servlet implementation class reply_post
@@ -47,7 +49,15 @@ public class reply_post extends HttpServlet {
         
         mysql_insert insert=new mysql_insert();
         insert.userreply_InserData(id, aid, reply, dateTime, status);
-        }
+        
+        //加分
+        mysql_operate obj1=new mysql_operate();
+        obj1.update_DBInt("user","point+3", "point", id, "uid");
+        //发帖人加分
+        mysql_getint obj2=new mysql_getint();
+        int uid=obj2.userID("userpost", "aid", aid);
+        obj1.update_DBInt("user","point+2", "point", uid, "uid");
+	}
 
 	/**
 	 * @see HttpServlet#doPost(HttpServletRequest request, HttpServletResponse response)
