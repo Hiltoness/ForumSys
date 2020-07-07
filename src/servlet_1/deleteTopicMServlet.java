@@ -36,6 +36,10 @@ public class deleteTopicMServlet extends HttpServlet {
         response.setContentType("text/html charset=utf-8");
         
         int delId=Integer.parseInt(request.getParameter("aid"));        
+        mysql_getint obj=new mysql_getint();
+        int id=obj.userID("userpost", "aid", delId);
+        int uid=obj.userID("userreport_a", "aid", delId);
+        
         String aid="aid";
         String tab1="post";              
         String tab2="userpost";        
@@ -59,10 +63,11 @@ public class deleteTopicMServlet extends HttpServlet {
         del.delete_DBInt(tab9, delId, aid);
         
         //扣分
-        mysql_getint obj=new mysql_getint();
-        int id=obj.userID("userpost", "aid", delId);
         mysql_operate obj1=new mysql_operate();
         obj1.update_DBInt("user","point-10", "point", id, "uid");
+        //加分
+        obj1.update_DBInt("user","point+3", "point", uid, "uid");
+        
         
         PrintWriter out = response.getWriter();
 
