@@ -1,4 +1,4 @@
-package com.servlet;
+package servlet_1;
 
 import java.io.IOException;
 import java.io.PrintWriter;
@@ -11,24 +11,16 @@ import javax.servlet.http.HttpServletResponse;
 
 import javabean.mysql_operate;
 
-/**
- * Servlet implementation class deleteServlet
- */
+
 @WebServlet("/deleteServlet")
 public class deleteServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
-       
-    /**
-     * @see HttpServlet#HttpServlet()
-     */
+ 
     public deleteServlet() {
         super();
-        // TODO Auto-generated constructor stub
+        
     }
 
-	/**
-	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
-	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		request.setCharacterEncoding("UTF-8");
         response.setCharacterEncoding("utf-8");
@@ -47,9 +39,7 @@ public class deleteServlet extends HttpServlet {
         out.println("location.href='manager_u.jsp'</script>");
 	}
 
-	/**
-	 * @see HttpServlet#doPost(HttpServletRequest request, HttpServletResponse response)
-	 */
+
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		// TODO Auto-generated method stub
 		doGet(request, response);

@@ -1,4 +1,4 @@
-package com.servlet;
+package servlet_1;
 
 import java.io.IOException;
 import java.io.PrintWriter;
@@ -14,23 +14,15 @@ import javax.servlet.http.HttpSession;
 
 import javabean.mysql_insert;
 
-/**
- * Servlet implementation class pub_m
- */
+
 @WebServlet("/pub_m")
 public class pub_m extends HttpServlet {
 	private static final long serialVersionUID = 1L;
 
-    /**
-     * Default constructor. 
-     */
     public pub_m() {
-        // TODO Auto-generated constructor stub
+    	super();
     }
 
-	/**
-	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
-	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		request.setCharacterEncoding("UTF-8");
         response.setCharacterEncoding("utf-8");
@@ -54,11 +46,9 @@ public class pub_m extends HttpServlet {
         out.println("location.href='pub_m.jsp'</script>");
 	}
 
-	/**
-	 * @see HttpServlet#doPost(HttpServletRequest request, HttpServletResponse response)
-	 */
+	
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		// TODO Auto-generated method stub
+		
 		doGet(request, response);
 	}
 
