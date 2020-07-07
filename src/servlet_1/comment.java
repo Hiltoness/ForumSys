@@ -63,6 +63,9 @@ public class comment extends HttpServlet {
         mysql_getint obj2=new mysql_getint();
         int uid=obj2.userID("userreply", "rid", rid);
         obj1.update_DBInt("user", "point+1","point", uid, "uid");
+        LevelUpgrade up=new LevelUpgrade();
+        up.up(id);
+        up.up(uid);
         
         PrintWriter out = response.getWriter();
 

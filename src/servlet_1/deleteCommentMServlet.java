@@ -1,5 +1,6 @@
 package servlet_1;
 
+import javabean.*;
 import java.io.IOException;
 import java.io.PrintWriter;
 
@@ -45,14 +46,18 @@ public class deleteCommentMServlet extends HttpServlet {
         String tab2="userreport_c";        
              
         mysql_operate del=new mysql_operate();
-        del.delete_DBInt(tab1, delId, cid);
         del.delete_DBInt(tab2, delId, cid);
+        del.delete_DBInt(tab1, delId, cid);
         
       //扣分
         mysql_operate obj1=new mysql_operate();
         obj1.update_DBInt("user","point-5", "point", id, "uid");
         //加分
         obj1.update_DBInt("user","point+1", "point", uid, "uid");
+        LevelUpgrade up=new LevelUpgrade();
+        up.up(id);
+        up.up(uid);
+        
         
         PrintWriter out = response.getWriter();
 

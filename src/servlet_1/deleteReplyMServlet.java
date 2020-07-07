@@ -9,6 +9,7 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
+import javabean.LevelUpgrade;
 import javabean.mysql_getint;
 import javabean.mysql_operate;
 
@@ -44,25 +45,24 @@ public class deleteReplyMServlet extends HttpServlet {
         String tab1="userreply";              
         String tab2="usercomment";        
         String tab3="userpraise";
-        String tab4="usercomment";
-        String tab5="userpraise";
-        String tab6="userreport_r";
-        String tab7="userreport_c";       
+        String tab4="userreport_r";
+        String tab5="userreport_c";       
              
         mysql_operate del=new mysql_operate();
-        del.delete_DBInt(tab1, delId, rid);
-        del.delete_DBInt(tab2, delId, rid);
-        del.delete_DBInt(tab3, delId, rid);
-        del.delete_DBInt(tab4, delId, rid);
         del.delete_DBInt(tab5, delId, rid);
-        del.delete_DBInt(tab6, delId, rid);
-        del.delete_DBInt(tab7, delId, rid);
+        del.delete_DBInt(tab4, delId, rid);
+        del.delete_DBInt(tab3, delId, rid);
+        del.delete_DBInt(tab2, delId, rid);
+        del.delete_DBInt(tab1, delId, rid);
         
         //扣分
         mysql_operate obj1=new mysql_operate();
         obj1.update_DBInt("user","point-8", "point", id, "uid");
         //加分
         obj1.update_DBInt("user","point+2", "point", uid, "uid");
+        LevelUpgrade up=new LevelUpgrade();
+        up.up(id);
+        up.up(uid);
         
         PrintWriter out = response.getWriter();
 

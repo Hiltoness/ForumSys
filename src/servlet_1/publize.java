@@ -54,7 +54,8 @@ public class publize extends HttpServlet {
         
         mysql_operate obj1=new mysql_operate();
         obj1.update_DBInt("user","point+5", "point", id, "uid");
-        
+        LevelUpgrade up=new LevelUpgrade();
+        up.up(id);
         
         PrintWriter out = response.getWriter();
 

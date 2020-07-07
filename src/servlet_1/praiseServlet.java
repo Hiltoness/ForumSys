@@ -11,6 +11,7 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
+import javabean.LevelUpgrade;
 import javabean.mysql_getint;
 import javabean.mysql_insert;
 import javabean.mysql_operate;
@@ -58,7 +59,8 @@ public class praiseServlet extends HttpServlet {
         int uid=obj.userID("userpost", "aid", aid);
         mysql_operate obj1=new mysql_operate();
         obj1.update_DBInt("user","point+1", "point", uid, "uid");
-
+        LevelUpgrade up=new LevelUpgrade();
+        up.up(uid);
 	
 	}
 

@@ -1,6 +1,7 @@
 package servlet_1;
 
 import javabean.*;
+
 import java.io.IOException;
 import java.text.SimpleDateFormat;
 import java.util.Date;
@@ -12,6 +13,7 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
+import javabean.LevelUpgrade;
 import javabean.mysql_insert;
 import javabean.mysql_operate;
 
@@ -57,6 +59,9 @@ public class reply_post extends HttpServlet {
         mysql_getint obj2=new mysql_getint();
         int uid=obj2.userID("userpost", "aid", aid);
         obj1.update_DBInt("user","point+2", "point", uid, "uid");
+        LevelUpgrade up=new LevelUpgrade();
+        up.up(id);
+        up.up(uid);
 	}
 
 	/**
