@@ -12,9 +12,9 @@ public class LevelUpgrade {
 		}else{
 			int l=((t-(p/50)<0)?(t-1):t);
 			if(l>level){
-				obj1.update_DBInt("user", "level+1", "level", uid, "uid");
+				obj1.update_DBInt11("user", level+1, "level", uid, "uid");
 			}else if(l<level){
-				obj1.update_DBInt("user", "level-1", "level", uid, "uid");
+				obj1.update_DBInt11("user", level-1, "level", uid, "uid");
 
 			}
 		}

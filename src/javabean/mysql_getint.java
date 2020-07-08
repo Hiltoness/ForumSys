@@ -394,5 +394,22 @@ public String name(int uid){
 		}
 	return uname;
 }
+public String password(int uid){
+	String upsw="";
+	try {
+		 mysql_DB db=new mysql_DB();
+			conn=db.connectDB();
+			pstm=conn.prepareStatement("select password from user where uid =?");
+			pstm.setInt(1, uid);
+			rs=pstm.executeQuery();
+			while(rs.next()) {
+				upsw=rs.getString(1);
+			}
+			db.close(conn);
+		}catch(SQLException ex){
+		ex.printStackTrace();
+		}
+	return upsw;
+}
 
 }
