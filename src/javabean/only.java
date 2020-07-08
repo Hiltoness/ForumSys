@@ -8,7 +8,6 @@ import java.util.ArrayList;
 
 public class only {
 	private ArrayList<userreply> userreplylist=new ArrayList<userreply> ();
-	private ArrayList<usercomment> usercommentlist=new ArrayList<usercomment> ();
 	private PreparedStatement pstm;     	  
 	  private Connection conn;
 	  private ResultSet rs;
@@ -30,14 +29,15 @@ public class only {
 					bean.setStatus(rs.getString(6));
 					userreplylist.add(bean);
 				}
-		
+		db.close(conn);
 			}catch(SQLException ex){
 			ex.printStackTrace();
 			}
 		 return userreplylist;
 	}
 	public ArrayList<usercomment> usercomment_getData(int attvalue1,int attvalue2) {
-		 try {
+		ArrayList<usercomment> usercommentlist=new ArrayList<usercomment> ();
+		try {
 			 mysql_DB db=new mysql_DB();
 				conn=db.connectDB();
 				pstm=conn.prepareStatement("select * from usercomment where aid=? and rid=?");
@@ -55,7 +55,7 @@ public class only {
 					bean.setStatus(rs.getString(7));
 					usercommentlist.add(bean);
 				}
-			
+				db.close(conn);
 			}catch(SQLException ex){
 			ex.printStackTrace();
 			}

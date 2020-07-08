@@ -109,8 +109,9 @@ public ArrayList<user> user_getData(String attwhere,int attvalue) {
 				bean.setLevel(rs.getInt(7));
 				bean.setCollege(rs.getString(8));
 				userlist.add(bean);
+				
 			}
-		
+		db.close(conn);
 		}catch(SQLException ex){
 		ex.printStackTrace();
 		}
@@ -136,7 +137,7 @@ public ArrayList<usercomment> usercomment_getData(String attwhere1,int attvalue1
 				bean.setStatus(rs.getString(7));
 				usercommentlist.add(bean);
 			}
-		
+			db.close(conn);
 		}catch(SQLException ex){
 		ex.printStackTrace();
 		}
@@ -206,7 +207,7 @@ public ArrayList<userreply> userreply_getData(String attwhere,int attvalue) {
 				bean.setStatus(rs.getString(6));
 				userreplylist.add(bean);
 			}
-	
+			db.close(conn);
 		}catch(SQLException ex){
 		ex.printStackTrace();
 		}
@@ -371,12 +372,28 @@ public int level(int uid){
 			while(rs.next()) {
 				level=rs.getInt(1);
 			}
-		
+			db.close(conn);
 		}catch(SQLException ex){
 		ex.printStackTrace();
 		}
 	return level;
 }
-
+public String name(int uid){
+	String uname="";
+	try {
+		 mysql_DB db=new mysql_DB();
+			conn=db.connectDB();
+			pstm=conn.prepareStatement("select uname from user where uid =?");
+			pstm.setInt(1, uid);
+			rs=pstm.executeQuery();
+			while(rs.next()) {
+				uname=rs.getString(1);
+			}
+			db.close(conn);
+		}catch(SQLException ex){
+		ex.printStackTrace();
+		}
+	return uname;
+}
 
 }

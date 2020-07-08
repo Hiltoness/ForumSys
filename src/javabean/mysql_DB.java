@@ -3,9 +3,9 @@ package javabean;
 import java.sql.*;
 public class mysql_DB {
 	  static String diverclass="com.mysql.jdbc.Driver";
-	  static String username="jdbc:mysql://localhost/visual";
-	  static String password="root";
-	  static String url="root";
+	  static String username="root";
+	  static String password="";
+	  static String url="jdbc:mysql://localhost/visual?serverTimezone=UTC&characterEncoding=utf8";
 	  static Connection aConnection;
 	  public Connection connectDB() {
 		  try {
@@ -18,4 +18,14 @@ public class mysql_DB {
 			}		
 			return aConnection;
 	  }
+	  public void close(Connection conn){
+			if(conn != null) {
+				try {
+					conn.close();
+					conn = null;
+				}catch(SQLException e) {
+					e.printStackTrace();
+				}
+			}
+		}
 }
