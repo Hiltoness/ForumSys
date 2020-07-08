@@ -1,8 +1,6 @@
 package javabean;
 //帖子类（热门列表的一些属性，包括回复数）
-import java.sql.Connection;
-import java.sql.PreparedStatement;
-import java.sql.ResultSet;
+
 public class postlist {
 	private int uid; 
 	private int aid;  

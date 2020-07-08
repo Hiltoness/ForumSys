@@ -10,13 +10,8 @@ public class personal_center {
 	  private PreparedStatement pstm;     
 	 private Connection conn;
 	  private ResultSet rs;
-	  private ArrayList<usercomment> commentlist=new ArrayList<usercomment> ();
-	  private ArrayList<userpraise> praiselist=new ArrayList<userpraise> ();
-	  private ArrayList<userreply> replylist=new ArrayList<userreply> ();
-	  private ArrayList<userreport_a> areportlist=new ArrayList<userreport_a> ();
-	  private ArrayList<userreport_c> creportlist=new ArrayList<userreport_c> ();
-	  private ArrayList<userreport_r> rreportlist=new ArrayList<userreport_r> ();
 	public ArrayList<usercomment> getCommentlist(int uid) {
+		ArrayList<usercomment> commentlist=new ArrayList<usercomment> ();
 		try {
 			mysql_DB db=new mysql_DB();
 			conn=db.connectDB();
@@ -62,6 +57,7 @@ public class personal_center {
 	}
 
 	public ArrayList<userpraise> getPraiselist(int uid) {
+		 ArrayList<userpraise> praiselist=new ArrayList<userpraise> ();
 		try {
 			mysql_DB db=new mysql_DB();
 			conn=db.connectDB();
@@ -105,6 +101,7 @@ public class personal_center {
 	}
 
 	public ArrayList<userreply> getReplynum(int uid) {
+		 ArrayList<userreply> replylist=new ArrayList<userreply> ();
 		try {
 			mysql_DB db=new mysql_DB();
 			conn=db.connectDB();
@@ -146,6 +143,7 @@ public class personal_center {
 	}
 
 	public ArrayList<userreport_a> getAreport(int uid) {
+		ArrayList<userreport_a> areportlist=new ArrayList<userreport_a> ();
 		try {
 			mysql_DB db=new mysql_DB();
 			conn=db.connectDB();
@@ -184,6 +182,7 @@ public class personal_center {
 	
 	
 	public ArrayList<userreport_r> getRreport(int uid) {
+		ArrayList<userreport_r> rreportlist=new ArrayList<userreport_r> ();
 		try {
 			mysql_DB db=new mysql_DB();
 			conn=db.connectDB();					
@@ -228,6 +227,8 @@ public class personal_center {
 	
 	
 	public ArrayList<userreport_c> getCreport(int uid) {
+		ArrayList<usercomment> commentlist=new ArrayList<usercomment> ();
+		ArrayList<userreport_c> creportlist=new ArrayList<userreport_c> ();
 		try {
 			mysql_DB db=new mysql_DB();
 			conn=db.connectDB();		

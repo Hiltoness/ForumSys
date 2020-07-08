@@ -6,25 +6,13 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.ArrayList;
 public class mysql_getall {
-
-	private ArrayList<manager> managerlist=new ArrayList<manager> ();
-	private ArrayList<post> postlist=new ArrayList<post> ();
-	private ArrayList<uco> ucolist=new ArrayList<uco> ();
-	private ArrayList<user> userlist=new ArrayList<user> ();
-	private ArrayList<usercomment> usercommentlist=new ArrayList<usercomment> ();
-	private ArrayList<userpost> userpostlist=new ArrayList<userpost> ();
-	private ArrayList<userpraise> userpraiselist=new ArrayList<userpraise> ();
-	private ArrayList<userreply> userreplylist=new ArrayList<userreply> ();
-	private ArrayList<userreport_a> userreport_alist=new ArrayList<userreport_a> ();
-	private ArrayList<userreport_c> userreport_clist=new ArrayList<userreport_c> ();
-	private ArrayList<userreport_r> userreport_rlist=new ArrayList<userreport_r> ();
-	private ArrayList<manager_user> mulist=new ArrayList<manager_user> ();
 	  private PreparedStatement pstm;     
 	  
 	  private Connection conn;
 	  private ResultSet rs;
 	  
 public ArrayList<manager> manager_getData() {
+	ArrayList<manager> managerlist=new ArrayList<manager> ();
 	 try {
 		 mysql_DB db=new mysql_DB();
 			conn=db.connectDB();
@@ -47,6 +35,7 @@ public ArrayList<manager> manager_getData() {
 }
 
 public ArrayList<post> post_getData() {
+	ArrayList<post> postlist=new ArrayList<post> ();
 	 try {
 		 mysql_DB db=new mysql_DB();
 			conn=db.connectDB();
@@ -68,6 +57,7 @@ public ArrayList<post> post_getData() {
 }
 
 public ArrayList<uco> uco_getData() {
+	ArrayList<uco> ucolist=new ArrayList<uco> ();
 	 try {
 		 mysql_DB db=new mysql_DB();
 			conn=db.connectDB();
@@ -89,6 +79,7 @@ public ArrayList<uco> uco_getData() {
 }
 
 public ArrayList<user> user_getData() {
+	ArrayList<user> userlist=new ArrayList<user> ();
 	 try {
 		 mysql_DB db=new mysql_DB();
 			conn=db.connectDB();
@@ -115,6 +106,7 @@ public ArrayList<user> user_getData() {
 }
 
 public ArrayList<usercomment> usercomment_getData() {
+	ArrayList<usercomment> usercommentlist=new ArrayList<usercomment> ();
 	 try {
 		 mysql_DB db=new mysql_DB();
 			conn=db.connectDB();
@@ -140,6 +132,7 @@ public ArrayList<usercomment> usercomment_getData() {
 }
 
 public ArrayList<userpost> userpost_getData() {
+	ArrayList<userpost> userpostlist=new ArrayList<userpost> ();
 	 try {
 		 mysql_DB db=new mysql_DB();
 			conn=db.connectDB();
@@ -161,6 +154,7 @@ public ArrayList<userpost> userpost_getData() {
 }
 
 public ArrayList<userpraise> userpraise_getData() {
+	 ArrayList<userpraise> userpraiselist=new ArrayList<userpraise> ();
 	 try {
 		 mysql_DB db=new mysql_DB();
 			conn=db.connectDB();
@@ -185,6 +179,7 @@ public ArrayList<userpraise> userpraise_getData() {
 }
 
 public ArrayList<userreply> userreply_getData() {
+	ArrayList<userreply> userreplylist=new ArrayList<userreply> ();
 	 try {
 		 mysql_DB db=new mysql_DB();
 			conn=db.connectDB();
@@ -208,6 +203,7 @@ public ArrayList<userreply> userreply_getData() {
 	 return userreplylist;
 }
 public ArrayList<userreport_a> userreport_a_getData() {
+	 ArrayList<userreport_a> userreport_alist=new ArrayList<userreport_a> ();
 	 try {
 		 mysql_DB db=new mysql_DB();
 			conn=db.connectDB();
@@ -231,6 +227,7 @@ public ArrayList<userreport_a> userreport_a_getData() {
 }
 
 public ArrayList<userreport_c> userreport_c_getData() {
+	ArrayList<userreport_c> userreport_clist=new ArrayList<userreport_c> ();
 	 try {
 		 mysql_DB db=new mysql_DB();
 			conn=db.connectDB();
@@ -256,6 +253,7 @@ public ArrayList<userreport_c> userreport_c_getData() {
 }
 
 public ArrayList<userreport_r> userreport_r_getData() {
+	ArrayList<userreport_r> userreport_rlist=new ArrayList<userreport_r> ();
 	 try {
 		 mysql_DB db=new mysql_DB();
 			conn=db.connectDB();
@@ -279,6 +277,7 @@ public ArrayList<userreport_r> userreport_r_getData() {
 	 return userreport_rlist;
 }
 public ArrayList<manager_user> manager_user_getData() {
+	ArrayList<manager_user> mulist=new ArrayList<manager_user> ();
 	 try {
 		 mysql_DB db=new mysql_DB();
 			conn=db.connectDB();

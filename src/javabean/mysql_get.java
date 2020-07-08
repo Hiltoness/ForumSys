@@ -6,25 +6,13 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.ArrayList;
 public class mysql_get {
-
-	private ArrayList<manager> managerlist=new ArrayList<manager> ();
-	private ArrayList<post> postlist=new ArrayList<post> ();
-	private ArrayList<uco> ucolist=new ArrayList<uco> ();
-	private ArrayList<user> userlist=new ArrayList<user> ();
-	private ArrayList<usercomment> usercommentlist=new ArrayList<usercomment> ();
-	private ArrayList<userpost> userpostlist=new ArrayList<userpost> ();
-	private ArrayList<userpraise> userpraiselist=new ArrayList<userpraise> ();
-	private ArrayList<userreply> userreplylist=new ArrayList<userreply> ();
-	private ArrayList<userreport_a> userreport_alist=new ArrayList<userreport_a> ();
-	private ArrayList<userreport_c> userreport_clist=new ArrayList<userreport_c> ();
-	private ArrayList<userreport_r> userreport_rlist=new ArrayList<userreport_r> ();
-	private ArrayList<manager_user> mulist=new ArrayList<manager_user> ();
 	  private PreparedStatement pstm;     
 	  
 	  private Connection conn;
 	  private ResultSet rs;
 	  
 public ArrayList<manager> manager_getData(String attwhere,String attvalue) {
+	ArrayList<manager> managerlist=new ArrayList<manager> ();
 	 try {
 		 
 		 mysql_DB db=new mysql_DB();
@@ -51,6 +39,7 @@ public ArrayList<manager> manager_getData(String attwhere,String attvalue) {
 }
 
 public ArrayList<post> post_getData(String attwhere,String attvalue) {
+	ArrayList<post> postlist=new ArrayList<post> ();
 	 try {
 		 mysql_DB db=new mysql_DB();
 			conn=db.connectDB();
@@ -72,6 +61,7 @@ public ArrayList<post> post_getData(String attwhere,String attvalue) {
 }
 
 public ArrayList<uco> uco_getData(String attwhere,String attvalue) {
+	ArrayList<uco> ucolist=new ArrayList<uco> ();
 	 try {
 		 mysql_DB db=new mysql_DB();
 			conn=db.connectDB();
@@ -93,6 +83,7 @@ public ArrayList<uco> uco_getData(String attwhere,String attvalue) {
 }
 
 public ArrayList<user> user_getData(String attwhere,String attvalue) {
+	ArrayList<user> userlist=new ArrayList<user> ();
 	 try {
 		 mysql_DB db=new mysql_DB();
 			conn=db.connectDB();
@@ -119,7 +110,8 @@ public ArrayList<user> user_getData(String attwhere,String attvalue) {
 }
 
 public ArrayList<usercomment> usercomment_getData(String attwhere1,String attvalue1,String attwhere2,String attvalue2) {
-	 try {
+	ArrayList<usercomment> usercommentlist=new ArrayList<usercomment> ();
+	try {
 		 mysql_DB db=new mysql_DB();
 			conn=db.connectDB();
 			pstm=conn.prepareStatement("select * from usercomment where "+attwhere1+" =? and "+attwhere2+" =?");
@@ -145,6 +137,7 @@ public ArrayList<usercomment> usercomment_getData(String attwhere1,String attval
 }
 
 public ArrayList<userpost> userpost_getData(String attwhere,String attvalue) {
+	ArrayList<userpost> userpostlist=new ArrayList<userpost> ();
 	 try {
 		 mysql_DB db=new mysql_DB();
 			conn=db.connectDB();
@@ -166,7 +159,8 @@ public ArrayList<userpost> userpost_getData(String attwhere,String attvalue) {
 }
 
 public ArrayList<userpraise> userpraise_getData(String attwhere1,String attvalue1,String attwhere2,String attvalue2) {
-	 try {
+	 ArrayList<userpraise> userpraiselist=new ArrayList<userpraise> (); 
+	try {
 		 mysql_DB db=new mysql_DB();
 			conn=db.connectDB();
 			pstm=conn.prepareStatement("select * from userpraise where "+attwhere1+" =? and "+attwhere2+" =?");
@@ -191,6 +185,7 @@ public ArrayList<userpraise> userpraise_getData(String attwhere1,String attvalue
 }
 
 public ArrayList<userreply> userreply_getData(String attwhere,String attvalue) {
+	 ArrayList<userreply> userreplylist=new ArrayList<userreply> ();
 	 try {
 		 mysql_DB db=new mysql_DB();
 			conn=db.connectDB();
@@ -214,6 +209,7 @@ public ArrayList<userreply> userreply_getData(String attwhere,String attvalue) {
 	 return userreplylist;
 }
 public ArrayList<userreport_a> userreport_a_getData(String attwhere,String attvalue) {
+	ArrayList<userreport_a> userreport_alist=new ArrayList<userreport_a> ();
 	 try {
 		 mysql_DB db=new mysql_DB();
 			conn=db.connectDB();
@@ -237,6 +233,7 @@ public ArrayList<userreport_a> userreport_a_getData(String attwhere,String attva
 }
 
 public ArrayList<userreport_c> userreport_c_getData(String attwhere,String attvalue) {
+	ArrayList<userreport_c> userreport_clist=new ArrayList<userreport_c> ();
 	 try {
 		 mysql_DB db=new mysql_DB();
 			conn=db.connectDB();
@@ -262,6 +259,7 @@ public ArrayList<userreport_c> userreport_c_getData(String attwhere,String attva
 }
 
 public ArrayList<userreport_r> userreport_r_getData(String attwhere,String attvalue) {
+	ArrayList<userreport_r> userreport_rlist=new ArrayList<userreport_r> ();
 	 try {
 		 mysql_DB db=new mysql_DB();
 			conn=db.connectDB();
@@ -286,6 +284,7 @@ public ArrayList<userreport_r> userreport_r_getData(String attwhere,String attva
 }
 
 public ArrayList<manager_user> manager_user_getData(String attwhere,String attvalue) {
+	ArrayList<manager_user> mulist=new ArrayList<manager_user> ();
 	 try {
 		 mysql_DB db=new mysql_DB();
 			conn=db.connectDB();

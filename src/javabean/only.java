@@ -7,11 +7,11 @@ import java.sql.SQLException;
 import java.util.ArrayList;
 
 public class only {
-	private ArrayList<userreply> userreplylist=new ArrayList<userreply> ();
 	private PreparedStatement pstm;     	  
 	  private Connection conn;
 	  private ResultSet rs;
 	public ArrayList<userreply> userreply_getData(int attvalue1,int attvalue2) {
+		ArrayList<userreply> userreplylist=new ArrayList<userreply> ();
 		 try {
 			 mysql_DB db=new mysql_DB();
 				conn=db.connectDB();

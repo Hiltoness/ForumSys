@@ -11,10 +11,11 @@ public class mysql_postlist {
 	 
 	  private Connection conn;
 	  private ResultSet rs;
-	  private ArrayList<postlist> list=new ArrayList<postlist> ();
-	  private ArrayList<postlist> solist=new ArrayList<postlist> ();
-	  private ArrayList<post> list0=new ArrayList<post> ();
+
 	  public ArrayList<postlist>  postlist_getData() {
+		  ArrayList<postlist> list=new ArrayList<postlist> ();
+		 ArrayList<postlist> solist=new ArrayList<postlist> ();
+		   ArrayList<post> list0=new ArrayList<post> ();
 			 try {
 				 mysql_DB db=new mysql_DB();
 					conn=db.connectDB();
