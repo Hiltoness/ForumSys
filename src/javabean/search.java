@@ -8,22 +8,22 @@ public class search {
 	private PreparedStatement pstm;     	 
 	  private Connection conn;
 	  private ResultSet rs;
-	  private ArrayList<postlist> list=new ArrayList<postlist> ();
-	  private ArrayList<post> list0=new ArrayList<post> ();
+	  
 	  public ArrayList<postlist>  searchlist_getData(String attvalue) {
+		  ArrayList<postlist> list=new ArrayList<postlist> ();
+		  ArrayList<post> list0=new ArrayList<post> ();
 			 try {
 				    mysql_DB db=new mysql_DB();
 					conn=db.connectDB();
-					pstm=conn.prepareStatement("select * from post where title=? or content=?");
+					pstm=conn.prepareStatement("select * from post where concat(title,content) like ?");
 					pstm.setString(1, "%"+attvalue+"%");
-					pstm.setString(2, "%"+attvalue+"%");
 					rs=pstm.executeQuery();
 					while(rs.next()) {
-						post bean=new post();
-						bean.setAid(rs.getInt(1));
-						bean.setTitle(rs.getString(2));
-						bean.setContent(rs.getString(3));
-						list0.add(bean);
+						post bean0=new post();
+						bean0.setAid(rs.getInt(1));
+						bean0.setTitle(rs.getString(2));
+						bean0.setContent(rs.getString(3));
+						list0.add(bean0);
 					}
 					for(int i=0;i<list0.size();i++) {
 						int num1=0;
