@@ -1,5 +1,6 @@
 package servlet_1;
 
+import javabean.*;
 import java.io.IOException;
 import java.io.PrintWriter;
 
@@ -36,28 +37,34 @@ public class modify_2 extends HttpServlet {
         
         HttpSession session = request.getSession();
         int id=Integer.parseInt(session.getAttribute("uid").toString());
+        String psw0=request.getParameter("info_former_psw");
         String psw1=request.getParameter("info_new_psw");
         String psw2=request.getParameter("info_confirm_psw");
-        
-        if(psw1==psw2) {
-        mysql_operate update=new mysql_operate();
-        
-        String user = "user";
-        String password="password";
-		String uid = "uid";
-		update.update_DBInt(user,psw1,password,id,uid);
-		
+        mysql_getint getObj=new mysql_getint();
+        String sp=getObj.password(id);
         PrintWriter out = response.getWriter();
+        if(sp.equals(psw0)){
+        	if(psw1.equals(psw2)) {
+                mysql_operate update=new mysql_operate();
+                
+                String user = "user";
+                String password="password";
+        		String uid = "uid";
+        		update.update_DBInt(user,psw1,password,id,uid);
 
-        out.println("<script language = javascript>alert('修改成功！');");
-        out.println("location.href='modify.jsp'</script>");
-        }
-        else {
-        PrintWriter out = response.getWriter();
+                out.println("<script language = javascript>alert('修改成功！');");
+                out.println("location.href='modify.jsp'</script>");
+                }else {
+                    out.println("<script language = javascript>alert('两次输入密码不一致！请重新输入');");
+                    out.println("location.href='modify.jsp'</script>");
+                    }
+        }else{
+        	out.println("<script language = javascript>alert('原密码错误！请重新输入');");
+            out.println("location.href='modify.jsp'</script>");
 
-        out.println("<script language = javascript>alert('两次输入密码不一致！请重新输入');");
-        out.println("location.href='modify.jsp'</script>");
         }
+        
+        
         
 	}
 

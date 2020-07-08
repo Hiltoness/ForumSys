@@ -2,6 +2,7 @@ package servlet_1;
 
 import java.io.IOException;
 import java.io.PrintWriter;
+
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
@@ -12,15 +13,23 @@ import javax.servlet.http.HttpSession;
 import javabean.mysql_operate;
 
 
-@WebServlet("/modify")
+/**
+ * Servlet implementation class modify
+ */
+@WebServlet("/modify_1")
 public class modify_1 extends HttpServlet {
 	private static final long serialVersionUID = 1L;
 
+    /**
+     * Default constructor. 
+     */
     public modify_1() {
-    	super();
+        // TODO Auto-generated constructor stub
     }
 
-	
+	/**
+	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
+	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		request.setCharacterEncoding("UTF-8");
         response.setCharacterEncoding("utf-8");
@@ -43,13 +52,16 @@ public class modify_1 extends HttpServlet {
 		update.update_DBInt(user,name,uname,id,uid);//修改姓名
 		update.update_DBInt(user,gender,sex,id,uid);//修改性别	
 		update.update_DBInt(user,coll,college,id,uid);//修改大学
+        
         PrintWriter out = response.getWriter();
 
         out.println("<script language = javascript>alert('修改成功！');");
         out.println("location.href='modify.jsp'</script>");
         }
 
-
+	/**
+	 * @see HttpServlet#doPost(HttpServletRequest request, HttpServletResponse response)
+	 */
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		
 		doGet(request, response);

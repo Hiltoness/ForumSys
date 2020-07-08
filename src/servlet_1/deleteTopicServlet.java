@@ -8,6 +8,7 @@ import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
 
 import javabean.LevelUpgrade;
 import javabean.mysql_getint;
@@ -60,9 +61,13 @@ public class deleteTopicServlet extends HttpServlet {
         del.delete_DBInt(tab1, delId, aid);
         
         //扣分
-        int id=Integer.parseInt(request.getParameter("uid"));
+        HttpSession session=request.getSession();
+        int id=Integer.parseInt(session.getAttribute("uid").toString());
+        
+        mysql_getint getInt=new mysql_getint();
+        int point=getInt.point(id)-5;
         mysql_operate obj1=new mysql_operate();
-        obj1.update_DBInt("user","point-5", "point", id, "uid");
+        obj1.update_DBInt11("user",point, "point", id, "uid");
         LevelUpgrade up=new LevelUpgrade();
         up.up(id);
         

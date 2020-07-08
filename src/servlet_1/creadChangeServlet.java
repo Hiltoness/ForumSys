@@ -1,4 +1,4 @@
-package com.servlet;
+package servlet_1;
 
 import java.io.IOException;
 import javax.servlet.ServletException;
@@ -33,6 +33,8 @@ public class creadChangeServlet extends HttpServlet {
         response.setCharacterEncoding("utf-8");
         response.setContentType("text/html charset=utf-8");
         
+        HttpSession session = request.getSession();
+        int uid=Integer.parseInt(session.getAttribute("uid").toString());
         int raid=Integer.parseInt(request.getParameter("aid"));
         int rrid=Integer.parseInt(request.getParameter("rid"));
         int rcid=Integer.parseInt(request.getParameter("cid"));
@@ -45,8 +47,11 @@ public class creadChangeServlet extends HttpServlet {
         
         mysql_operate rread=new mysql_operate();
         rread.update_DBInt3(table, sta, status, raid, whereatt, rrid, whereatt2, rcid, whereatt3);
+        
+        response.sendRedirect("modify.jsp?uid="+uid);
 	}
 
+	
 	/**
 	 * @see HttpServlet#doPost(HttpServletRequest request, HttpServletResponse response)
 	 */

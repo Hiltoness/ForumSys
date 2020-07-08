@@ -53,7 +53,9 @@ public class publize extends HttpServlet {
         insert.userpost_InserData(id, aid, dateTime);
         
         mysql_operate obj1=new mysql_operate();
-        obj1.update_DBInt("user","point+5", "point", id, "uid");
+        mysql_getint getInt=new mysql_getint();
+        int point=getInt.point(id)+5;
+        obj1.update_DBInt11("user",point, "point", id, "uid");
         LevelUpgrade up=new LevelUpgrade();
         up.up(id);
         

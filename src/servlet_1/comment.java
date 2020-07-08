@@ -58,12 +58,15 @@ public class comment extends HttpServlet {
 		insert.usercomment_InserData(id,aid,rid,commentSend,dateTime,status); //aid和rid不知道从哪获取
 		
 		//加分
+		mysql_getint getInt=new mysql_getint();
+        int point=getInt.point(id)+2;
 		mysql_operate obj1=new mysql_operate();
-        obj1.update_DBInt("user","point+2", "point", id, "uid");
+        obj1.update_DBInt11("user",point, "point", id, "uid");
 		//回帖主人加分
         mysql_getint obj2=new mysql_getint();
         int uid=obj2.userID("userreply", "rid", rid);
-        obj1.update_DBInt("user", "point+1","point", uid, "uid");
+        int point1=getInt.point(uid)+1;
+        obj1.update_DBInt11("user", point1,"point", uid, "uid");
         LevelUpgrade up=new LevelUpgrade();
         up.up(id);
         up.up(uid);

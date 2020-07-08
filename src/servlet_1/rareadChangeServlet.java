@@ -1,11 +1,14 @@
-package com.servlet;
+package servlet_1;
 
 import java.io.IOException;
+
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
+
 import javabean.mysql_operate;
 
 /**
@@ -42,7 +45,11 @@ public class rareadChangeServlet extends HttpServlet {
         
         mysql_operate updateStatus=new mysql_operate();		
 		updateStatus.update_DBInt2(table, status, sta, raid, whereatt, ruid, whereatt2);
-        
+		
+		HttpSession session = request.getSession();
+        int uid=Integer.parseInt(session.getAttribute("uid").toString());
+
+		response.sendRedirect("modify.jsp?uid="+uid);
 	}
 
 	/**

@@ -34,9 +34,9 @@ public class deleteServlet extends HttpServlet {
         response.setCharacterEncoding("utf-8");
         response.setContentType("text/html charset=utf-8");
         
-        String table="table";
+        String table="user";
         String whereatt="uid";
-        int delId=Integer.parseInt(request.getParameter("id"));
+        int delId=Integer.parseInt(request.getParameter("uid"));
         
         mysql_operate del=new mysql_operate();
         del.delete_DBInt(table, delId, whereatt);

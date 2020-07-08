@@ -40,12 +40,12 @@ public class pub_m extends HttpServlet {
         response.setContentType("text/html charset=utf-8");
         
         HttpSession session = request.getSession();
-        int id=(int)session.getAttribute("id");
+        int id=Integer.parseInt(session.getAttribute("mid").toString());
         String title=request.getParameter("topic_title");
-        String notice=(String)session.getAttribute("pubm");
+        String notice=request.getParameter("posttext");
         int pid=0;
         Date date = new Date();
-        SimpleDateFormat df = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
+        SimpleDateFormat df = new SimpleDateFormat("yyyy-MM-dd HH:mm");
         String dateTime = df.format(date);
         
         mysql_insert insert=new mysql_insert();

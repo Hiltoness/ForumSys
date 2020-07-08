@@ -8,13 +8,14 @@ import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
 
 import javabean.mysql_operate;
 
 /**
  * Servlet implementation class deleteMyUco
  */
-@WebServlet("/deleteMyUco")
+@WebServlet("/deleteUcoServlet")
 public class deleteUcoServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
        
@@ -37,7 +38,8 @@ public class deleteUcoServlet extends HttpServlet {
         String table="uco";
         String uid="uid";
         String aid="aid";
-        int delUid=Integer.parseInt(request.getParameter("uid"));
+        HttpSession session= request.getSession();
+        int delUid=Integer.parseInt(session.getAttribute("uid").toString());
         int delAid=Integer.parseInt(request.getParameter("aid"));
         
         mysql_operate del=new mysql_operate();
@@ -45,8 +47,10 @@ public class deleteUcoServlet extends HttpServlet {
         
         PrintWriter out = response.getWriter();
 
-        out.println("<script language = javascript>alert('删除成功！');");
-        out.println("location.href='manager_u.jsp'</script>");
+        out.println("<script language = javascript>alert('删除成功！');</script>");
+        int id=Integer.parseInt(session.getAttribute("uid").toString());
+      
+        response.sendRedirect("my.jsp?uid="+id);
 		
 	}
 

@@ -58,8 +58,9 @@ public class praiseServlet extends HttpServlet {
 		//加分
         mysql_getint obj=new mysql_getint();
         int uid=obj.userID("userpost", "aid", aid);
+        int point=obj.point(uid)+1;
         mysql_operate obj1=new mysql_operate();
-        obj1.update_DBInt("user","point+1", "point", uid, "uid");
+        obj1.update_DBInt11("user",point, "point", uid, "uid");
         LevelUpgrade up=new LevelUpgrade();
         up.up(uid);
         response.sendRedirect("QuesInfo.jsp?aid="+aid);

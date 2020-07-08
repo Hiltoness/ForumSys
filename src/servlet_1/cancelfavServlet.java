@@ -1,4 +1,4 @@
-package com.servlet;
+package servlet_1;
 
 import java.io.IOException;
 import javax.servlet.ServletException;
@@ -37,7 +37,7 @@ public class cancelfavServlet extends HttpServlet {
         int delId=Integer.parseInt(request.getParameter("aid"));
         
         mysql_operate del=new mysql_operate();
-        del.delete_DB(table, delId, aid);
+        del.delete_DBInt(table, delId, aid);
 	}
 
 	/**
