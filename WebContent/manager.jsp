@@ -13,31 +13,13 @@
 </head>
 <body>
 <jsp:include page="TopMenu_m.jsp"></jsp:include>
-<script>
-function deleteTopic_m(aid) {//删除主贴
-    if(confirm("确认删除"+aid)){
-        location.href="deleteTopicMServlet?method=delete&aid="+aid;
-    }else{
-        alert("删除失败");
-    }
-}
 
-function deleteReply(rid) {//删除回帖
-    if(confirm("确认删除"+rid)){
-        location.href="deleteReplyMServlet?method=delete&rid="+rid;
-    }else{
-        alert("删除失败");
-    }
-}
+<%
+	int mid=Integer.parseInt(session.getAttribute("mid").toString());
+	String u=Integer.toString(mid);
+	session.setAttribute("mid", u);
 
-function deleteComment(cid){//删除评论
-	if(confirm("确认删除"+cid)){
-        location.href="deleteCommentMServlet?method=delete&cid="+cid;
-    }else{
-        alert("删除失败");
-    }
-}
-</script>
+%>
 <div class="viewContainer">
     <div class="mainAsideBox">
         <div class="container">
@@ -45,9 +27,9 @@ function deleteComment(cid){//删除评论
                 <section class="managerSec">
                     <h3 class="mainArticleTitle">
                         <span>管理帖子主题</span>
-                        <form class="searchTopic_m" id="searchTopic_m" method="get" action="">
+                        <!-- <form class="searchTopic_m" id="searchTopic_m" method="get" action="">
                             <input class="searchInput_m" type="search" placeholder="搜索帖子主题">
-                        </form>
+                        </form>-->
                     </h3>
 
                     <ul class="reviewShow">
@@ -76,9 +58,9 @@ function deleteComment(cid){//删除评论
                 <section class="managerSec">
                     <h3 class="mainArticleTitle">
                         <span>管理帖子回复</span>
-                        <form class="searchTopic_m" id="searchReply_m">
+                        <!--  <form class="searchTopic_m" id="searchReply_m">
                             <input class="searchInput_m" type="search" placeholder="搜索帖子回复">
-                        </form>
+                        </form>-->
                     </h3>
                     <ul class="reviewShow">
                     <%
@@ -105,9 +87,9 @@ function deleteComment(cid){//删除评论
                 <section class="managerSec">
                     <h3 class="mainArticleTitle">
                         <span>管理评论</span>
-                        <form class="searchTopic_m" id="searchReply_m">
+                        <!--<form class="searchTopic_m" id="searchReply_m">
                             <input class="searchInput_m" type="search" placeholder="搜索帖子回复">
-                        </form>
+                        </form>  -->
                     </h3>
                     <ul class="reviewShow">
                     <%
@@ -142,5 +124,30 @@ function deleteComment(cid){//删除评论
         </div>
     </footer>
 </div>
+<script>
+function deleteTopic_m(aid) {//删除主贴
+    if(confirm("确认删除"+aid)){
+        location.href="deleteTopicMServlet?method=delete&aid="+aid;
+    }else{
+        alert("删除失败");
+    }
+}
+
+function deleteReply(rid) {//删除回帖
+    if(confirm("确认删除"+rid)){
+        location.href="deleteReplyMServlet?method=delete&rid="+rid;
+    }else{
+        alert("删除失败");
+    }
+}
+
+function deleteComment(cid){//删除评论
+	if(confirm("确认删除"+cid)){
+        location.href="deleteCommentMServlet?method=delete&cid="+cid;
+    }else{
+        alert("删除失败");
+    }
+}
+</script>
 </body>
 </html>

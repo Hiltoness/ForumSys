@@ -10,54 +10,46 @@
     <base target="_blank">
 </head>
 <body>
+<%
+	int mid=Integer.parseInt(session.getAttribute("mid").toString());
+	String u=Integer.toString(mid);
+	session.setAttribute("mid", u);
+
+%>
+<jsp:include page="TopMenu_m.jsp"></jsp:include>
 <div class="viewContainer">
-    <div class="mainHeaderBox">
-        <div class="container">
-            <div class="mainNav">
-                <a class="topTitle1" href="manager.html">积分技术论坛 管理系统</a>
-                <ul class="navList">
-                    <li class="navItem1"><a href="manager.html">管理帖子主题</a></li>
-                    <span class="navText"> | </span>
-                    <li class="navItem1"><a href="publize.html">管理帖子回复</a></li>
-                    <span class="navText"> | </span>
-                    <li class="navItem1"><a href="publize.html">管理用户</a></li>
-                    <span class="navText"> | </span>
-                    <li class="navItem1"><a href="publize.html">发布公告</a></li>
-                </ul>
-            </div>
-            <div class="mainLogin">
-                <ul class="navLogin">
-                    <li class="navItem"><a href="modify.html">管理员Name</a></li>
-                    <span class="navText"> | </span>
-                    <li class="navItem"><a>退出</a></li>
-                </ul>
-            </div>
-        </div>
-    </div>
+    
     <div class="mainAsideBox">
         <div class="container">
             <div class="publicize">
                 <form class="searchTopic" id="pub_manager" name="publizeManager" method="post" action="">
-                    <input id="topic_title" class="inputTitle" autocomplete="off" maxlength="80" placeholder="输入公告标题" size="60" type="text">
-
+                    <input id="topic_title" name="topic_title" class="inputTitle" autocomplete="off" maxlength="80" placeholder="输入公告标题" size="60" type="text">
+					<input id="posttext" name="posttext" style="display:none" value="" />
                     <div class="replyEdit" id="editor1">
                         <p>发布公告</p>
                     </div>
+                    <input class="btnCommit" type="submit" id="pubm_commit" name="topic_commit" value="发表">
                     <script type="text/javascript" src="wangEditor-3.1.1/release/wangEditor.min.js"></script>
                     <script type="text/javascript">
                         var rich_editor=window.wangEditor;
                         var ed=new rich_editor('#editor1');
                         ed.create();
                         
+                        document.getElementById('pubm_commit').addEventListener('click', function(){
+                        	var text=ed.txt.text();
+                        	if(text==null){
+                        		alert("不能为空");
+                        	}else{
+                        		alert(text);
+                        		document.getElementById("posttext").setAttribute("value", text);
+                        		document.getElementById("pub_manager").setAttribute("action", "pub_m");
+                        	}
+                        }, false)
                     </script>
-                    <input class="btnCommit" type="submit" id="pubm_commit" name="topic_commit" value="发表" onclick="">
+                    
                 </form>
                 <script>
-                	document.getElementById('pubm_commit').addEventListener('click', function(){
-                	var text=ed.txt.text();
-                    HttpSession session=request.getSession();
-                    session.setAttribute("pubm",text);
-                }, false)
+                	
                 </script>
             </div>
         </div>

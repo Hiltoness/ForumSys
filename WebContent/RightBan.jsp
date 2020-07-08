@@ -49,14 +49,15 @@
                     	int cnum=obj.getCommentnum(uid);//未读评论
                     	int pnum=obj.getPraisenum(uid);//未读点赞
                     	int rpnum=obj.getReportnum(uid);//未读系统通知
+                    	System.out.print(rnum+" "+cnum+" "+pnum+" "+rpnum);
                     	
                     %>
                         <ul class="MSG">
-                            <li class="headerMSGTitle aHover"><a href="modify.jsp?uid=<%=uid %>"><b>消息</b></a></li>
-                            <li class="headerMSGItem"><a href="modify.jsp#Info1?uid=<%=uid %>">评论</a></li>
-                            <li class="headerMSGItem"><a href="modify.jsp#Info2?uid=<%=uid %>">点赞</a></li>
-                            <li class="headerMSGItem"><a href="modify.jsp#Info3?uid=<%=uid %>">回复</a></li>
-                            <li class="headerMSGItem"><a href="modify.jsp#Info4?uid=<%=uid %>">系统通知</a></li>
+                            <li class="headerMSGTitle aHover"><a href="modify.jsp?uid=<%=uid %>"><b>消息</b><span id="infoUnread" style="display: none;color: red"></span></a></li>
+                            <li class="headerMSGItem"><a href="modify.jsp#Info1?uid=<%=uid %>">评论</a><span id="commentUnread" style="display: none;color: red"></span></li>
+                            <li class="headerMSGItem"><a href="modify.jsp#Info2?uid=<%=uid %>">点赞</a><span id="praiseUnread" style="display: none;color: red"></span></li>
+                            <li class="headerMSGItem"><a href="modify.jsp#Info3?uid=<%=uid %>">回复</a><span id="replyUnread" style="display: none;color: red"></span></li>
+                            <li class="headerMSGItem"><a href="modify.jsp#Info4?uid=<%=uid %>">系统通知<span id="noticeUnread" style="display: none;color: red"></span></a></li>
                         </ul>
                         <ul class="MSG">
                             <li class="headerMSGTitle"><a href="modify.jsp#Info5?uid=<%=uid %>"><b>资料</b></a></li>
@@ -82,7 +83,7 @@
 							for(int k=0;k<bulletin.size();k++){
 							
 						%>
-						<li class="mainBulletItem"><a><%=bulletin.get(k) %></a></li>
+						<li class="mainBulletItem"><a href="modify.jsp#bulletin?uid=<%=uid%>"><%=bulletin.get(k) %></a></li>
 						<%
 							}
 						%>
@@ -92,15 +93,16 @@
 </div>
 <script language="javascript">
 	//未读回帖
-    var jsp_rnum="<%= rnum%>"; 
+    var jsp_rnum=<%= rnum%>; 
+    console.log(jsp_rnum);
     //未读评论
-    var jsp_cnum="<%=cnum%>";
+    var jsp_cnum=<%=cnum%>;
     //未读点赞
-    var jsp_pnum="<%=pnum%>";
+    var jsp_pnum=<%=pnum%>;
     //系统通知
-    var jsp_rpnum="<%=rpnum%>";
+    var jsp_rpnum=<%=rpnum%>;
     //未读公告
-    var jsp_bnum="<%=bnum%>";
+    var jsp_bnum=<%=bnum%>;
     function loadFresh() {
         var m=unread();
         if(jsp_rnum>0){
@@ -131,6 +133,7 @@
             var unreadNote = document.getElementById("infoUnread");
             unreadNote.style.display = "contents";
             unreadNote.innerHTML = this.num;
+            console.log(this.num);
         }
 
         function commentUnread(num1) {// 未读评论
@@ -171,9 +174,9 @@
             "praiseUnread":praiseUnread,
             "replyUnread":replyUnread,
             "noticeUnread":noticeUnread
-        };
+        }
     }
-
+    
     function bulletin(numb) {
     	var unreadBull = document.getElementById("bulletinUnread");
         unreadBull.style.display = "contents";

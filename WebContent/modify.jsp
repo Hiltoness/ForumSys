@@ -105,13 +105,15 @@
                             <ul class="reviewShow">
                             <%
                             List<userreply> reply=obj1.getReplynum(uid);
+                            System.out.print(reply.size());
                             for(int i=0;i<reply.size();i++){
                             	userreply rp=reply.get(i);
                             	String status=rp.getStatus();
                             	int aaid=rp.getAid();
                             	int rrid=rp.getRid();
-                            	List<user> un=obj2.user_getData("uid",rp.getUid());
-		                    	String uname=un.get(0).getUname();
+		                    	String runame=obj2.name(rp.getUid());
+		                    	System.out.print(runame);
+		                    	
                             %>
                             		<script language="javascript">
 				                    	var status="<%= status%>";
@@ -123,7 +125,7 @@
 				                    </script>
                                 <li class="infoDetail">
                                 <p class="artilist">
-                                        <span class="infoName"><%=uname %></span>回复了你的帖子“<span class="infoContent"><%=rp.getReply() %>”</span>
+                                        <span class="infoName"><%=runame %></span>回复了你的帖子“<span class="infoContent"><%=rp.getReply() %>”</span>
                                  </p>
                                 </li>
                             <%} %>

@@ -8,9 +8,14 @@
 </head>
 <body>
 <%
-	session.setAttribute("uid", "2");
-	response.sendRedirect("main.jsp?uid=2");
+	session.setAttribute("mid","1");
+	response.sendRedirect("manager.jsp");
+	
 
 %>
+<!-- 
+		session.setAttribute("uid", "2");
+	response.sendRedirect("modify.jsp");
+-->
 </body>
 </html>

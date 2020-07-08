@@ -8,8 +8,8 @@
 </head>
 <body>
 <%
-	session.setAttribute("uid", "1");
-	response.sendRedirect("main.jsp?uid=1");
+	session.setAttribute("uid", "2");
+	response.sendRedirect("main.jsp?uid=2");
 
 %>
 </body>

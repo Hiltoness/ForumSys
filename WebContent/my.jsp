@@ -26,7 +26,7 @@
     
     function deleteMyUco(uid,aid){//删除我的收藏
     	if(confirm("确认删除")){
-            location.href="deleteUcoServlet?method=delete&uid="+uid+"aid="+aid;
+            location.href="deleteUcoServlet?method=delete&uid="+uid+"&aid="+aid;
         }else{
             alert("删除失败");
         }
@@ -97,7 +97,7 @@
                                         <span class="datetime"><%=ppd_tm %></span>
                                         <span >&nbsp;&nbsp;回复(<%=num%>)</span>
                                         <span >&nbsp;&nbsp;提问人：<%=ppd_pb %></span>
-                                        <a href="javascript:deleteMyUco(uid,<%=fav.getAid()%>)">&nbsp;&nbsp;删除</a>
+                                        <a href="javascript:deleteMyUco(<%=uid%>,<%=fav.getAid()%>)">&nbsp;&nbsp;删除</a>
                                     </p>
                                 </li>
                                 <%} %>

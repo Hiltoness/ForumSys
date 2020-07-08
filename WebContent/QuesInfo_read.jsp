@@ -21,14 +21,14 @@
     left:50%;
     top:50%;
     width:350px;
-    height:460px;
+    height:500px;
     margin-left:-100px;
     margin-top:-200px;
     padding: 5px;
     border:1px solid #cccccc;
     -webkit-border-radius: 5px;
     background-color: #fbfcfd;
-    z-index: 10;
+    z-index: 10002;
     text-align:center">
     <div class="boxTitle"><p>举报</p>
         <button class="close" type="button" onclick="closeRDiv()" aria-label="Close">
@@ -37,9 +37,9 @@
     </div>
 
     <div class="boxCenter">
-        <form class="reportForm1" id="reportCon" method="post" action="">
+        <form class="reportForm1" id="reportCon" name="reportCon" method="post" action="" accept-charset="utf-8">
             <div class="boxHeader">
-                <span>你觉得这个帖子有什么问题？（必选）</span>
+                <span>你觉得这个帖子/评论有什么问题？（必选）</span>
             </div>
             <label class="reportBan"><input type="radio" name="report1" value="1" />内容涉黄</label>
             <label class="reportBan"><input type="radio" name="report1" value="2" />政治相关</label>
@@ -56,10 +56,10 @@
             <div class="boxHeader">
                 <span>补充说明（选填）</span>
             </div>
-            <textarea rows="5" cols="30" class="reportInput" id="reportInput"></textarea>
+            <textarea rows="5" cols="30" class="reportInput" id="reportInput" name="reportInput">请输入举报理由</textarea>
 
-            <button class="btnM" type="submit">提交</button>
-            <button class="btnM1" formtarget="_self" onclick="closeRDiv()">取消</button>
+            <button class="btnM" type="submit" onsubmit="document.charset='utf-8'">提交</button>
+            <button class="btnM1" type="button" formtarget="_self" onclick="closeRDiv()">取消</button>
         </form>
     </div>
 
@@ -73,12 +73,13 @@
         z-Index:9"></div>
 <%--评论框--%>
 <div id="response" style="display: none;margin: 10px 15px">
-    <form id="commentForm" name="commentForm" style="display: contents" accept-charset="utf-8" method="post" action="">
+    <form id="commentForm" name="commentForm" style="display: contents" accept-charset="utf-8" method="post" action="comment">
     	<!--评论cid-->
-    	<input style="display: none" id="replyCid" value=""/>
-    	<!--评论内容-->
+    	<input style="display: none" id="replyAid" name="replyAid" value=""/>
+    	<input style="display: none" id="replyRid" name="replyRid" value=""/>
+    	<!-- 评论内容-->
         <textarea id="commentSend" style="display:inline;width: 100%;height: 80px;-webkit-border-radius: 3px;padding: 2px 5px"></textarea>
-        <!--提交按钮-->
+        <!-- 提交按钮-->
         <input class="btnModi" value="发表评论" type="submit" />
     </form>
 </div>
@@ -96,13 +97,14 @@
                 <div class="quesFloor">
                 <%
                 
-                  int aid=Integer.parseInt(request.getParameter("aid").toString());//主贴id
+                  int aid=Integer.parseInt(request.getParameter("aid"));//主贴id
                   mysql_get obj=new mysql_get();
                   only obj1=new only();
                   mysql_getint obj2=new mysql_getint();
                   List<post> post=obj2.post_getData("aid", aid);
                   List<userpost> userpost=obj2.userpost_getData("aid", aid);
                   List<userreply> repost1=obj2.userreply_getData("aid", aid);
+				List<uco> uco=obj2.uco_getData("uid",uid);											
                   post pp=post.get(0);//帖子表
                   userpost up=userpost.get(0);//用户发帖表
                   String title=pp.getTitle();//标题
@@ -113,7 +115,15 @@
                   String time=up.getAtime();//发帖时间
                   String content=pp.getContent();//帖子内容
                   int num=repost1.size();//帖子回复数
+					int comNum=0;//评论数
                   int reNum=0;//回帖数
+                  //用户收藏
+                  int ucoFlag=0;
+                  for(int l=0;l<uco.size();l++){
+                	  if(uco.get(l).getAid()==aid){
+                		  ucoFlag=1;
+                	  }
+                  }
                   
                 %>
                     <h3 class="quesTitle"><%=post.get(0).getTitle() %></h3>
@@ -135,7 +145,7 @@
                                     <label class="datetime"><%=time %></label>
                                 </div>
                                 <div class="erControlR">
-                                    <a href="javascript:fav(<%=aid%>)"><span id="fav">收藏</span></a>
+                                    <a href="javascript:fav(<%=aid%>)"><span id="fav"></span></a>
                                     <span><%=num %></span>
                                     <a href="javascript:backAll(<%=aid%>)"><span id="back" style="color: rgb(103,103,103)">返回全部楼层</span></a>
                                     <a href="javascript:report1(<%=aid%>)">举报</a>
@@ -143,6 +153,16 @@
                             </div>
                         </div>
                     </section>
+					<script>
+                	var ucoflag='<%=ucoFlag%>';
+                	if(ucoflag==='1'){
+                		document.getElementById("fav").innerHTML="已收藏";
+                	}else{
+                		document.getElementById("fav").innerHTML="收藏";
+                	}
+                	
+                </script>
+                
                     <%	
                     	String rUid=request.getParameter("rUid");//指定“只看TA”的uid
                     	List<userreply> rr=obj2.userreply_getData("aid", aid);
@@ -151,11 +171,13 @@
                     		int rid=rr_1.getRid();//回帖id
                     		int ruid=rr_1.getUid();
                     		List<user> us=obj2.user_getData("uid", ruid);
-                    		List<usercomment> com=obj1.usercomment_getData(aid,rid );//评论list
                     		String rname=us.get(0).getUname();//回帖用户名
                     		int rlevel=us.get(0).getLevel();//回帖用户等级
                     		String reply=rr_1.getReply();//回帖内容
                     		String rtime=rr_1.getRtime();//回帖时间
+							List<usercomment> com=new ArrayList<usercomment> ();
+                    		com=obj1.usercomment_getData(aid,rid);//评论list
+                    		System.out.print("rid"+rid);											  
                     	
                      %>
                     <section class="quesTitleNEr">
@@ -179,15 +201,34 @@
                                     <a href="javascript:praise(<%=rid%>,<%=aid%>,<%=reNum%>)"><span class="praise">点赞</span></a>
                                     <div class="commentBtn" onclick="comment(this,<%=rr_1.getRid()%>)"><span class="comment">评论</span></div>
                                     <a href="javascript:reportReply(<%=ruid%>,<%=aid%>)">举报</a>
+                                    <% 
+                                    	List<userpraise> praise=obj2.userpraise_getData("aid",aid, "uid", uid);
+	                                  //用户点赞
+	                            		int praFlag=0;
+	                            		for(int l=0;l<praise.size();l++){
+	                            			if(praise.get(l).getRid()==rid){
+	                            				praFlag=1;
+	                            			}
+	                            		}
+                                    %>
+                                    <script>
+					                	var praflag='<%=praFlag%>';
+					                	console.log(praflag);
+					                	if(praflag=='1'){
+					                		document.getElementsByClassName("praise")['<%=reNum%>'].innerHTML="取消点赞";
+					                	}else{
+					                		document.getElementsByClassName("praise")['<%=reNum%>'].innerHTML="点赞";
+					                	}
+					                	
+					                </script>						  
                                 </div>
                             </div>
                             <%
                             	for(int j=0;j<com.size();j++){
                             		usercomment com1=com.get(j);
                             		List<user> us_c=obj2.user_getData("uid", com1.getUid());
-                            		String us_cname=us_c.get(0).getUname();//评论人用户名
-                            		int us_clevel=us_c.get(0).getLevel();//评论人等级
-                            	
+                            		String us_cname=obj2.name(com1.getUid());//评论人用户名
+                            		int us_clevel=obj2.level(com1.getUid());//评论人等级                            	
                             %>
                             <div class="erComment">
                                 <div class="commentHead">
@@ -204,11 +245,13 @@
                                 </div>
 
                             </div>
-                            <% reNum++;
+                            <% 
                             } %>
                         </div>
                     </section>
-                    <%} %>
+                    <%
+						reNum++;
+					} %>
                     
                 </div>
 				 <div class="replyEdit">
@@ -216,14 +259,29 @@
                             <p>发表你的观点</p>
                         </div>
                         <form id="reply_ques" method="post" action="">
+                        <input id="replytext" name="replytext" style="display:none" value="">
+                        <input style="display:none" value="<%=aid%>" name="aid">
+                            <input class="btnCommit" type="submit" id="reply_commit" name="reply_commit" value="发表">
                             <script type="text/javascript" src="wangEditor-3.1.1/release/wangEditor.min.js"></script>
                             <script language="JavaScript">
                                 var rich_editor=window.wangEditor
                                 var ed=new rich_editor('#editor1')
-                                ed.create()
+                                ed.create();
+                                document.getElementById('reply_commit').addEventListener('click', function(){
+                            	var text=ed.txt.text();
+                            	if(text==null){
+                            		alert("请输入帖子内容");
+                            	}else{
+                            		alert(text);
+                            		document.getElementById("replytext").setAttribute("value", text);
+                            		document.getElementById("reply_ques").setAttribute("action", "reply_post");
+                            	}
+                            	
+                            }, false)
+                            
                             </script>
-                            <input style="display:none" value="<%=aid%>" name="aid">
-                            <input class="btnCommit" type="submit" id="reply_commit" name="reply_commit" value="发表" onclick="">
+                            
+																																   
                         </form>
                         <script>
 		                	document.getElementById('reply_commit').addEventListener('click', function(){
@@ -303,14 +361,14 @@
     }
     function praise(rid,aid,i) {//点赞
         var pDiv=document.getElementsByClassName("praise")[i];
-        if(pDiv.style.color=="rgb(103, 103, 103)"){
+        if(pDiv.innerHTML=="点赞"){
             location.href="praiseServlet?method=praise&aid="+aid+"&rid="+rid;
             pDiv.style.color="red";
-            pDiv.innerHTML="取消点赞"
+            pDiv.innerHTML="取消点赞";
         }else {//取消点赞
             location.href="cancelpraiseServlet?method=cancelpraise&aid="+aid+"&rid="+rid;
             pDiv.style.color = "#676767"
-            pDiv.innerHTML = "点赞"
+            pDiv.innerHTML = "点赞";
         }
     }
     function $(el) {

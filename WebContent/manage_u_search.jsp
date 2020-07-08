@@ -44,7 +44,7 @@
                     </div>
                     <% 
                       mysql_getall obj=new mysql_getall();
-                    List<user> usinfo=obj.user_getData();
+                    List<user> usinfo=(List)session.getAttribute("result");
                     for(int i=0;i<usinfo.size();i++){
                     	user info=usinfo.get(i);
                     	int id=info.getUid();

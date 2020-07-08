@@ -37,7 +37,7 @@
     </div>
 
     <div class="boxCenter">
-        <form class="reportForm1" id="reportCon" name="reportCon" method="post" action="">
+        <form class="reportForm1" id="reportCon" name="reportCon" method="post" action="" accept-charset="utf-8">
             <div class="boxHeader">
                 <span>你觉得这个帖子/评论有什么问题？（必选）</span>
             </div>
@@ -56,10 +56,10 @@
             <div class="boxHeader">
                 <span>补充说明（选填）</span>
             </div>
-            <textarea rows="5" cols="30" class="reportInput" id="reportInput" name="reportInput"></textarea>
+            <textarea rows="5" cols="30" class="reportInput" id="reportInput" name="reportInput">请输入举报理由</textarea>
 
-            <button class="btnM" type="submit">提交</button>
-            <button class="btnM1" formtarget="_self" onclick="closeRDiv()">取消</button>
+            <button class="btnM" type="submit" onsubmit="document.charset='utf-8'">提交</button>
+            <button class="btnM1" type="button" formtarget="_self" onclick="closeRDiv()">取消</button>
         </form>
     </div>
 
@@ -96,7 +96,7 @@
 	                int uid=Integer.parseInt(session.getAttribute("uid").toString());
 	            	String u=Integer.toString(uid);
 	            	session.setAttribute("uid", u);
-                  int aid=Integer.parseInt(request.getParameter("aid").toString());//主贴id
+                  int aid=Integer.parseInt(request.getParameter("aid"));//主贴id
                   mysql_get obj=new mysql_get();
                   only obj1=new only();
                   mysql_getint obj2=new mysql_getint();
@@ -144,7 +144,7 @@
                                     <label class="datetime"><%=time %></label>
                                 </div>
                                 <div class="erControlR">
-                                    <a href="javascript:fav(<%=aid%>)"><span id="fav">收藏</span></a>
+                                    <a href="javascript:fav(<%=aid%>)"><span id="fav"></span></a>
                                     <span><%=num %></span>
                                     <a href="javascript:read(<%=userid%>,<%=aid%>,0)"><span class="read" style="color: rgb(103,103,103)">只看楼主</span></a>
                                     <a href="javascript:report1(<%=aid%>)">举报</a>
@@ -155,31 +155,26 @@
                     
                 <script>
                 	var ucoflag='<%=ucoFlag%>';
-                	if(ucoflag=='1'){
+                	if(ucoflag==='1'){
                 		document.getElementById("fav").innerHTML="已收藏";
+                	}else{
+                		document.getElementById("fav").innerHTML="收藏";
                 	}
                 	
                 </script>
                     <%
                     	List<userreply> rr=obj2.userreply_getData("aid", aid);
-                    	for(int i=0;i<rr.size();i++){
+                    	for(int i=0;i<rr.size()/2;i++){
                     		userreply rr_1=rr.get(i);
                     		int rid=rr_1.getRid();//回帖id
-                    		List<usercomment> com=obj1.usercomment_getData(aid,rid);//评论list
-                    		List<userpraise> praise=obj2.userpraise_getData("aid",aid, "uid", uid);
                     		int ruid=rr_1.getUid();
-                    		List<user> us=obj2.user_getData("uid", ruid);
-                    		String rname=us.get(0).getUname();//回帖用户名
-                    		int rlevel=us.get(0).getLevel();//回帖用户等级
+                    		String rname=obj2.name(ruid);//回帖用户名
+                    		int rlevel=obj2.level(ruid);//回帖用户等级
                     		String reply=rr_1.getReply();//回帖内容
                     		String rtime=rr_1.getRtime();//回帖时间
-                    		//用户点赞
-                    		int praFlag=0;
-                    		for(int l=0;l<praise.size();l++){
-                    			if(praise.get(l).getRid()==rid){
-                    				praFlag=1;
-                    			}
-                    		}
+                    		List<usercomment> com=new ArrayList<usercomment> ();
+                    		com=obj1.usercomment_getData(aid,rid);//评论list
+                    		System.out.print("rid"+rid);
                     		
                     	
                      %>
@@ -201,26 +196,41 @@
                                     <label class="datetime"><%=rtime %></label>
                                 </div>
                                 <div class="erControlR">
-                                    <a href="javascript:read(<%=us.get(0).getUid()%>,aid,i+1)"><span class="read">只看TA</span></a>
-                                    <a href="javascript:praise(<%=rid%>,<%=aid%>,<%=reNum%>)"><span class="praise">点赞</span></a>
+                                    <a href="javascript:read(<%=ruid%>,aid,i+1)"><span class="read">只看TA</span></a>
+                                    <a href="javascript:praise(<%=rid%>,<%=aid%>,<%=reNum%>)"><span class="praise"></span></a>
                                     <div class="commentBtn" onclick="comment(this,<%=rid%>,<%=aid%>)"><span class="comment">评论</span></div>
                                     <a href="javascript:reportReply(<%=rid%>,<%=aid%>)">举报</a>
                                     <span><%=i+1 %> 楼</span>
+                                    <%
+                                    	List<userpraise> praise=obj2.userpraise_getData("aid",aid, "uid", uid);
+	                                  //用户点赞
+	                            		int praFlag=0;
+	                            		for(int l=0;l<praise.size();l++){
+	                            			if(praise.get(l).getRid()==rid){
+	                            				praFlag=1;
+	                            			}
+	                            		}
+                                    %>
+                                    <script>
+					                	var praflag='<%=praFlag%>';
+					                	console.log(praflag);
+					                	if(praflag=='1'){
+					                		document.getElementsByClassName("praise")['<%=reNum%>'].innerHTML="取消点赞";
+					                	}else{
+					                		document.getElementsByClassName("praise")['<%=reNum%>'].innerHTML="点赞";
+					                	}
+					                	
+					                </script>
                                 </div>
                             </div>
-                            <script>
-			                	var ucoflag='<%=praFlag%>';
-			                	if(praflag=='1'){
-			                		document.getElementById("fav").innerHTML="取消点赞";
-			                	}
-			                	
-			                </script>
+                            
                             <%
                             	for(int j=0;j<com.size();j++){
+                            		System.out.print("size"+com.size());
                             		usercomment com1=com.get(j);
                             		List<user> us_c=obj2.user_getData("uid", com1.getUid());
-                            		String us_cname=us_c.get(0).getUname();//评论人用户名
-                            		int us_clevel=us_c.get(0).getLevel();//评论人等级
+                            		String us_cname=obj2.name(com1.getUid());//评论人用户名
+                            		int us_clevel=obj2.level(com1.getUid());//评论人等级
                             	
                             %>
                             <div class="erComment">
@@ -237,14 +247,14 @@
                                 </div>
 
                             </div>
+                            
                             <%
-                            reNum++;
                             comNum++;
                             } %>
                         </div>
                     </section>
                     <% 
-                      reNum++;
+                    reNum++;
                     	} %>
                     
                 </div>
