@@ -1,6 +1,7 @@
 package servlet_1;
 
 import java.io.IOException;
+import java.io.PrintWriter;
 import java.text.SimpleDateFormat;
 import java.util.Date;
 
@@ -16,7 +17,7 @@ import javabean.mysql_insert;
 /**
  * Servlet implementation class report_post
  */
-@WebServlet("/report_post")
+@WebServlet("/reportPostServlet")
 public class reportPostServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
        
@@ -39,14 +40,24 @@ public class reportPostServlet extends HttpServlet {
         HttpSession session = request.getSession();
         int id=Integer.parseInt(session.getAttribute("uid").toString());
         int aid=Integer.parseInt(request.getParameter("postId"));
-        String report=request.getParameter("report1"+"  "+"reportInput");        
+        String rr=request.getParameter("reportInput");
+        if(rr==null){
+        	rr="null";
+        }
+        String report1=request.getParameter("report1");
+        String report=report1.concat(rr);
         Date date = new Date();
-        SimpleDateFormat df = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
+        SimpleDateFormat df = new SimpleDateFormat("yyyy-MM-dd HH:mm");
         String dateTime = df.format(date);
         String status="unread";
         
         mysql_insert insert=new mysql_insert();
         insert.userreport_a_InserData(id, aid, report, dateTime, status);
+        PrintWriter out = response.getWriter();
+        
+        out.println("<script language = javascript>alert('举报成功！');</script>");
+       
+        response.sendRedirect("QuesInfo.jsp?aid="+aid);
 	}
 
 	/**

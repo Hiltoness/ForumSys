@@ -1,6 +1,7 @@
 package servlet_1;
 
 import java.io.IOException;
+import java.io.PrintWriter;
 import java.text.SimpleDateFormat;
 import java.util.Date;
 
@@ -42,12 +43,17 @@ public class reportReplyServlet extends HttpServlet {
         int rid=Integer.parseInt(request.getParameter("replyId"));
         String report=request.getParameter("report1"+"  "+"reportInput");        
         Date date = new Date();
-        SimpleDateFormat df = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
+        SimpleDateFormat df = new SimpleDateFormat("yyyy-MM-dd HH:mm");
         String dateTime = df.format(date);
         String status="unread";
         
         mysql_insert insert=new mysql_insert();
         insert.userreport_r_InserData(id, aid, rid, report, dateTime, status);
+        PrintWriter out = response.getWriter();
+        
+        out.println("<script language = javascript>alert('举报成功！');</script>");
+        response.sendRedirect("QuesInfo.jsp?aid="+aid);
+        
 	}
 
 	/**

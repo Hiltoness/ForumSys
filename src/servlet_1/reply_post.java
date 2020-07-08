@@ -15,6 +15,7 @@ import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
 import javabean.LevelUpgrade;
+import javabean.mysql_getint;
 import javabean.mysql_insert;
 import javabean.mysql_operate;
 
@@ -54,20 +55,22 @@ public class reply_post extends HttpServlet {
         insert.userreply_InserData(id, aid, reply, dateTime, status);
         
         //加分
+        mysql_getint getInt=new mysql_getint();
+        int point=getInt.point(id)+3;
         mysql_operate obj1=new mysql_operate();
-        obj1.update_DBInt("user","point+3", "point", id, "uid");
+        obj1.update_DBInt11("user",point, "point", id, "uid");
         //发帖人加分
-        mysql_getint obj2=new mysql_getint();
-        int uid=obj2.userID("userpost", "aid", aid);
-        obj1.update_DBInt("user","point+2", "point", uid, "uid");
+        int uid=getInt.userID("userpost", "aid", aid);
+        int point1=getInt.point(uid)+2;
+        obj1.update_DBInt11("user",point, "point", uid, "uid");
         LevelUpgrade up=new LevelUpgrade();
         up.up(id);
         up.up(uid);
         
         PrintWriter out = response.getWriter();
         
-        out.println("<script language = javascript>alert('回帖成功！');");
-        out.println("location.href='publize.jsp'</script>");
+        out.println("<script language = javascript>alert('回帖成功！');</script>");
+        response.sendRedirect("QuesInfo.jsp?aid="+aid);
 	}
 
 	/**

@@ -1,6 +1,7 @@
-package com.servlet;
+package servlet_1;
 
 import java.io.IOException;
+
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
@@ -43,6 +44,10 @@ public class rreadChangeServlet extends HttpServlet {
         
         mysql_operate rread=new mysql_operate();
         rread.update_DBInt2(table, sta, status, raid, whereatt, rrid, whereatt2);
+        
+        HttpSession session = request.getSession();
+        int uid=Integer.parseInt(session.getAttribute("uid").toString());
+
 	}
 
 	/**

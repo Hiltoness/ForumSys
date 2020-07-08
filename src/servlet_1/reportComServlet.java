@@ -1,6 +1,7 @@
 package servlet_1;
 
 import java.io.IOException;
+import java.io.PrintWriter;
 import java.text.SimpleDateFormat;
 import java.util.Date;
 
@@ -49,6 +50,11 @@ public class reportComServlet extends HttpServlet {
         
         mysql_insert insert=new mysql_insert();
         insert.userreport_c_InserData(id, aid, rid, cid, report, dateTime, status);
+        PrintWriter out = response.getWriter();
+        
+        out.println("<script language = javascript>alert('举报成功！');</script>");
+       
+        response.sendRedirect("QuesInfo.jsp?aid="+aid);
 	}
 
 	/**
