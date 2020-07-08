@@ -54,7 +54,7 @@ public class personal_center {
 				}
 			}
 		
-		
+			db.close(conn);
 		}catch(SQLException ex){
 		ex.printStackTrace();
 		}
@@ -97,7 +97,7 @@ public class personal_center {
 					
 				}
 			}
-		
+			db.close(conn);
 		}catch(SQLException ex){
 		ex.printStackTrace();
 		}
@@ -138,7 +138,7 @@ public class personal_center {
 					
 				}
 			}
-	
+			db.close(conn);
 		}catch(SQLException ex){
 		ex.printStackTrace();
 		}
@@ -175,7 +175,7 @@ public class personal_center {
 					areportlist.add(bean0);
 				}
 			}			
-		
+			db.close(conn);
 		}catch(SQLException ex){
 		ex.printStackTrace();
 		}
@@ -203,7 +203,7 @@ public class personal_center {
 			}
 			for(int i=0;i<list.size();i++) {
 				pstm=conn.prepareStatement("select * from userreport_r where aid =? and rid=?");
-				userreply reply=replylist.get(i);
+				userreply reply=list.get(i);
 				pstm.setInt(1, reply.getAid());
 				pstm.setInt(2, reply.getRid());
 				rs=pstm.executeQuery();
@@ -218,7 +218,7 @@ public class personal_center {
 					rreportlist.add(bean0);	
 				}
 			}
-			
+			db.close(conn);
 		
 		}catch(SQLException ex){
 		ex.printStackTrace();
@@ -265,7 +265,7 @@ public class personal_center {
 					creportlist.add(bean0);
 				}
 			}
-		
+			db.close(conn);
 		
 		}catch(SQLException ex){
 		ex.printStackTrace();

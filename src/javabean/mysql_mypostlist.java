@@ -51,7 +51,7 @@ public class mysql_mypostlist {
 						list.add(bean);
 					}
 					
-			
+					db.close(conn);
 				}catch(SQLException ex){
 				ex.printStackTrace();
 				}

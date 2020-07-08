@@ -52,7 +52,7 @@ public class mysql_postlist {
 					}
 					sort sortlist=new sort();
 					solist=sortlist.postlistsort(list);
-				
+					db.close(conn);
 				}catch(SQLException ex){
 				ex.printStackTrace();
 				}

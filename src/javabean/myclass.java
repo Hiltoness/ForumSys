@@ -32,7 +32,7 @@ public class myclass {
 			while(rs.next()) {
 				name=rs.getString(1);
 			}			
-		
+			db.close(conn);
 		}catch(SQLException ex){
 		ex.printStackTrace();
 		}		
@@ -49,7 +49,7 @@ public class myclass {
 			while(rs.next()) {
 				level=rs.getInt(1);
 			}			
-		
+			db.close(conn);
 		}catch(SQLException ex){
 		ex.printStackTrace();
 		}		
@@ -67,7 +67,7 @@ public class myclass {
 			while(rs.next()) {
 				postnum=postnum+1;
 			}			
-	
+			db.close(conn);
 		}catch(SQLException ex){
 		ex.printStackTrace();
 		}		
@@ -84,7 +84,7 @@ public class myclass {
 			while(rs.next()) {
 				point=rs.getInt(1);
 			}			
-		
+			db.close(conn);
 		}catch(SQLException ex){
 		ex.printStackTrace();
 		}		
@@ -102,7 +102,7 @@ public class myclass {
 			while(rs.next()) {
 				uconum=uconum+1;
 			}			
-		
+			db.close(conn);
 		}catch(SQLException ex){
 		ex.printStackTrace();
 		}		
@@ -142,7 +142,7 @@ public class myclass {
 				}
 			}
 		
-	
+			db.close(conn);
 		}catch(SQLException ex){
 		ex.printStackTrace();
 		}
@@ -181,7 +181,7 @@ public class myclass {
 					
 				}
 			}
-		
+			db.close(conn);
 		}catch(SQLException ex){
 		ex.printStackTrace();
 		}
@@ -216,7 +216,7 @@ public class myclass {
 					
 				}
 			}
-		
+			db.close(conn);
 		}catch(SQLException ex){
 		ex.printStackTrace();
 		}
@@ -314,7 +314,7 @@ public class myclass {
 					}	
 			}
 			
-		
+			db.close(conn);
 		}catch(SQLException ex){
 		ex.printStackTrace();
 		}
@@ -331,7 +331,7 @@ public class myclass {
 			while(rs.next()) {				
 				managertitle.add(rs.getString(3));
 			}			
-		
+			db.close(conn);
 		}catch(SQLException ex){
 		ex.printStackTrace();
 		}		

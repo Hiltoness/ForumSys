@@ -26,6 +26,7 @@ public class mysql_get {
 	  
 public ArrayList<manager> manager_getData(String attwhere,String attvalue) {
 	 try {
+		 
 		 mysql_DB db=new mysql_DB();
 			conn=db.connectDB();
 			pstm=conn.prepareStatement("select * from message where "+attwhere+" =?");
@@ -41,11 +42,12 @@ public ArrayList<manager> manager_getData(String attwhere,String attvalue) {
 				
 				managerlist.add(bean);
 			}
-		
+			db.close(conn);
 		}catch(SQLException ex){
 		ex.printStackTrace();
 		}
-	 return managerlist;
+	 
+	return managerlist;
 }
 
 public ArrayList<post> post_getData(String attwhere,String attvalue) {
@@ -62,7 +64,7 @@ public ArrayList<post> post_getData(String attwhere,String attvalue) {
 				bean.setContent(rs.getString(3));
 				postlist.add(bean);
 			}
-	
+			db.close(conn);
 		}catch(SQLException ex){
 		ex.printStackTrace();
 		}
@@ -83,7 +85,7 @@ public ArrayList<uco> uco_getData(String attwhere,String attvalue) {
 				bean.setCotime(rs.getString(3));
 				ucolist.add(bean);
 			}
-	
+			db.close(conn);
 		}catch(SQLException ex){
 		ex.printStackTrace();
 		}
@@ -109,7 +111,7 @@ public ArrayList<user> user_getData(String attwhere,String attvalue) {
 				bean.setCollege(rs.getString(8));
 				userlist.add(bean);
 			}
-		
+			db.close(conn);
 		}catch(SQLException ex){
 		ex.printStackTrace();
 		}
@@ -135,7 +137,7 @@ public ArrayList<usercomment> usercomment_getData(String attwhere1,String attval
 				bean.setStatus(rs.getString(7));
 				usercommentlist.add(bean);
 			}
-		
+			db.close(conn);
 		}catch(SQLException ex){
 		ex.printStackTrace();
 		}
@@ -156,7 +158,7 @@ public ArrayList<userpost> userpost_getData(String attwhere,String attvalue) {
 				bean.setAtime(rs.getString(3));
 				userpostlist.add(bean);
 			}
-		
+			db.close(conn);
 		}catch(SQLException ex){
 		ex.printStackTrace();
 		}
@@ -181,7 +183,7 @@ public ArrayList<userpraise> userpraise_getData(String attwhere1,String attvalue
 				bean.setStatus(rs.getString(6));
 				userpraiselist.add(bean);
 			}
-		
+			db.close(conn);
 		}catch(SQLException ex){
 		ex.printStackTrace();
 		}
@@ -205,7 +207,7 @@ public ArrayList<userreply> userreply_getData(String attwhere,String attvalue) {
 				bean.setStatus(rs.getString(6));
 				userreplylist.add(bean);
 			}
-	
+			db.close(conn);
 		}catch(SQLException ex){
 		ex.printStackTrace();
 		}
@@ -227,7 +229,7 @@ public ArrayList<userreport_a> userreport_a_getData(String attwhere,String attva
 				bean.setStatus(rs.getString(5));
 				userreport_alist.add(bean);
 			}
-		
+			db.close(conn);
 		}catch(SQLException ex){
 		ex.printStackTrace();
 		}
@@ -252,7 +254,7 @@ public ArrayList<userreport_c> userreport_c_getData(String attwhere,String attva
 				bean.setStatus(rs.getString(7));
 				userreport_clist.add(bean);
 			}
-		
+			db.close(conn);
 		}catch(SQLException ex){
 		ex.printStackTrace();
 		}
@@ -276,7 +278,7 @@ public ArrayList<userreport_r> userreport_r_getData(String attwhere,String attva
 				bean.setStatus(rs.getString(6));
 				userreport_rlist.add(bean);
 			}
-		
+			db.close(conn);
 		}catch(SQLException ex){
 		ex.printStackTrace();
 		}
@@ -297,7 +299,7 @@ public ArrayList<manager_user> manager_user_getData(String attwhere,String attva
 				bean.setStatus(rs.getString(3));
 				mulist.add(bean);
 			}
-		
+			db.close(conn);
 		}catch(SQLException ex){
 		ex.printStackTrace();
 		}

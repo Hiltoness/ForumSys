@@ -29,7 +29,7 @@ public int manager_InserData(int mid,String notitle,String notice,String notime)
 			while(rs.next()){
 				pid=rs.getInt(1);
 			}
-		
+			db.close(conn);
 		}catch(SQLException ex){
 		ex.printStackTrace();
 		}
@@ -52,7 +52,7 @@ public int post_InserData(String title,String content) {
 			while(rs.next()){
 				aid=rs.getInt(1);
 			}
-		
+			db.close(conn);
 		}catch(SQLException ex){
 		ex.printStackTrace();
 		}
@@ -68,7 +68,7 @@ public void uco_InserData(int uid,int aid,String cotime) {
 			pstm.setInt(2, aid);
 			pstm.setString(3,cotime );
 			pstm.executeUpdate();
-		
+			db.close(conn);
 		}catch(SQLException ex){
 		ex.printStackTrace();
 		}
@@ -88,7 +88,7 @@ public void user_InserData(String uname,String utime,String sex,String password,
 			pstm.setInt(6,level);
 			pstm.setString(7,college);
 			pstm.executeUpdate();
-		
+			db.close(conn);
 		}catch(SQLException ex){
 		ex.printStackTrace();
 		}
@@ -107,7 +107,7 @@ public void usercomment_InserData(int uid,int aid,int rid,String comment,String 
 			pstm.setString(5,ctime);
 			pstm.setString(6,status);
 			pstm.executeUpdate();
-		
+			db.close(conn);
 		}catch(SQLException ex){
 		ex.printStackTrace();
 		}
@@ -122,7 +122,7 @@ public void userpost_InserData(int uid,int aid,String atime) {
 			pstm.setInt(2, aid);
 			pstm.setString(3,atime);
 			pstm.executeUpdate();
-		
+			db.close(conn);
 		}catch(SQLException ex){
 		ex.printStackTrace();
 		}
@@ -140,7 +140,7 @@ public void userpraise_InserData(int uid,int aid,int rid,String praise,String pt
 			pstm.setString(5,ptime);
 			pstm.setString(6,status);
 			pstm.executeUpdate();
-		
+			db.close(conn);
 		}catch(SQLException ex){
 		ex.printStackTrace();
 		}
@@ -158,7 +158,7 @@ public void userreply_InserData(int uid,int aid,String reply,String rtime,String
 			pstm.setString(4,rtime);
 			pstm.setString(5,status);
 			pstm.executeUpdate();
-		
+			db.close(conn);
 		}catch(SQLException ex){
 		ex.printStackTrace();
 		}
@@ -174,7 +174,7 @@ public void userreport_a_InserData(int uid,int aid,String report,String retime,S
 			pstm.setString(4,retime);
 			pstm.setString(5,status);
 			pstm.executeUpdate();
-		
+			db.close(conn);
 		}catch(SQLException ex){
 		ex.printStackTrace();
 		}
@@ -193,7 +193,7 @@ public void userreport_c_InserData(int uid,int aid,int rid,int cid,String report
 			pstm.setString(6,retime);
 			pstm.setString(7,status);
 			pstm.executeUpdate();
-		
+			db.close(conn);
 		}catch(SQLException ex){
 		ex.printStackTrace();
 		}
@@ -211,7 +211,7 @@ public void userreport_r_InserData(int uid,int aid,int rid,String report,String 
 			pstm.setString(5,retime);
 			pstm.setString(6,status);
 			pstm.executeUpdate();
-	
+			db.close(conn);
 		}catch(SQLException ex){
 		ex.printStackTrace();
 		}
@@ -227,7 +227,7 @@ public void manager_user_InserData(int pid,int uid,String status) {
 
 			
 			pstm.executeUpdate();
-		
+			db.close(conn);
 		}catch(SQLException ex){
 		ex.printStackTrace();
 		}

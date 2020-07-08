@@ -17,7 +17,7 @@ public class mysql_operate {
 					pstm=conn.prepareStatement("delete from "+table+" where "+whereatt+" =?");
 					pstm.setInt(1, wherevalue);
 					pstm.executeUpdate();
-				
+					db.close(conn);
 				}catch(SQLException ex){
 				ex.printStackTrace();
 				}
@@ -31,7 +31,7 @@ public class mysql_operate {
 					pstm.setInt(1, wherevalue);
 					pstm.setInt(2, wherevalue2);
 					pstm.executeUpdate();
-				
+					db.close(conn);
 				}catch(SQLException ex){
 				ex.printStackTrace();
 				}
@@ -44,7 +44,7 @@ public class mysql_operate {
 					pstm=conn.prepareStatement("delete from "+table+" where "+whereatt+" =?");
 					pstm.setString(1, wherevalue);
 					pstm.executeUpdate();
-				
+					db.close(conn);
 				}catch(SQLException ex){
 				ex.printStackTrace();
 				}
@@ -60,7 +60,7 @@ public class mysql_operate {
 					pstm.setString(1, setvalue);
 					pstm.setString(2, wherevalue);
 					pstm.executeUpdate();
-							
+					db.close(conn);	
 				}catch(SQLException ex){
 				ex.printStackTrace();
 				}
@@ -70,12 +70,12 @@ public class mysql_operate {
 			 try {
 				 mysql_DB db=new mysql_DB();
 					conn=db.connectDB();
-					pstm=conn.prepareStatement("update "+table+" set "+setatt+" =? where "+whereatt+" =? and"+whereatt2+" =?");					
+					pstm=conn.prepareStatement("update "+table+" set "+setatt+" =? where "+whereatt+" =? and "+whereatt2+" =?");					
 					pstm.setString(1, setvalue);
 					pstm.setString(2, wherevalue);
 					pstm.setString(3, wherevalue2);
 					pstm.executeUpdate();
-							
+					db.close(conn);	
 				}catch(SQLException ex){
 				ex.printStackTrace();
 				}
@@ -85,13 +85,13 @@ public class mysql_operate {
 			 try {
 				 mysql_DB db=new mysql_DB();
 					conn=db.connectDB();
-					pstm=conn.prepareStatement("update "+table+" set "+setatt+" =? where "+whereatt+" =? and"+whereatt2+" =? and"+whereatt3+" =?");					
+					pstm=conn.prepareStatement("update "+table+" set "+setatt+" =? where "+whereatt+" =? and "+whereatt2+" =? and "+whereatt3+" =?");					
 					pstm.setString(1, setvalue);
 					pstm.setString(2, wherevalue);
 					pstm.setString(3, wherevalue2);
 					pstm.setString(4, wherevalue3);
 					pstm.executeUpdate();
-							
+					db.close(conn);	
 				}catch(SQLException ex){
 				ex.printStackTrace();
 				}
@@ -101,14 +101,14 @@ public class mysql_operate {
 			 try {
 				 mysql_DB db=new mysql_DB();
 					conn=db.connectDB();
-					pstm=conn.prepareStatement("update "+table+" set "+setatt+" =? where "+whereatt+" =? and"+whereatt2+" =? and"+whereatt3+" =? and"+whereatt4+" =?");					
+					pstm=conn.prepareStatement("update "+table+" set "+setatt+" =? where "+whereatt+" =? and "+whereatt2+" =? and "+whereatt3+" =? and "+whereatt4+" =?");					
 					pstm.setString(1, setvalue);
 					pstm.setString(2, wherevalue);
 					pstm.setString(3, wherevalue2);
 					pstm.setString(4, wherevalue3);
 					pstm.setString(5, wherevalue4);
 					pstm.executeUpdate();
-							
+					db.close(conn);	
 				}catch(SQLException ex){
 				ex.printStackTrace();
 				}
@@ -122,7 +122,7 @@ public class mysql_operate {
 					pstm.setString(1, setvalue);
 					pstm.setInt(2, wherevalue);
 					pstm.executeUpdate();
-							
+					db.close(conn);	
 				}catch(SQLException ex){
 				ex.printStackTrace();
 				}
@@ -132,12 +132,12 @@ public class mysql_operate {
 			 try {
 				 mysql_DB db=new mysql_DB();
 					conn=db.connectDB();
-					pstm=conn.prepareStatement("update "+table+" set "+setatt+" =? where "+whereatt+" =? and"+whereatt2+" =?");					
+					pstm=conn.prepareStatement("update "+table+" set "+setatt+" =? where "+whereatt+" =? and "+whereatt2+" =?");					
 					pstm.setString(1, setvalue);
 					pstm.setInt(2, wherevalue);
 					pstm.setInt(3, wherevalue2);
 					pstm.executeUpdate();
-							
+					db.close(conn);	
 				}catch(SQLException ex){
 				ex.printStackTrace();
 				}
@@ -147,13 +147,13 @@ public class mysql_operate {
 			 try {
 				 mysql_DB db=new mysql_DB();
 					conn=db.connectDB();
-					pstm=conn.prepareStatement("update "+table+" set "+setatt+" =? where "+whereatt+" =? and"+whereatt2+" =? and"+whereatt3+" =?");					
+					pstm=conn.prepareStatement("update "+table+" set "+setatt+" =? where "+whereatt+" =? and "+whereatt2+" =? and "+whereatt3+" =?");					
 					pstm.setString(1, setvalue);
 					pstm.setInt(2, wherevalue);
 					pstm.setInt(3, wherevalue2);
 					pstm.setInt(4, wherevalue3);
 					pstm.executeUpdate();
-							
+					db.close(conn);	
 				}catch(SQLException ex){
 				ex.printStackTrace();
 				}
@@ -163,14 +163,14 @@ public class mysql_operate {
 			 try {
 				 mysql_DB db=new mysql_DB();
 					conn=db.connectDB();
-					pstm=conn.prepareStatement("update "+table+" set "+setatt+" =? where "+whereatt+" =? and"+whereatt2+" =? and"+whereatt3+" =? and"+whereatt4+" =?");					
+					pstm=conn.prepareStatement("update "+table+" set "+setatt+" =? where "+whereatt+" =? and "+whereatt2+" =? and "+whereatt3+" =? and "+whereatt4+" =?");					
 					pstm.setString(1, setvalue);
 					pstm.setInt(2, wherevalue);
 					pstm.setInt(3, wherevalue2);
 					pstm.setInt(4, wherevalue3);
 					pstm.setInt(5, wherevalue4);
 					pstm.executeUpdate();
-							
+					db.close(conn);	
 				}catch(SQLException ex){
 				ex.printStackTrace();
 				}
@@ -184,7 +184,7 @@ public class mysql_operate {
 					pstm.setInt(1, setvalue);
 					pstm.setInt(2, wherevalue);
 					pstm.executeUpdate();
-							
+					db.close(conn);	
 				}catch(SQLException ex){
 				ex.printStackTrace();
 				}

@@ -1,24 +1,19 @@
 package javabean;
 import java.sql.Connection;
-import java.sql.DriverManager;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.ArrayList;
 public class search {
-	private PreparedStatement pstm;     
-	  private String diverclass="com.mysql.jdbc.Driver";
-	  private String username="jdbc:mysql://localhost/visual";
-	  private String password="root";
-	  private String url="root";
+	private PreparedStatement pstm;     	 
 	  private Connection conn;
 	  private ResultSet rs;
 	  private ArrayList<postlist> list=new ArrayList<postlist> ();
 	  private ArrayList<post> list0=new ArrayList<post> ();
 	  public ArrayList<postlist>  searchlist_getData(String attvalue) {
 			 try {
-					Class.forName(diverclass);
-					conn=DriverManager.getConnection(url,username,password);
+				    mysql_DB db=new mysql_DB();
+					conn=db.connectDB();
 					pstm=conn.prepareStatement("select * from post where title=? or content=?");
 					pstm.setString(1, "%"+attvalue+"%");
 					pstm.setString(2, "%"+attvalue+"%");
@@ -53,9 +48,7 @@ public class search {
 						bean.setNum(num1);
 						list.add(bean);
 					}
-					
-				}catch(ClassNotFoundException e1){
-					e1.printStackTrace();
+					db.close(conn);			
 				}catch(SQLException ex){
 				ex.printStackTrace();
 				}
