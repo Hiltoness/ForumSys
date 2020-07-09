@@ -47,6 +47,7 @@ public class rreadChangeServlet extends HttpServlet {
         
         HttpSession session = request.getSession();
         int uid=Integer.parseInt(session.getAttribute("uid").toString());
+        response.sendRedirect("modify.jsp?uid="+uid);
 
 	}
 

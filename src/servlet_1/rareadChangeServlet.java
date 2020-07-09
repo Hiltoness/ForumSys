@@ -44,7 +44,7 @@ public class rareadChangeServlet extends HttpServlet {
         String whereatt2="uid";
         
         mysql_operate updateStatus=new mysql_operate();		
-		updateStatus.update_DBInt2(table, status, sta, raid, whereatt, ruid, whereatt2);
+		updateStatus.update_DBInt(table, status, sta, raid, whereatt);
 		
 		HttpSession session = request.getSession();
         int uid=Integer.parseInt(session.getAttribute("uid").toString());

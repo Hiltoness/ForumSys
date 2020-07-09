@@ -47,7 +47,8 @@ public class rcreadChangeServlet extends HttpServlet {
         String whereatt4="uid";
         
         mysql_operate rread=new mysql_operate();       
-		rread.update_DBInt4(table, sta, status, raid, whereatt, rrid, whereatt2, rcid, whereatt3, ruid, whereatt4);
+		rread.update_DBInt3(table, sta, status, raid, whereatt, rrid, whereatt2, rcid, whereatt3);
+		System.out.println("change read");
 		HttpSession session = request.getSession();
         int uid=Integer.parseInt(session.getAttribute("uid").toString());
         response.sendRedirect("modify.jsp?uid="+uid);

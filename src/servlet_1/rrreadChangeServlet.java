@@ -45,10 +45,13 @@ public class rrreadChangeServlet extends HttpServlet {
         String whereatt3="uid";
         
         mysql_operate rread=new mysql_operate();
-        rread.update_DBInt3(table, sta, status, raid, whereatt, rrid, whereatt2, ruid, whereatt3);
+        rread.update_DBInt2(table, sta, status, raid, whereatt, rrid, whereatt2);
         
         HttpSession session = request.getSession();
         int uid=Integer.parseInt(session.getAttribute("uid").toString());
+        response.sendRedirect("modify.jsp?uid="+uid);
+
+        
 
 	}
 
