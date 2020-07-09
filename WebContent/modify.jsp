@@ -59,7 +59,7 @@
                                     <p class="artilist">
                                         <span class="infoName"><%=uname %></span>评论了你的回帖"<span class="infoContent"><%=com %></span>"
                                         </p>
-                                        <a href="QuesInfo.jsp?aid='<%=ct.getAid()%>'?rid='<%=ct.getRid()%>'">
+                                        <a href="QuesInfo.jsp?aid=<%=ct.getAid()%>&rid=<%=ct.getRid()%>">
                                         	查看详情</a>
                                     </li>
                                     <%
@@ -85,9 +85,9 @@
 				                    %>
 				                    <script language="javascript">
 				                    	var status="<%= status%>";
-				                    	var aid="<%=aaid%>";
-				                    	var rid="<%=rrid%>";
-				                    	var puid="<%=puid%>";
+				                    	var aid=<%=aaid%>;
+				                    	var rid=<%=rrid%>;
+				                    	var puid=<%=puid%>;
 				                    	if(status=="unread"){
 				                    		location.href="preadChangeServlet?aid="+aid+"&rid="+rid+"&uid="+puid;
 				                    	}
@@ -104,8 +104,8 @@
                             <h3 class="infoTitle"><a name="Info3">回复我的</a></h3>
                             <ul class="reviewShow">
                             <%
-                            List<userreply> reply=obj1.getReplynum(uid);
-                            System.out.print(reply.size());
+                            List<userreply> reply=obj1.getReplyList(uid);
+                            System.out.print( "reply size!"+reply.size());
                             for(int i=0;i<reply.size();i++){
                             	userreply rp=reply.get(i);
                             	String status=rp.getStatus();
@@ -144,14 +144,16 @@
                             	List<post> ti=obj2.post_getData("aid",rp_a.getAid());
                             	String tit=ti.get(0).getTitle();
                             	
+                            	
                             %>
-                            		<script language="javascript">
+                            		<%-- <script language="javascript">
 				                    	var status="<%= status%>";
 				                    	var aid="<%=aaid%>";
+				                    	var uid="<%=uuid%>";
 				                    	if(status=="unread"){
-				                    		location.href="rareadChangeServlet?aid="+aaid+"&uid="+uuid;
+				                    		location.href="rareadChangeServlet?aid="+aid+"&uid="+uid;
 				                    	}
-				                    </script>
+				                    </script>--%>
                                 <li class="infoDetail">
                                 		<p class="artilist">
                                         	你的帖子<span class="infoContent"><%=tit %></span>因<span class="infoName"><%=rp_a.getReport() %></span>
@@ -165,17 +167,20 @@
                             	String status=rp_r.getStatus();
                             	int aaid=rp_r.getAid();
                             	int rrid=rp_r.getRid();
+                            	int uuid=uid;
                             	List<userreply> ti=obj2.userreply_getData("rid",rp_r.getRid());
                             	String tit=ti.get(0).getReply();
                             %>
+                            	<%-- 
                                 <script language="javascript">
 				                    	var status="<%= status%>";
 				                    	var aid="<%=aaid%>";
 				                    	var rid="<%=rrid%>";
+				                    	var uid="<%=uuid%>";
 				                    	if(status=="unread"){
-				                    		location.href="rrreadChangeServlet?aid="+aaid+"&uid="+uuid+"&rid="+rid;
+				                    		location.href="rrreadChangeServlet?aid="+aid+"&uid="+uid+"&rid="+rid;
 				                    	}
-				                    </script>
+				                    </script>--%>
                                 <li class="infoDetail">
                                 	<p class="artilist">你的回帖<span class="infoContent"><%=tit %></span>因<span class="infoName"><%=rp_r.getReport() %></span>
                                 	被举报删帖
@@ -184,22 +189,27 @@
                             <%} %>
                             <%
                             List<userreport_c> report_c=obj1.getCreport(uid);
+                            System.out.println("report_c "+report_c.size()+" "+uid);
                             for(int i=0;i<report_c.size();i++){
                             	userreport_c rp_c=report_c.get(i);
                             	String status=rp_c.getStatus();
                             	int aaid=rp_c.getAid();
                             	int rrid=rp_c.getRid();
                             	int ccid=rp_c.getCid();
+                            	int uuid=uid;
                             	List<usercomment> ti=obj2.usercomment_getData("cid",rp_c.getCid(),"rid",rp_c.getRid());
                             	String tit=ti.get(0).getComment();
                             %>
+                            
                                 <script language="javascript">
 				                    	var status="<%= status%>";
 				                    	var aid="<%=aaid%>";
 				                    	var rid="<%=rrid%>";
 				                    	var cid="<%=ccid%>";
+				                    	var uid="<%=uuid%>";
 				                    	if(status=="unread"){
-				                    		location.href="rcreadChangeServlet?aid="+aaid+"&uid="+uuid+"&rid="+rid+"&cid="+cid;
+				                    		console.log("unread");
+				                    		location.href="rcreadChangeServlet?aid="+aid+"&uid="+uid+"&rid="+rid+"&cid="+cid;
 				                    	}
 				                    </script>
                                 <li class="infoDetail">
@@ -216,20 +226,28 @@
                             	<%
                             		mysql_getall obj3=new mysql_getall();
                             		List<manager> bulletin=obj3.manager_getData();
+                            		System.out.print("bulletin  !!1 "+bulletin.size());
                             		for(int k=0;k<bulletin.size();k++){
                             			manager bull=bulletin.get(k);
                             			int ppid=bull.getPid();
+                            			int uuid=uid;
                             			List<manager_user> bullu=obj2.manager_user_getData("pid", bull.getPid()); /*"uid",uuid*/
-                            			String status=bullu.get(0).getStatus();
+                            			String status1=bullu.get(0).getStatus();
                             			
                             	%>
+                            	<%-- 
                             	<script>
-                            		var status=<%= status%>;
-                            		var pid=<%=ppid%>;
-                            		if(status=="unread"){
-                            			location.href="breadChangeServlet?uid="+uuid+"&pid="+pid;
+                            		var status="<%= status1%>";
+                            		var pid="<%=ppid%>";
+                            		var uid="<%=uuid%>";
+                            		console.log(pid);
+                            		console.log(uid);
+                            		console.log(status==("unread"));
+                            		if(status==("unread")){
+                            			location.href="breadChangeServlet?uid="+uid+"&pid="+pid;
                             		}
                             	</script>
+                            	--%>
                                 <li class="infoDetail"><%=bull.getNotitle() %>：<%=bull.getNotice() %> --<%=bull.getNotime() %></li>
                                 <%} %>
                             </ul>
