@@ -1,11 +1,13 @@
 package servlet_1;
 
 import java.io.IOException;
+
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
 
 import javabean.mysql_operate;
 
@@ -41,7 +43,9 @@ public class breadChangeServlet extends HttpServlet {
         String whereatt2="pid";
         
         mysql_operate rread=new mysql_operate();
-        rread.update_DBInt2(table, sta, status, ruid, whereatt, rpid, whereatt2);
+        rread.update_DBInt(table, sta, status, rpid, whereatt2);
+        System.out.print("success");
+		response.sendRedirect("modify.jsp?uid="+ruid);
 	}
 
 	/**
