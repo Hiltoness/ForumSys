@@ -16,7 +16,7 @@ public ArrayList<manager> manager_getData() {
 	 try {
 		 mysql_DB db=new mysql_DB();
 			conn=db.connectDB();
-			pstm=conn.prepareStatement("select * from message ");			
+			pstm=conn.prepareStatement("select * from manager ");			
 			rs=pstm.executeQuery();
 			while(rs.next()) {
 				manager bean=new manager();
