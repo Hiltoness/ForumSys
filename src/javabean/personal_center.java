@@ -99,7 +99,45 @@ public class personal_center {
 		}
 		return praiselist;
 	}
-
+	public ArrayList<userreply> getReplyList(int uid) {
+		 ArrayList<userreply> replylist=new ArrayList<userreply> ();
+		try {
+			mysql_DB db=new mysql_DB();
+			conn=db.connectDB();
+			pstm=conn.prepareStatement("select * from userpost where uid=?");
+			pstm.setInt(1, uid);
+			rs=pstm.executeQuery();
+			ArrayList<userpost> list=new ArrayList<userpost> ();
+			while(rs.next()) {
+				userpost bean=new userpost();
+				bean.setUid(rs.getInt(1));
+				bean.setAid(rs.getInt(2));
+				bean.setAtime(rs.getString(3));
+				list.add(bean);
+			}
+			for(int i=0;i<list.size();i++) {
+				pstm=conn.prepareStatement("select * from userreply where aid=?");
+				userpost reply=list.get(i);
+				pstm.setInt(1, reply.getAid());
+				rs=pstm.executeQuery();
+				while(rs.next()) {
+	               	userreply bean0=new userreply();
+	   				bean0.setUid(rs.getInt(1));
+	   				bean0.setAid(rs.getInt(2));
+	   				bean0.setRid(rs.getInt(3));
+	   				bean0.setReply(rs.getString(4));
+	   				bean0.setRtime(rs.getString(5));
+	   				bean0.setStatus(rs.getString(6));
+	   				replylist.add(bean0);	
+				}
+			}
+			db.close(conn);
+		}catch(SQLException ex){
+		ex.printStackTrace();
+		}
+		return replylist;
+	}
+	
 	public ArrayList<userreply> getReplynum(int uid) {
 		 ArrayList<userreply> replylist=new ArrayList<userreply> ();
 		try {
@@ -117,12 +155,12 @@ public class personal_center {
 				list.add(bean);
 			}
 			for(int i=0;i<list.size();i++) {
-				pstm=conn.prepareStatement("select * from userreply where aid =?");
+				pstm=conn.prepareStatement("select * from userreply where aid=?");
 				userpost reply=list.get(i);
 				pstm.setInt(1, reply.getAid());
 				rs=pstm.executeQuery();
 				while(rs.next()) {
-                if(rs.getString(6)=="unread") {
+                if(rs.getString(6).equals("unread")) {
                 	userreply bean0=new userreply();
     				bean0.setUid(rs.getInt(1));
     				bean0.setAid(rs.getInt(2));
@@ -245,7 +283,7 @@ public class personal_center {
 				bean.setComment(rs.getString(5));
 				bean.setCtime(rs.getString(6));
 				bean.setStatus(rs.getString(7));
-				list.add(bean);
+				commentlist.add(bean);
 			}
 			for(int i=0;i<commentlist.size();i++) {
 				pstm=conn.prepareStatement("select * from userreport_c where aid =? and rid=? and cid=?");
