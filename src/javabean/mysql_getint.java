@@ -330,7 +330,7 @@ public int userID(String table,String col,int value){
 	try {
 		 mysql_DB db=new mysql_DB();
 			conn=db.connectDB();
-			pstm=conn.prepareStatement("select uid from"+ table + "where "+col+" =?");
+			pstm=conn.prepareStatement("select uid from "+ table + " where "+col+" = ?");
 			pstm.setInt(1, value);
 			rs=pstm.executeQuery();
 			while(rs.next()) {
