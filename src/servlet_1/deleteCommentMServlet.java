@@ -1,6 +1,7 @@
 package servlet_1;
 
 import javabean.*;
+
 import java.io.IOException;
 import java.io.PrintWriter;
 
@@ -9,6 +10,7 @@ import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
 
 import javabean.mysql_getint;
 import javabean.mysql_operate;
@@ -65,7 +67,11 @@ public class deleteCommentMServlet extends HttpServlet {
         PrintWriter out = response.getWriter();
 
         out.println("<script language = javascript>alert('删除成功！');");
-        out.println("location.href='my.jsp'</script>");
+        out.println("</script>");
+        HttpSession session = request.getSession();
+        int mid=Integer.parseInt(session.getAttribute("mid").toString());
+
+        response.sendRedirect("manager.jsp?mid="+mid);
 	}
 
 	/**

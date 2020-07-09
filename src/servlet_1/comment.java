@@ -73,8 +73,8 @@ public class comment extends HttpServlet {
         
         PrintWriter out = response.getWriter();
 
-        out.println("<script language = javascript>alert('评论成功！');");
-        out.println("location.href='QuesInfo.jsp'</script>");
+        out.println("<script language = javascript>alert('评论成功！');</script>");
+        response.sendRedirect("QuesInfo.jsp?aid="+aid);
 	}
 
 	/**

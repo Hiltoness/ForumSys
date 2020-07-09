@@ -8,6 +8,7 @@ import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
 
 import javabean.LevelUpgrade;
 import javabean.mysql_getint;
@@ -68,9 +69,12 @@ public class deleteReplyMServlet extends HttpServlet {
         up.up(uid);
         
         PrintWriter out = response.getWriter();
+        HttpSession session = request.getSession();
+        int mid=Integer.parseInt(session.getAttribute("mid").toString());
 
         out.println("<script language = javascript>alert('删除成功！');");
-        out.println("location.href='my.jsp'</script>");
+        out.println("</script>");
+        response.sendRedirect("manager.jsp?mid="+mid);
 	}
 
 	/**

@@ -62,7 +62,9 @@ public class pub_m extends HttpServlet {
         PrintWriter out = response.getWriter();
 
         out.println("<script language = javascript>alert('公告发布成功！');");
-        out.println("location.href='pub_m.jsp'</script>");
+        out.println("</script>");
+        int mid=Integer.parseInt(session.getAttribute("mid").toString());
+        response.sendRedirect("manager.jsp?mid="+mid);
 	}
 
 	/**
