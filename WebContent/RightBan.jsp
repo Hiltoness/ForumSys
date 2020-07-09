@@ -49,7 +49,7 @@
                     	int cnum=obj.getCommentnum(uid);//未读评论
                     	int pnum=obj.getPraisenum(uid);//未读点赞
                     	int rpnum=obj.getReportnum(uid);//未读系统通知
-                    	System.out.print(rnum+" "+cnum+" "+pnum+" "+rpnum);
+                    	System.out.print(rnum+"rnum "+cnum+"cnum "+pnum+"pnum "+rpnum);
                     	
                     %>
                         <ul class="MSG">
@@ -71,12 +71,7 @@
                     <ul>
                     	<%
                     	int bnum=0;
-                    	List<manager_user> bull=obj3.manager_user_getData("uid",uid);
-                    	for(int m=0;m<bull.size();m++){
-                    		manager_user bullur=bull.get(m);
-                    		if(bullur.getStatus()=="unread")
-                    			bnum++;
-                    	}
+                    	bnum=obj.getBullnum(uid);
                     	%>
 						<%
 							List<String> bulletin=obj.getManagertitle();
