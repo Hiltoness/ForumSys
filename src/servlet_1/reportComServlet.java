@@ -42,7 +42,12 @@ public class reportComServlet extends HttpServlet {
         int aid=Integer.parseInt(request.getParameter("postId"));
         int rid=Integer.parseInt(request.getParameter("replyId"));
         int cid=Integer.parseInt(request.getParameter("comId"));
-        String report=request.getParameter("report1"+"  "+"reportInput");        
+        String rr=request.getParameter("reportInput");
+        if(rr==null){
+        	rr="null";
+        }
+        String report1=request.getParameter("report1");
+        String report=report1.concat(rr);
         Date date = new Date();
         SimpleDateFormat df = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
         String dateTime = df.format(date);

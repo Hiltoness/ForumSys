@@ -41,7 +41,12 @@ public class reportReplyServlet extends HttpServlet {
         int id=Integer.parseInt(session.getAttribute("uid").toString());;
         int aid=Integer.parseInt(request.getParameter("postId"));
         int rid=Integer.parseInt(request.getParameter("replyId"));
-        String report=request.getParameter("report1"+"  "+"reportInput");        
+        String rr=request.getParameter("reportInput");
+        if(rr==null){
+        	rr="null";
+        }
+        String report1=request.getParameter("report1");
+        String report=report1.concat(rr);
         Date date = new Date();
         SimpleDateFormat df = new SimpleDateFormat("yyyy-MM-dd HH:mm");
         String dateTime = df.format(date);
