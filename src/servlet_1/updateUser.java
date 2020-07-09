@@ -34,7 +34,7 @@ public class updateUser extends HttpServlet {
         response.setContentType("text/html charset=utf-8");
         
         HttpSession session = request.getSession();
-        int id=Integer.parseInt(session.getAttribute("uid").toString());
+        int id=Integer.parseInt(request.getParameter("uid"));
         String pwd=request.getParameter("modi_m_psw");
         
         mysql_operate update=new mysql_operate();

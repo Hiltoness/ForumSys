@@ -79,12 +79,13 @@
 					    z-index: 100;
 					    text-align:center">
 					    <%-- 修改用户信息--%>
-					    <form class="modiForm1" id="modi_m2" name="modi_m2" method="post" action="">
-					        <label class="modiForm">用户ID:<label id="modi_uid"><%=id --%></label></label>
+					    <form class="modiForm1" id="modi_m2" name="modi_m2" method="post" action="updateUser">
+					        <label class="modiForm">用户ID:<label id="modi_uid"><%=id %></label></label>
 					        <label class="modiForm">用户昵称：<%=name %></label>
 					        <label class="modiForm">注册时间：<%=time %></label>
 					        <label class="modiForm">性别：<%=gender %></label>
 					        <label class="modiForm">密码：<input class="modiInput" type="text" id="modi_m_psw" name="modi_m_psw" value=<%=psw %>></label>
+					        <input style="display:none" name="uid" value="<%=id%>">
 					        <button class="btnM" type="submit">确认修改</button>
 					        <button class="btnM1" formtarget="_self" onclick="closeDiv()">取消</button>
 					    </form>
