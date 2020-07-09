@@ -78,7 +78,7 @@
     	<input style="display: none" id="replyAid" name="replyAid" value=""/>
     	<input style="display: none" id="replyRid" name="replyRid" value=""/>
     	<!-- 评论内容-->
-        <textarea id="commentSend" style="display:inline;width: 100%;height: 80px;-webkit-border-radius: 3px;padding: 2px 5px"></textarea>
+        <textarea id="commentSend" name="commentSend" style="display:inline;width: 100%;height: 80px;-webkit-border-radius: 3px;padding: 2px 5px"></textarea>
         <!-- 提交按钮-->
         <input class="btnModi" value="发表评论" type="submit" />
     </form>
@@ -145,7 +145,7 @@
                                 </div>
                                 <div class="erControlR">
                                     <a href="javascript:fav(<%=aid%>)"><span id="fav"></span></a>
-                                    <span><%=num %></span>
+                                    <span>回复<%=num %></span>
                                     <a href="javascript:read(<%=userid%>,<%=aid%>,0)"><span class="read" style="color: rgb(103,103,103)">只看楼主</span></a>
                                     <a href="javascript:report1(<%=aid%>)">举报</a>
                                 </div>
@@ -164,7 +164,7 @@
                 </script>
                     <%
                     	List<userreply> rr=obj2.userreply_getData("aid", aid);
-                    	for(int i=0;i<rr.size()/2;i++){
+                    	for(int i=0;i<rr.size();i++){
                     		userreply rr_1=rr.get(i);
                     		int rid=rr_1.getRid();//回帖id
                     		int ruid=rr_1.getUid();
@@ -340,7 +340,7 @@
         var postobj=document.getElementById("postId");
         postobj.setAttribute("value", aid);
         var replyobj=document.getElementById("replyId");
-        postobj.setAttribute("value", rid);
+        replyobj.setAttribute("value", rid);
         var hideobj=document.getElementById("hidebg");
         hideobj.style.display="block";  //显示隐藏层
         hideobj.style.height=document.body.clientHeight+"px";  //设置隐藏层的高度为当前页面高度
@@ -353,9 +353,9 @@
         var postobj=document.getElementById("postId");
         postobj.setAttribute("value", aid);
         var replyobj=document.getElementById("replyId");
-        postobj.setAttribute("value", rid);
-        var replyobj=document.getElementById("comId");
-        postobj.setAttribute("value", cid);
+        replyobj.setAttribute("value", rid);
+        var comobj=document.getElementById("comId");
+        comobj.setAttribute("value", cid);
         var hideobj=document.getElementById("hidebg");
         hideobj.style.display="block";  //显示隐藏层
         hideobj.style.height=document.body.clientHeight+"px";  //设置隐藏层的高度为当前页面高度
