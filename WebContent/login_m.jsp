@@ -8,15 +8,8 @@
 </head>
 <body>
 <%
-session.setAttribute("uid", "1");
-response.sendRedirect("main.jsp?uid=1");
-	
-
-%>
-<!-- 
 session.setAttribute("mid","1");
-	response.sendRedirect("manager.jsp");
-		
--->
+response.sendRedirect("manager.jsp");
+%>
 </body>
 </html>
