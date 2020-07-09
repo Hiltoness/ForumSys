@@ -210,7 +210,7 @@ public class myclass {
 				pstm.setInt(1, reply.getAid());
 				rs=pstm.executeQuery();
 				while(rs.next()) {
-                if(rs.getString(6)=="unread") {
+                if(rs.getString(6).equals("unread")) {
 					replynum=replynum+1;	
 					}
 					
@@ -245,7 +245,7 @@ public class myclass {
 				pstm.setInt(1, reply.getAid());
 				rs=pstm.executeQuery();
 				while(rs.next()) {
-                if(rs.getString(5)=="unread") {
+                if(rs.getString(5).equals("unread")) {
 					reportnum=reportnum+1;	
 					}		
 				}
@@ -272,7 +272,7 @@ public class myclass {
 				pstm.setInt(2, reply.getRid());
 				rs=pstm.executeQuery();
 				while(rs.next()) {
-                if(rs.getString(6)=="unread") {
+                if(rs.getString(6).equals("unread")) {
 					reportnum=reportnum+1;	
 					}		
 				}
@@ -300,17 +300,29 @@ public class myclass {
 				pstm.setInt(3, reply.getCid());
 				rs=pstm.executeQuery();
 				while(rs.next()) {
-                if(rs.getString(7)=="unread") {
+                if(rs.getString(7).equals("unread")) {
 					reportnum=reportnum+1;	
 					}		
 				}
 			}
+			db.close(conn);
+		}catch(SQLException ex){
+		ex.printStackTrace();
+		}
+		return reportnum;
+	}
+	
+	public int getBullnum(int uid) {
+		int bullnum=0;
+		try {
+			mysql_DB db=new mysql_DB();
+			conn=db.connectDB();
 			pstm=conn.prepareStatement("select status from manager_user where uid=?");
 			pstm.setInt(1, uid);
 			rs=pstm.executeQuery();
 			while(rs.next()) {
-				if(rs.getString(1)=="unread"){
-					reportnum=reportnum+1;	
+				if(rs.getString(1).equals("unread")){
+					bullnum=bullnum+1;	
 					}	
 			}
 			
@@ -318,9 +330,10 @@ public class myclass {
 		}catch(SQLException ex){
 		ex.printStackTrace();
 		}
-		return reportnum;
+		return bullnum;
 	}
-
+		
+	
 	public ArrayList<String>  getManagertitle() {
 		try {
 			mysql_DB db=new mysql_DB();
