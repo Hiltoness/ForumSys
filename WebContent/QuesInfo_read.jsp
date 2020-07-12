@@ -148,7 +148,7 @@
                                 <div class="erControlR">
                                     <a><span id="fav" data-aid="<%=aid%>" ></span></a>
                                     <span><%=num %></span>
-                                    <a href="javascript:backAll(<%=aid%>)"><span id="back" style="color: rgb(103,103,103)">返回全部楼层</span></a>
+                                    <a href="javascript:backAll(<%=aid%>)"><span id="back" data-aid="<%=aid %>" style="color: rgb(103,103,103)">返回全部楼层</span></a>
                                     <a href="javascript:report1(<%=aid%>)">举报</a>
                                 </div>
                             </div>
@@ -301,25 +301,22 @@
 <script>
 		$('#fav').click(
 		   function (event) {
-		        	let string=jQuery("#fav").text();
+		    let string=jQuery("#fav").text();
+		     var aid=jQuery("#fav").data("aid");
 		    if(string.includes("已")){
-		    	location.href="cancelfavServlet?method=cancelfav&aid="+jQuery("#fav").data("aid");
+		    	location.href="cancelfavServlet?method=cancelfav&aid="+aid;
 		        $("#fav").html("收藏");
 		    }else {//取消收藏
-		        location.href="favServlet?method=fav&aid="+jQuery("#fav").data("aid");
+		        location.href="favServlet?method=fav&aid="+aid;
 		        $("#fav").html("已收藏")
 		    }
 		    })
 </script>		
 <script>
-    function backAll(aid) {//返回查看全部
-        var rDiv=document.getElementById("back"); 
-        rDiv.style.color="#e40d01";
-        rDiv.style.fontWeight="bold";
-         // location.href="readServlet?method=read&aid="+aid;
-         location.href="QuesInfo.jsp?aid="+aid;
-         //window.history.go(-1);
-    }
+	$("#back").click(function(event){
+		var aid=$("#back").data("aid");
+		location.href="QuesInfo.jsp?aid="+aid;
+	})
     function report1(aid) {
         //点击举报主贴
         document.getElementById("reportDiv").style.display="";
@@ -375,16 +372,16 @@
             pDiv.innerHTML = "点赞";
         }
     }
-    function $(el) {
-        return document.getElementById(el);
-    }
-    function comment(obj,rid) {//评论
-        var oComment=obj.parentNode.parentNode.parentNode;
-        console.log(oComment)
-        oComment.appendChild($("response"));
-        $("response").style.display="flex";
-        var replyID=document.getElementById("replyCid");//回帖的id
-        replyID.setAttribute("value",rid);
+    var eleComment=document.getElementsByClassName('comment');//评论
+    for(var i=0;i<eleComment.length;i++){
+        (function (current) {
+            current.onclick=function (event) {
+                current.parentNode.parentNode.parentNode.parentNode.appendChild(document.getElementById("response"));
+                $('#response').css('display','flex');
+                $('#replyRid').val(current.dataset.rid);
+                $('#replyAid').val(current.dataset.aid);
+            };
+        })(eleComment[i]);
     }
 
 </script>

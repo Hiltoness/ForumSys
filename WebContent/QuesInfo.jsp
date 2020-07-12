@@ -145,7 +145,7 @@
                                 <div class="erControlR">
                                     <a><span id="fav" data-aid="<%=aid%>" >收藏</span></a>
                                     <span>回复<%=num %></span>
-                                    <a href="javascript:read(<%=userid%>,<%=aid%>,0)"><span class="read" style="color: rgb(103,103,103)">只看楼主</span></a>
+                                    <a><span class="read" data-uid="<%=uid %>" data-aid="<%=aid %>" style="color: rgb(103,103,103)">只看楼主</span></a>
                                     <a href="javascript:report1(<%=aid%>)">举报</a>
                                 </div>
                             </div>
@@ -196,7 +196,7 @@
                                 <div class="erControlR">
                                     <a href="javascript:read(<%=ruid%>,aid,i+1)"><span class="read">只看TA</span></a>
                                     <a href="javascript:praise(<%=rid%>,<%=aid%>,<%=reNum%>)"><span class="praise"></span></a>
-                                    <div class="commentBtn" onclick="comment(this,<%=rid%>,<%=aid%>)"><span class="comment">评论</span></div>
+                                    <div class="commentBtn"><span class="comment" data-rid="<%=rid%>" data-aid="<%=aid%>">评论</span></div>
                                     <a href="javascript:reportReply(<%=rid%>,<%=aid%>)">举报</a>
                                     <span><%=i+1 %> 楼</span>
                                     <%
@@ -243,9 +243,7 @@
                                         <a href="javascript:reportCom1(<%=rid %>,<%=aid %>,<%=com1.getCid() %>)">举报</a>
                                     </div>
                                 </div>
-
                             </div>
-                            
                             <%
                             comNum++;
                             } %>
@@ -290,31 +288,30 @@
 </div>
 <script>
 $('#fav').click(
-        function (event) {
-        	let string=jQuery("#fav").text();
+   function (event) {
+     let string=jQuery("#fav").text();
+     var aid=jQuery("#fav").data("aid");
     if(string.includes("已")){
-    	location.href="cancelfavServlet?method=cancelfav&aid="+jQuery("#fav").data("aid");
+    	location.href="cancelfavServlet?method=cancelfav&aid="+aid;
         $("#fav").html("收藏");
     }else {//取消收藏
-    	console.log("收藏")
-        console.log(jQuery("#fav").data("aid"));
-        location.href="favServlet?method=fav&aid="+jQuery("#fav").data("aid");
+        location.href="favServlet?method=fav&aid="+aid;
         $("#fav").html("已收藏")
     }
     })
 </script>
 <script>
-    function read(uid,aid,i) {//只看楼主/TA
-        var rDiv=document.getElementsByClassName("read")[i];
-        if(rDiv.style.color=="rgb(103, 103, 103)"){
-            location.href="QuesInfo_read.jsp?rUid="+uid+"&aid="+aid;
-            rDiv.style.color="#e40d01";
-            rDiv.style.fontWeight="bold";
-        }else {//取消只看楼主/TA
-            document.getElementById("read").style.color="#676767";
-            rDiv.style.fontWeight="normal";
-        }
-    }
+	var eleOnly=document.getElementsByClassName("read");//只看楼主/TA
+	for(var i=0;i<eleOnly.length;i++){
+		(function(current){
+			current.onclick=function(){
+				var uid=current.dataset.uid;
+				var aid=current.dataset.aid;
+				location.href="QuesInfo_read.jsp?rUid="+uid+"&aid="+aid;
+			}
+		})(eleOnly[i]);
+	}
+    
     function report1(aid) {
         //点击举报主贴
         document.getElementById("reportDiv").style.display="";
@@ -382,18 +379,16 @@ $('#fav').click(
             pDiv.innerHTML = "点赞"
         }
     }
-    function $(el) {
-        return document.getElementById(el);
-    }
-    function comment(obj,rid,aid) {//评论
-        var oComment=obj.parentNode.parentNode.parentNode;
-        console.log(oComment)
-        oComment.appendChild($("response"));
-        $("response").style.display="flex";
-        var replyID=document.getElementById("replyRid");//回帖的id
-        replyID.setAttribute("value",rid);
-        var replyAD=document.getElementById("replyAid");
-        replyAD.setAttribute("value",aid);
+    var eleComment=document.getElementsByClassName('comment');//评论
+    for(var i=0;i<eleComment.length;i++){
+        (function (current) {
+            current.onclick=function (event) {
+                current.parentNode.parentNode.parentNode.parentNode.appendChild(document.getElementById("response"));
+                $('#response').css('display','flex');
+                $('#replyRid').val(current.dataset.rid);
+                $('#replyAid').val(current.dataset.aid);
+            };
+        })(eleComment[i]);
     }
 
 </script>
