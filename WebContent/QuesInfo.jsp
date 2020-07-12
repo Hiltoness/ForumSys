@@ -11,10 +11,10 @@
     <title>积分技术论坛 - 浏览帖子详情</title>
     <link type="text/css" rel="stylesheet" href="base.css"/>
     <link rel="icon" href="" type="image/x-icon" />
+    <script type="text/javascript" src="http://localhost:8080/ForumSyst/jquery-3.5.1.js"></script>
 </head>
 <body>
 <jsp:include page="TopMenu.jsp"/>
-
 <%--举报框 --%>
 <div id="reportDiv" style="display: none;
     POSITION:absolute;
@@ -84,7 +84,6 @@
     </form>
 </div>
 <div class="viewContainer">
-    
     <div class="mainAsideBox">
 	<jsp:include page="RightBan.jsp"/>
     
@@ -144,7 +143,7 @@
                                     <label class="datetime"><%=time %></label>
                                 </div>
                                 <div class="erControlR">
-                                    <a href="javascript:fav(<%=aid%>)"><span id="fav"></span></a>
+                                    <a><span id="fav" data-aid="<%=aid%>" >收藏</span></a>
                                     <span>回复<%=num %></span>
                                     <a href="javascript:read(<%=userid%>,<%=aid%>,0)"><span class="read" style="color: rgb(103,103,103)">只看楼主</span></a>
                                     <a href="javascript:report1(<%=aid%>)">举报</a>
@@ -160,7 +159,6 @@
                 	}else{
                 		document.getElementById("fav").innerHTML="收藏";
                 	}
-                	
                 </script>
                     <%
                     	List<userreply> rr=obj2.userreply_getData("aid", aid);
@@ -267,7 +265,7 @@
                         <input style="display:none" value="<%=aid%>" name="aid">
                             <input class="btnCommit" type="submit" id="reply_commit" name="reply_commit" value="发表">
                             <script type="text/javascript" src="wangEditor-3.1.1/release/wangEditor.min.js"></script>
-                            <script language="JavaScript">
+                            <script>
                                 var rich_editor=window.wangEditor
                                 var ed=new rich_editor('#editor1')
                                 ed.create();
@@ -286,30 +284,26 @@
                             </script>
                             
                         </form>
-                        <script>
-		                	document.getElementById('reply_commit').addEventListener('click', function(){
-		                	var text=ed.txt.text();
-		                    HttpSession session=request.getSession();
-		                    session.setAttribute("replytext",text);
-		                }, false)
-		                </script>
                     </div>
         </div>
     </div>
 </div>
-
-<jsp:include page="foot.jsp"/>
 <script>
-    function fav(aid) {//收藏
-        var fDiv=document.getElementById("fav");
-        if(fDiv.innerHTML==="收藏"){
-             location.href="favServlet?method=fav&aid="+aid;
-            fDiv.innerHTML="已收藏";
-        }else {//取消收藏
-             location.href="cancelfavServlet?method=cancelfav&aid="+aid;
-            fDiv.innerHTML="收藏";
-        }
+$('#fav').click(
+        function (event) {
+        	let string=jQuery("#fav").text();
+    if(string.includes("已")){
+    	location.href="cancelfavServlet?method=cancelfav&aid="+jQuery("#fav").data("aid");
+        $("#fav").html("收藏");
+    }else {//取消收藏
+    	console.log("收藏")
+        console.log(jQuery("#fav").data("aid"));
+        location.href="favServlet?method=fav&aid="+jQuery("#fav").data("aid");
+        $("#fav").html("已收藏")
     }
+    })
+</script>
+<script>
     function read(uid,aid,i) {//只看楼主/TA
         var rDiv=document.getElementsByClassName("read")[i];
         if(rDiv.style.color=="rgb(103, 103, 103)"){
@@ -403,5 +397,7 @@
     }
 
 </script>
+
+<jsp:include page="foot.jsp"/>
 </body>
 </html>
