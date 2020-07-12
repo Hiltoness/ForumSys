@@ -11,6 +11,7 @@
     <title>积分技术论坛 - 浏览帖子详情</title>
     <link type="text/css" rel="stylesheet" href="base.css"/>
     <link rel="icon" href="" type="image/x-icon" />
+    <script type="text/javascript" src="http://localhost:8080/ForumSyst/jquery-3.5.1.js"></script>
 </head>
 <body>
 <jsp:include page="TopMenu.jsp"/>
@@ -145,7 +146,7 @@
                                     <label class="datetime"><%=time %></label>
                                 </div>
                                 <div class="erControlR">
-                                    <a href="javascript:fav(<%=aid%>)"><span id="fav"></span></a>
+                                    <a><span id="fav" data-aid="<%=aid%>" ></span></a>
                                     <span><%=num %></span>
                                     <a href="javascript:backAll(<%=aid%>)"><span id="back" style="color: rgb(103,103,103)">返回全部楼层</span></a>
                                     <a href="javascript:report1(<%=aid%>)">举报</a>
@@ -298,16 +299,19 @@
 <jsp:include page="foot.jsp"/>
 
 <script>
-    function fav(aid) {//收藏
-        var fDiv=document.getElementById("fav");
-        if(fDiv.innerHTML==="收藏"){
-            location.href="favServlet?method=fav&aid="+aid;
-            fDiv.innerHTML="已收藏";
-        }else {//取消收藏
-             location.href="cancelfavServlet?method=cancelfav&aid="+aid;
-            fDiv.innerHTML="收藏";
-        }
-    }
+		$('#fav').click(
+		   function (event) {
+		        	let string=jQuery("#fav").text();
+		    if(string.includes("已")){
+		    	location.href="cancelfavServlet?method=cancelfav&aid="+jQuery("#fav").data("aid");
+		        $("#fav").html("收藏");
+		    }else {//取消收藏
+		        location.href="favServlet?method=fav&aid="+jQuery("#fav").data("aid");
+		        $("#fav").html("已收藏")
+		    }
+		    })
+</script>		
+<script>
     function backAll(aid) {//返回查看全部
         var rDiv=document.getElementById("back"); 
         rDiv.style.color="#e40d01";
