@@ -135,7 +135,7 @@ public class myclass {
 				pstm.setInt(2, reply.getRid());
 				rs=pstm.executeQuery();
 				while(rs.next()) {
-					if(rs.getString(7)=="unread") {
+					if(rs.getString(7).equals("unread")) {
 						commentnum=commentnum+1;
 					}
 					
@@ -175,7 +175,7 @@ public class myclass {
 				pstm.setInt(2, reply.getRid());
 				rs=pstm.executeQuery();
 				while(rs.next()) {
-                 if(rs.getString(6)=="unread") {
+                 if(rs.getString(6).equals("unread")) {
 						praisenum=praisenum+1;
 					}
 					
