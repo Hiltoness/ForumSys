@@ -360,16 +360,24 @@
         document.getElementById("reportDiv").style.display="none";
         document.getElementById("hidebg").style.display="none";
     }
-    function praise(rid,aid,i) {//点赞
+    function praise(rid,aid,i) {//点赞回帖
         var pDiv=document.getElementsByClassName("praise")[i];
         if(pDiv.innerHTML=="点赞"){
-            location.href="praiseServlet?method=praise&aid="+aid+"&rid="+rid;
+        	$.ajax({
+    			url:"praiseServlet",
+    			type:"get",
+    			data:{"aid":aid,"rid":rid}
+    		})
             pDiv.style.color="red";
-            pDiv.innerHTML="取消点赞";
+            pDiv.innerHTML="取消点赞"
         }else {//取消点赞
-            location.href="cancelpraiseServlet?method=cancelpraise&aid="+aid+"&rid="+rid;
+        	$.ajax({
+    			url:"cancelpraiseServlet",
+    			type:"get",
+    			data:{"aid":aid,"rid":rid}
+    		})
             pDiv.style.color = "#676767"
-            pDiv.innerHTML = "点赞";
+            pDiv.innerHTML = "点赞"
         }
     }
     var eleComment=document.getElementsByClassName('comment');//评论
